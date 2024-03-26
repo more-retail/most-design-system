@@ -1,0 +1,234 @@
+{
+  "typography": {
+    "head": {
+      "10": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "50px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "72px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "38px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "56px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "28px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "40px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "21px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "50": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "16px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "60": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "12px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      }
+    },
+    "label": {
+      "10": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "21px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "16",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "12px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "9px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
+    },
+    "labelThick": {
+      "10": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "21px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "16",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "12px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "Fabriga",
+          "fontSize": "9px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
+    },
+    "para": {
+      "10": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "21px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "16",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "12px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "9px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
+    },
+    "paraThick": {
+      "10": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "21px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "16",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "12px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "DM Sans",
+          "fontSize": "9px",
+          "fontWeight": 600,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
+    }
+  }
+}

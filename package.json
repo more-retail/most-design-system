@@ -1,0 +1,38 @@
+{
+  "name": "most-design-system",
+  "version": "0.1",
+  "description": "A design system crafted for more retail's digital products",
+  "homepage": "https://github.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moreretail/most-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TOFILL"
+  },
+  "type": "module",
+  "export": {
+    "./tokens/js": "./tokens/js/tokens.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build-tokens": "node ./scripts/buildMostTokens.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "style-dictionary": "^3.9.2",
+    "style-dictionary-utils": "^2.2.1",
+    "vite": "^5.2.0"
+  }
+}
