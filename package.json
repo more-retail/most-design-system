@@ -5,10 +5,10 @@
   "homepage": "https://github.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/moreretail/most-design-system.git"
+    "url": "https://github.com/more-retail/most-design-system.git"
   },
   "bugs": {
-    "url": "https://github.com/TOFILL"
+    "url": "https://github.com/more-retail/most-design-system/issues"
   },
   "type": "module",
   "export": {
