@@ -76,7 +76,7 @@
       "20": {
         "$value": {
           "fontFamily": "Fabriga",
-          "fontSize": "16",
+          "fontSize": "16px",
           "fontWeight": 500,
           "letterSpacing": "0px",
           "lineHeight": "24px"
@@ -118,7 +118,7 @@
       "20": {
         "$value": {
           "fontFamily": "Fabriga",
-          "fontSize": "16",
+          "fontSize": "16px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "24px"
@@ -160,7 +160,7 @@
       "20": {
         "$value": {
           "fontFamily": "DM Sans",
-          "fontSize": "16",
+          "fontSize": "16px",
           "fontWeight": 400,
           "letterSpacing": "0px",
           "lineHeight": "24px"
@@ -202,7 +202,7 @@
       "20": {
         "$value": {
           "fontFamily": "DM Sans",
-          "fontSize": "16",
+          "fontSize": "16px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "24px"

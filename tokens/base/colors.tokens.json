@@ -3,7 +3,6 @@
     "orange": {
       "5": {
         "$value": "#FDF9F7",
-
         "$type": "color"
       },
       "20": {
@@ -24,7 +23,8 @@
       },
       "60": {
         "$value": "#FA4B16",
-        "$type": "color"
+        "$type": "color",
+        "$description": "more's brand color"
       },
       "70": {
         "$value": "#DA3D09",
@@ -166,7 +166,8 @@
       },
       "70": {
         "$value": "#008A29",
-        "$type": "color"
+        "$type": "color",
+        "$description": "more's brand color"
       },
       "80": {
         "$value": "#146F27",
@@ -304,7 +305,8 @@
       },
       "70": {
         "$value": "#784CD5",
-        "$type": "color"
+        "$type": "color",
+        "$description": "more's brand color"
       },
       "80": {
         "$value": "#612FB8",
@@ -367,15 +369,15 @@
       "110": {
         "$value": "#14212A",
         "$type": "color"
+      },
+      "white": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "black": {
+        "$value": "#000000",
+        "$type": "color"
       }
-    },
-    "white": {
-      "$value": "#FFFFFF",
-      "$type": "color"
-    },
-    "black": {
-      "$value": "#000000",
-      "$type": "color"
     }
   }
 }

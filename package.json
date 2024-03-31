@@ -1,29 +1,17 @@
 {
   "name": "most-design-system",
-  "version": "0.1.0",
   "description": "A design system crafted for more retail's digital products",
-  "homepage": "https://github.com/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/more-retail/most-design-system.git"
-  },
+  "version": "0.2",
   "bugs": {
     "url": "https://github.com/more-retail/most-design-system/issues"
-  },
-  "type": "module",
-  "export": {
-    "./tokens/js": "./tokens/js/tokens.js"
-  },
-  "license": "MIT",
-  "scripts": {
-    "dev": "vite",
-    "build-tokens": "node ./scripts/buildMostTokens.js"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "prettier": "^3.2.5",
+    "@prettier/sync": "^0.5.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -34,5 +22,36 @@
     "style-dictionary": "^3.9.2",
     "style-dictionary-utils": "^2.2.1",
     "vite": "^5.2.0"
-  }
+  },
+  "exports": {
+    "./tokens/js": "./tokens/dist/js/tokens.js",
+    "./tokens/react-native": "./tokens/dist/react-native/tokens.js",
+    "./tokens/css": "./tokens/dist/css/tokens.css",
+    "./tokens/css-in-js": "./tokens/dist/css-in-js/tokens.js"
+  },
+  "homepage": "https://github.com/more-retail/most-design-system/",
+  "keywords": [
+    "design at more",
+    "design system",
+    "design tokens",
+    "more",
+    "more design",
+    "more retail",
+    "most design",
+    "most design system"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/more-retail/most-design-system.git"
+  },
+  "scripts": {
+    "build-tokens": "node ./scripts/style-dictionary/build-tokens.js",
+    "dev": "vite"
+  },
+  "type": "module"
 }

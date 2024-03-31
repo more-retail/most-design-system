@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 26 Mar 2024 10:14:04 GMT
+ * Generated on Sun, 31 Mar 2024 18:05:29 GMT
  */
 
 export default {
@@ -108,9 +108,9 @@ export default {
       "90": "#36444e",
       "100": "#223039",
       "110": "#14212a",
+      white: "#ffffff",
+      black: "#000000",
     },
-    white: "#ffffff",
-    black: "#000000",
   },
   typography: {
     head: {
@@ -167,7 +167,7 @@ export default {
       },
       "20": {
         fontFamily: "Fabriga",
-        fontSize: "16",
+        fontSize: "16px",
         fontWeight: 500,
         letterSpacing: "0px",
         lineHeight: "24px",
@@ -197,7 +197,7 @@ export default {
       },
       "20": {
         fontFamily: "Fabriga",
-        fontSize: "16",
+        fontSize: "16px",
         fontWeight: 600,
         letterSpacing: "0px",
         lineHeight: "24px",
@@ -227,7 +227,7 @@ export default {
       },
       "20": {
         fontFamily: "DM Sans",
-        fontSize: "16",
+        fontSize: "16px",
         fontWeight: 400,
         letterSpacing: "0px",
         lineHeight: "24px",
@@ -257,7 +257,7 @@ export default {
       },
       "20": {
         fontFamily: "DM Sans",
-        fontSize: "16",
+        fontSize: "16px",
         fontWeight: 600,
         letterSpacing: "0px",
         lineHeight: "24px",
