@@ -2,7 +2,7 @@
 
 ![most-design-system-logo](./public/most-design-system-logo.png)
 
-The *most design system* is a meticulously crafted experience which delivers a
+The _most design system_ is a meticulously crafted experience which delivers a
 user-centric, approachable and modernistic user experience across more retail's
 digital platforms.
 
@@ -24,27 +24,28 @@ yarn add most-design-system --dev
 
 ## Most Design Tokens
 
-The *most design tokens* express micro design decisions that frames the *most design system's*
+The _most design tokens_ express micro design decisions that frames the _most design system's_
 visual style.
 
 ### JavaScript
 
-To use *most design tokens* in JavaScript frameworks, import most's design tokens as JavaScript objects.
+To use _most design tokens_ in JavaScript frameworks, import most's design tokens as JavaScript objects.
 
 ```js
-import tokens from "most-design-system/tokens/js"
+import tokens from "most-design-system/tokens/js";
 ```
 
 And use the tokens according to your framework's styling syntax.
 
 ```js
 // src/App.jsx
-<h1 style={{
+<h1
+  style={{
     color: tokens.colors.orange[60],
-    fontSize: tokens.typography.head[10].fontSize
+    fontSize: tokens.typography.head[10].fontSize,
   }}
 >
-Most Design System
+  Most Design System
 </h1>
 ```
 
@@ -52,10 +53,10 @@ You can also use the tokens to style in vanilla JavaScript if required.
 
 ### React Native
 
-Import *most design tokens* as JavaScript objects formatted for React Native.
+Import _most design tokens_ as JavaScript objects formatted for React Native.
 
 ```js
-import tokens from "most-design-system/tokens/react-native"
+import tokens from "most-design-system/tokens/react-native";
 ```
 
 And use the tokens as you want.
@@ -63,22 +64,22 @@ And use the tokens as you want.
 ```js
 // src/App.jsx
 <Text
-  style={ {
+  style={{
     color: tokens.colors.orange[60],
     fontSize: tokens.typography.head[10].fontSize,
-  } }
+  }}
 >
-Most Design System
+  Most Design System
 </Text>
 ```
 
 ### CSS
 
-Import *most design tokens* as CSS variables
+Import _most design tokens_ as CSS variables
 
 ```css
 /* src/App.css */
-@import 'most-design-system/tokens/css'
+@import "most-design-system/tokens/css";
 ```
 
 And start using them anywhere where you can use CSS variables
@@ -99,9 +100,9 @@ In your `tailwind.config.js`, import and set up all the regular and [composite t
 // tailwind.config.js
 
 // Import JS tokens for regular tokens
-import jsTokens from "most-design-system/tokens/js"
+import jsTokens from "most-design-system/tokens/js";
 // Import CSS-in-JS tokens for composite tokens
-import cssInJsTokens from "most-design-system/tokens/css-in-js"
+import cssInJsTokens from "most-design-system/tokens/css-in-js";
 // Import the plugin function to be able to add your composite tokens
 import plugin from "tailwindcss/plugin";
 
@@ -114,20 +115,20 @@ export default {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      ...tokens.colors,
+      ...jsTokens.colors,
     },
   },
   // To add and use composite tokens, register them as new styles in
   // Tailwind's "utility" layer
   plugins: [
     plugin(({ addUtilities }) => {
-      addUtilities(tokensCssInJs);
+      addUtilities(cssInJsTokens);
     }),
   ],
-}
+};
 ```
 
-And start using *most design tokens* as Tailwind utility classes.
+And start using _most design tokens_ as Tailwind utility classes.
 
 ```jsx
 // src/App.jsx

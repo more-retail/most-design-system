@@ -1,7 +1,7 @@
 {
   "name": "most-design-system",
   "description": "A design system crafted for more retail's digital products",
-  "version": "0.2",
+  "version": "0.2.1",
   "bugs": {
     "url": "https://github.com/more-retail/most-design-system/issues"
   },
@@ -47,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/more-retail/most-design-system.git"
+    "url": "git+https://github.com/more-retail/most-design-system.git"
   },
   "scripts": {
     "build-tokens": "node ./scripts/style-dictionary/build-tokens.js",

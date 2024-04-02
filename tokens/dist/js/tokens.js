@@ -1,12 +1,13 @@
 /**
  * Do not edit directly
- * Generated on Sun, 31 Mar 2024 18:05:29 GMT
+ * Generated on Tue, 02 Apr 2024 07:26:40 GMT
  */
 
 export default {
   colors: {
     orange: {
       "5": "#fdf9f7",
+      "10": "#ffece2",
       "20": "#fce4da",
       "30": "#fec6b2",
       "40": "#fd9e83",
@@ -20,6 +21,7 @@ export default {
     },
     yellow: {
       "5": "#fefcf3",
+      "10": "#fff5c3",
       "20": "#f9ecae",
       "30": "#fcda5f",
       "40": "#f4c43a",
@@ -33,6 +35,7 @@ export default {
     },
     gold: {
       "5": "#fdf5ef",
+      "10": "#ffeee1",
       "20": "#fee4cf",
       "30": "#ffca7f",
       "40": "#ffb75c",
@@ -46,6 +49,7 @@ export default {
     },
     green: {
       "5": "#f8fef8",
+      "10": "#e1ffe1",
       "20": "#cdf4ce",
       "30": "#97ef9d",
       "40": "#56d069",
@@ -59,6 +63,7 @@ export default {
     },
     red: {
       "5": "#fef4f3",
+      "10": "#feebea",
       "20": "#fde2e0",
       "30": "#fdc4c1",
       "40": "#fe9a9a",
@@ -72,6 +77,7 @@ export default {
     },
     blue: {
       "5": "#f8fdff",
+      "10": "#dbf5fe",
       "20": "#d1f0fa",
       "30": "#9be0fd",
       "40": "#5ec5fe",
@@ -85,6 +91,7 @@ export default {
     },
     violet: {
       "5": "#ede5fe",
+      "10": "#f2edff",
       "20": "#ede5fe",
       "30": "#d5cdfc",
       "40": "#beacfe",
@@ -97,20 +104,21 @@ export default {
       "110": "#2d0d5e",
     },
     neutral: {
-      "5": "#f9fcff",
-      "20": "#e1ebf3",
-      "30": "#c9d6e0",
-      "40": "#adbdc9",
-      "50": "#94a4b0",
-      "60": "#7d8d99",
-      "70": "#687782",
-      "80": "#495762",
-      "90": "#36444e",
-      "100": "#223039",
-      "110": "#14212a",
-      white: "#ffffff",
-      black: "#000000",
+      "5": "#fafcfe",
+      "10": "#f1f6fa",
+      "20": "#e4eaf0",
+      "30": "#ccd5dd",
+      "40": "#b0bdc6",
+      "50": "#96a4ae",
+      "60": "#808c96",
+      "70": "#6a777f",
+      "80": "#4c575f",
+      "90": "#38444c",
+      "100": "#253037",
+      "110": "#172128",
     },
+    white: "#ffffff",
+    black: "#000000",
   },
   typography: {
     head: {

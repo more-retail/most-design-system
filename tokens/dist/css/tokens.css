@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Sun, 31 Mar 2024 18:05:29 GMT
+ * Generated on Tue, 02 Apr 2024 07:26:40 GMT
  */
 
 :root {
@@ -26,19 +26,20 @@
   --typography-head-30: 400 28px/40px Fabriga;
   --typography-head-20: 400 38px/56px Fabriga;
   --typography-head-10: 400 50px/72px Fabriga;
-  --colors-neutral-black: rgba(0, 0, 0, 1);
-  --colors-neutral-white: rgba(255, 255, 255, 1);
-  --colors-neutral-110: rgba(20, 33, 42, 1);
-  --colors-neutral-100: rgba(34, 48, 57, 1);
-  --colors-neutral-90: rgba(54, 68, 78, 1);
-  --colors-neutral-80: rgba(73, 87, 98, 1);
-  --colors-neutral-70: rgba(104, 119, 130, 1);
-  --colors-neutral-60: rgba(125, 141, 153, 1);
-  --colors-neutral-50: rgba(148, 164, 176, 1);
-  --colors-neutral-40: rgba(173, 189, 201, 1);
-  --colors-neutral-30: rgba(201, 214, 224, 1);
-  --colors-neutral-20: rgba(225, 235, 243, 1);
-  --colors-neutral-5: rgba(249, 252, 255, 1);
+  --colors-black: rgba(0, 0, 0, 1);
+  --colors-white: rgba(255, 255, 255, 1);
+  --colors-neutral-110: rgba(23, 33, 40, 1);
+  --colors-neutral-100: rgba(37, 48, 55, 1);
+  --colors-neutral-90: rgba(56, 68, 76, 1);
+  --colors-neutral-80: rgba(76, 87, 95, 1);
+  --colors-neutral-70: rgba(106, 119, 127, 1);
+  --colors-neutral-60: rgba(128, 140, 150, 1);
+  --colors-neutral-50: rgba(150, 164, 174, 1);
+  --colors-neutral-40: rgba(176, 189, 198, 1);
+  --colors-neutral-30: rgba(204, 213, 221, 1);
+  --colors-neutral-20: rgba(228, 234, 240, 1);
+  --colors-neutral-10: rgba(241, 246, 250, 1);
+  --colors-neutral-5: rgba(250, 252, 254, 1);
   --colors-violet-110: rgba(45, 13, 94, 1);
   --colors-violet-100: rgba(63, 0, 132, 1);
   --colors-violet-90: rgba(83, 25, 166, 1);
@@ -49,6 +50,7 @@
   --colors-violet-40: rgba(190, 172, 254, 1);
   --colors-violet-30: rgba(213, 205, 252, 1);
   --colors-violet-20: rgba(237, 229, 254, 1);
+  --colors-violet-10: rgba(242, 237, 255, 1);
   --colors-violet-5: rgba(237, 229, 254, 1);
   --colors-blue-110: rgba(0, 37, 97, 1);
   --colors-blue-100: rgba(7, 53, 124, 1);
@@ -60,6 +62,7 @@
   --colors-blue-40: rgba(94, 197, 254, 1);
   --colors-blue-30: rgba(155, 224, 253, 1);
   --colors-blue-20: rgba(209, 240, 250, 1);
+  --colors-blue-10: rgba(219, 245, 254, 1);
   --colors-blue-5: rgba(248, 253, 255, 1);
   --colors-red-110: rgba(84, 9, 19, 1);
   --colors-red-100: rgba(120, 6, 31, 1);
@@ -71,6 +74,7 @@
   --colors-red-40: rgba(254, 154, 154, 1);
   --colors-red-30: rgba(253, 196, 193, 1);
   --colors-red-20: rgba(253, 226, 224, 1);
+  --colors-red-10: rgba(254, 235, 234, 1);
   --colors-red-5: rgba(254, 244, 243, 1);
   --colors-green-110: rgba(4, 53, 18, 1);
   --colors-green-100: rgba(13, 69, 28, 1);
@@ -82,6 +86,7 @@
   --colors-green-40: rgba(86, 208, 105, 1);
   --colors-green-30: rgba(151, 239, 157, 1);
   --colors-green-20: rgba(205, 244, 206, 1);
+  --colors-green-10: rgba(225, 255, 225, 1);
   --colors-green-5: rgba(248, 254, 248, 1);
   --colors-gold-110: rgba(68, 37, 3, 1);
   --colors-gold-100: rgba(92, 53, 6, 1);
@@ -93,6 +98,7 @@
   --colors-gold-40: rgba(255, 183, 92, 1);
   --colors-gold-30: rgba(255, 202, 127, 1);
   --colors-gold-20: rgba(254, 228, 207, 1);
+  --colors-gold-10: rgba(255, 238, 225, 1);
   --colors-gold-5: rgba(253, 245, 239, 1);
   --colors-yellow-110: rgba(60, 42, 7, 1);
   --colors-yellow-100: rgba(82, 59, 10, 1);
@@ -104,6 +110,7 @@
   --colors-yellow-40: rgba(244, 196, 58, 1);
   --colors-yellow-30: rgba(252, 218, 95, 1);
   --colors-yellow-20: rgba(249, 236, 174, 1);
+  --colors-yellow-10: rgba(255, 245, 195, 1);
   --colors-yellow-5: rgba(254, 252, 243, 1);
   --colors-orange-110: rgba(80, 26, 12, 1);
   --colors-orange-100: rgba(113, 35, 16, 1);
@@ -115,5 +122,6 @@
   --colors-orange-40: rgba(253, 158, 131, 1);
   --colors-orange-30: rgba(254, 198, 178, 1);
   --colors-orange-20: rgba(252, 228, 218, 1);
+  --colors-orange-10: rgba(255, 236, 226, 1);
   --colors-orange-5: rgba(253, 249, 247, 1);
 }

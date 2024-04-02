@@ -1,6 +1,6 @@
 import StyleDictionary from "style-dictionary";
 import { isTypography } from "style-dictionary-utils/dist/filter/isTypography.js";
-import { dimensionToPixelUnitless } from "style-dictionary-utils/dist/transformer/dimension-to-pixelUnitless.js"
+import { dimensionToPixelUnitless } from "style-dictionary-utils/dist/transformer/dimension-to-pixelUnitless.js";
 import { fontWeightToNumber } from "style-dictionary-utils/dist/transformer/font-weight-to-number.js";
 
 /**
@@ -19,7 +19,7 @@ const transformer = ({ value }) => {
   transformed.fontSize = dimensionToPixelUnitless.transformer(token);
 
   token.value = value.fontWeight.toString();
-  transformed.fontWeight = fontWeightToNumber.transformer(token);
+  transformed.fontWeight = fontWeightToNumber.transformer(token).toString();
 
   token.value = value.letterSpacing;
   transformed.letterSpacing = dimensionToPixelUnitless.transformer(token);
@@ -28,12 +28,12 @@ const transformer = ({ value }) => {
   transformed.lineHeight = dimensionToPixelUnitless.transformer(token);
 
   return transformed;
-}
+};
 
 export default StyleDictionary.registerTransform({
-  name: 'typography/reactNative',
-  type: 'value',
+  name: "typography/reactNative",
+  type: "value",
   transitive: true,
   matcher: isTypography,
-  transformer
+  transformer,
 });
