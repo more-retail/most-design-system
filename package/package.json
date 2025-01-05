@@ -1,10 +1,5 @@
 {
   "name": "most-design-system",
-  "author": {
-    "name": "Abhishek Rein",
-    "email": "w@abhishekrein.xyz",
-    "url": "https://abhishekrein.xyz"
-  },
   "description": "A design system crafted for more retail's digital product ecosystem.",
   "version": "0.3.0",
   "bugs": {
