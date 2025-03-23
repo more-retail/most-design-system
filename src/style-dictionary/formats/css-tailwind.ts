@@ -61,7 +61,7 @@ const tokensToThemeDirective = (
 ): string => {
   const variables = Object.entries(tokens)
     .map(([name, value]) => {
-      const formattedValue = isNaN(Number(value)) ? `"${value}"` : value;
+      const formattedValue = isNaN(Number(value)) ? `${value}` : value;
       return `  --${name}: ${formattedValue};`;
     })
     .join("\n");
