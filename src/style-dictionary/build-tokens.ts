@@ -5,6 +5,8 @@ import { mostFileHeader } from "./fileHeaders/most-file-header";
 import { cssInJs } from "./formats/css-in-js";
 import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
 import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
+import { cssTailwind } from "./formats/css-tailwind";
+import { typographyCss } from "./transforms/typography-css";
 import { typographyReactNative } from "./transforms/typography-react-native";
 import { contentString } from "./transforms/content-string";
 
@@ -15,9 +17,10 @@ const distDir = path.join(dirname, "../tokens");
 const sd = new StyleDictionary({
   hooks: {
     fileHeaders: {
-      "most-file-feader": mostFileHeader,
+      "most-file-header": mostFileHeader,
     },
     transforms: {
+      "typography/css": typographyCss,
       "typography/reactNative": typographyReactNative,
       "content/string": contentString,
     },
@@ -25,6 +28,7 @@ const sd = new StyleDictionary({
       "css/in-js": cssInJs,
       "typescript/esm-declarations": typescriptEsmDeclarations,
       "typescript/css-in-js-esm-declarations": typescriptCssInJsEsmDeclarations,
+      "css/tailwind": cssTailwind,
     },
   },
   source: [`${srcDir}/**/*.tokens.json`],
@@ -32,7 +36,6 @@ const sd = new StyleDictionary({
     css: {
       buildPath: `${distDir}/css/`,
       transformGroup: "css",
-      expand: true,
       files: [
         {
           destination: "tokens.css",
@@ -43,7 +46,7 @@ const sd = new StyleDictionary({
         },
       ],
       options: {
-        fileHeader: "most-file-feader",
+        fileHeader: "most-file-header",
       },
     },
     js: {
@@ -63,7 +66,7 @@ const sd = new StyleDictionary({
         },
       ],
       options: {
-        fileHeader: "most-file-feader",
+        fileHeader: "most-file-header",
       },
     },
     reactNative: {
@@ -88,7 +91,7 @@ const sd = new StyleDictionary({
         },
       ],
       options: {
-        fileHeader: "most-file-feader",
+        fileHeader: "most-file-header",
       },
     },
     cssInJs: {
@@ -105,11 +108,38 @@ const sd = new StyleDictionary({
         },
       ],
       options: {
-        fileHeader: "most-file-feader",
+        fileHeader: "most-file-header",
+      },
+    },
+    tailwind: {
+      buildPath: `${distDir}/tailwind/`,
+      transforms: [
+        "attribute/cti",
+        "name/kebab",
+        "color/css",
+        "typography/css",
+      ],
+      files: [
+        {
+          destination: "tokens.css",
+          format: "css/tailwind",
+          options: {
+            disableDefaultNamespaces: [
+              "color",
+              "text",
+              "font-weight",
+              "tracking",
+              "leading",
+            ],
+          },
+        },
+      ],
+      options: {
+        fileHeader: "most-file-header",
       },
     },
   },
-  log: { verbosity: "verbose" },
+  log: { verbosity: "default" },
 });
 
 sd.buildAllPlatforms();

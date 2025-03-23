@@ -6,7 +6,7 @@
     "url": "https://abhishekrein.xyz"
   },
   "description": "A design system crafted for more retail's digital product ecosystem.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "bugs": {
     "url": "https://github.com/more-retail/most-design-system/issues"
   },
@@ -38,7 +38,8 @@
     "./tokens/js": "./dist/tokens/js/tokens.js",
     "./tokens/react-native": "./dist/tokens/dist/react-native/tokens.js",
     "./tokens/css": "./dist/tokens/css/tokens.css",
-    "./tokens/css-in-js": "./dist/tokens/css-in-js/tokens.js"
+    "./tokens/css-in-js": "./dist/tokens/css-in-js/tokens.js",
+    "./tokens/tailwind": "./dist/tokens/tailwind/tokens.css"
   },
   "homepage": "https://github.com/more-retail/most-design-system/",
   "keywords": [

@@ -14,22 +14,23 @@ You can install the most design system as a regular dev dependency.
 npm install --save-dev most-design-system
 ```
 
-Or with yarn
+Or with `pnpm`
 
 ```bash
-yarn add most-design-system --dev
+pnpm install --dev most-design-system
 ```
 
 # Usage
 
 ## Most Design Tokens
 
-The _most design tokens_ express micro design decisions that frames the _most design system's_
-visual style.
+The _most design tokens_ express micro design decisions that frames the _most
+design system's_ visual style.
 
 ### JavaScript
 
-To use _most design tokens_ in JavaScript frameworks, import most's design tokens as JavaScript objects.
+To use _most design tokens_ in JavaScript frameworks, import most's design
+tokens as JavaScript objects.
 
 ```js
 import tokens from "most-design-system/tokens/js";
@@ -86,6 +87,7 @@ And start using them anywhere where you can use CSS variables
 
 ```css
 /* src/App.css */
+
 h1 {
   color: var(--colors-orange-60);
   font: var(--typography-para-30);
@@ -94,7 +96,31 @@ h1 {
 
 ### Tailwind
 
-In your `tailwind.config.js`, import and set up all the regular and [composite tokens](https://design-tokens.github.io/community-group/format/#composite-types).
+Import _most design tokens_ as Tailwind v4's CSS configuration.
+
+```css
+/* src/globals.css */
+
+@import "most-design-system/tokens/tailwind";
+```
+
+And start using _most design tokens_ as Tailwind classes.
+
+```jsx
+// src/App.jsx
+
+function App() {
+  return {
+    <>
+      <h1 className="text-orange-60 typography-label-10">Most Design System</h1>
+    </>
+  }
+}
+```
+
+For projects using Tailwind versions earlier than v4, in your
+`tailwind.config.js`, import and set up all the regular and [composite
+tokens](https://design-tokens.github.io/community-group/format/#composite-types).
 
 ```js
 // tailwind.config.js
@@ -128,7 +154,7 @@ export default {
 };
 ```
 
-And start using _most design tokens_ as Tailwind utility classes.
+And start using _most design tokens_ as Tailwind classes.
 
 ```jsx
 // src/App.jsx
