@@ -42,7 +42,7 @@ And use the tokens according to your framework's styling syntax.
 // src/App.jsx
 <h1
   style={{
-    color: tokens.colors.orange[60],
+    color: tokens.color.orange[60],
     fontSize: tokens.typography.head[10].fontSize,
   }}
 >
@@ -66,7 +66,7 @@ And use the tokens as you want.
 // src/App.jsx
 <Text
   style={{
-    color: tokens.colors.orange[60],
+    color: tokens.color.orange[60],
     fontSize: tokens.typography.head[10].fontSize,
   }}
 >
@@ -89,7 +89,7 @@ And start using them anywhere where you can use CSS variables
 /* src/App.css */
 
 h1 {
-  color: var(--colors-orange-60);
+  color: var(--color-orange-60);
   font: var(--typography-para-30);
 }
 ```
@@ -141,7 +141,7 @@ export default {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      ...jsTokens.colors,
+      ...jsTokens.color,
     },
   },
   // To add and use composite tokens, register them as new styles in
