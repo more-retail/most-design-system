@@ -124,13 +124,7 @@ const sd = new StyleDictionary({
           destination: "tokens.css",
           format: "css/tailwind",
           options: {
-            disableDefaultNamespaces: [
-              "color",
-              "text",
-              "font-weight",
-              "tracking",
-              "leading",
-            ],
+            disableDefaultNamespaces: ["color", "text", "tracking", "leading"],
           },
         },
       ],
