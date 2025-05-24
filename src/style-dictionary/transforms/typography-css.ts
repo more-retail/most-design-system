@@ -8,6 +8,7 @@ interface TypographyValue {
   fontWeight?: string;
   letterSpacing?: string;
   lineHeight?: string;
+  fontVariationSettings?: string; // Optional, for variable fonts
 }
 
 /**
@@ -16,6 +17,7 @@ interface TypographyValue {
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings
  */
 interface TypographyCssValue {
   "font-family"?: string;
@@ -23,6 +25,7 @@ interface TypographyCssValue {
   "font-weight"?: number | string;
   "letter-spacing"?: number | string;
   "line-height"?: number | string;
+  "font-variation-settings"?: string; // Optional, for variable fonts
 }
 
 /**
@@ -49,6 +52,7 @@ export const typographyCss: ValueTransform = {
       fontWeight: "font-weight",
       letterSpacing: "letter-spacing",
       lineHeight: "line-height",
+      fontVariationSettings: "font-variation-settings",
     };
 
     for (const [key, cssKey] of Object.entries(mappings)) {
