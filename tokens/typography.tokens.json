@@ -264,7 +264,7 @@
       "10": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "22",
+          "fontSize": "22px",
           "fontWeight": 350,
           "letterSpacing": "0px",
           "lineHeight": "32px",
@@ -275,7 +275,7 @@
       "20": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "17",
+          "fontSize": "17px",
           "fontWeight": 350,
           "letterSpacing": "0px",
           "lineHeight": "24px",
@@ -286,7 +286,7 @@
       "30": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "13",
+          "fontSize": "13px",
           "fontWeight": 350,
           "letterSpacing": "0px",
           "lineHeight": "16px",
@@ -297,7 +297,7 @@
       "40": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "11",
+          "fontSize": "11px",
           "fontWeight": 350,
           "letterSpacing": "0px",
           "lineHeight": "12px",
@@ -352,7 +352,7 @@
       "10": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "22",
+          "fontSize": "22px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "32px",
@@ -363,7 +363,7 @@
       "20": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "17",
+          "fontSize": "17px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "24px",
@@ -374,7 +374,7 @@
       "30": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "13",
+          "fontSize": "13px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "16px",
@@ -385,7 +385,7 @@
       "40": {
         "$value": {
           "fontFamily": "Fraunces",
-          "fontSize": "11",
+          "fontSize": "11px",
           "fontWeight": 600,
           "letterSpacing": "0px",
           "lineHeight": "12px",
