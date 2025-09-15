@@ -24,3 +24,6 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# These token files are generated at build time
+src/tokens

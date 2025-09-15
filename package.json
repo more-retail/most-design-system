@@ -1,47 +1,7 @@
 {
   "name": "most-design-system",
-  "author": {
-    "name": "Abhishek Rein",
-    "email": "w@abhishekrein.xyz",
-    "url": "https://abhishekrein.xyz"
-  },
+  "version": "0.7.0",
   "description": "A design system crafted for more retail's digital product ecosystem.",
-  "version": "0.6.0",
-  "bugs": {
-    "url": "https://github.com/more-retail/most-design-system/issues"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@prettier/sync": "^0.5.2",
-    "@types/node": "^22.10.5",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "@vitejs/plugin-react-swc": "^3.7.2",
-    "eslint": "^9.17.0",
-    "eslint-plugin-react": "^7.37.3",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "prettier": "^3.4.2",
-    "style-dictionary": "^4.3.0",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.19.0",
-    "vite": "^6.0.7",
-    "vite-node": "^2.1.8"
-  },
-  "files": [
-    "./dist/tokens/"
-  ],
-  "exports": {
-    "./tokens/js": "./dist/tokens/js/tokens.js",
-    "./tokens/react-native": "./dist/tokens/dist/react-native/tokens.js",
-    "./tokens/css": "./dist/tokens/css/tokens.css",
-    "./tokens/css-in-js": "./dist/tokens/css-in-js/tokens.js",
-    "./tokens/tailwind": "./dist/tokens/tailwind/tokens.css"
-  },
-  "homepage": "https://github.com/more-retail/most-design-system/",
   "keywords": [
     "design at more",
     "design system",
@@ -52,18 +12,96 @@
     "most design",
     "most design system"
   ],
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "homepage": "https://github.com/more-retail/most-design-system/",
+  "bugs": {
+    "url": "https://github.com/more-retail/most-design-system/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/more-retail/most-design-system.git"
   },
-  "scripts": {
-    "build-tokens": "tsc --build && vite-node ./dist/style-dictionary/build-tokens.js",
-    "dev": "vite"
+  "license": "MIT",
+  "author": {
+    "name": "Abhishek Rein",
+    "email": "w@abhishekrein.xyz",
+    "url": "https://abhishekrein.xyz"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/most-design-system.js",
+      "types": "./dist/most-design-system.d.ts"
+    },
+    "./components/react": {
+      "import": "./dist/most-design-system.js",
+      "types": "./dist/most-design-system.d.ts"
+    },
+    "./tokens/js": {
+      "import": "./dist/tokens/js/tokens.js",
+      "types": "./dist/tokens/js/tokens.d.ts"
+    },
+    "./tokens/react-native": {
+      "import": "./dist/tokens/react-native/tokens.js",
+      "types": "./dist/tokens/react-native/tokens.d.ts"
+    },
+    "./tokens/css": "./dist/tokens/css/tokens.css",
+    "./tokens/css-in-js": {
+      "import": "./dist/tokens/css-in-js/tokens.js",
+      "types": "./dist/tokens/css-in-js/tokens.d.ts"
+    },
+    "./tokens/tailwind": "./dist/tokens/tailwind/tokens.css"
+  },
+  "files": [
+    "./dist/"
+  ],
+  "scripts": {
+    "build": "npm run build:lib && npm run build:tokens",
+    "build:lib": "vite build",
+    "build:tokens": "vite-node ./style-dictionary/build-tokens.ts",
+    "dev": "vite",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@material-symbols/svg-700": "^0.34.1",
+    "clsx": "^2.1.1",
+    "color": "^5.0.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.52.11",
+    "@prettier/sync": "github:prettier/sync",
+    "@tailwindcss/vite": "^4.1.12",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.8",
+    "@vitejs/plugin-react-swc": "^4.0.1",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "prettier": "^3.6.2",
+    "prettier-plugin-packagejson": "^2.5.19",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "rollup-preserve-directives": "^1.1.3",
+    "style-dictionary": "^5.0.2",
+    "tailwindcss": "*",
+    "tw-animate-css": "^1.3.7",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0",
+    "unplugin-dts": "^1.0.0-beta.6",
+    "vite": "^7.1.3",
+    "vite-node": "^3.2.4",
+    "vite-plugin-svgr": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.12"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

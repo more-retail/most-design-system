@@ -1,6 +1,6 @@
 # most design system
 
-![most-design-system-logo](./public/most-design-system-logo.png)
+![most-design-system-logo](./docs/images/most-design-system-logo.png)
 
 The _most design system_ is a meticulously crafted experience which delivers a
 user-centric, approachable and modernistic user experience across more retail's

@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "./tokens/tailwind/tokens.css";
+@import "tw-animate-css";
+
+#root {
+  width: auto;
+  height: 100vh;
+}

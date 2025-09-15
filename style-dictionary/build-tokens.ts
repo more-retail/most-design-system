@@ -1,5 +1,6 @@
-import * as path from "path";
 import StyleDictionary from "style-dictionary";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { mostFileHeader } from "./fileHeaders/most-file-header";
 import { cssInJs } from "./formats/css-in-js";
@@ -10,11 +11,14 @@ import { typographyCss } from "./transforms/typography-css";
 import { typographyReactNative } from "./transforms/typography-react-native";
 import { contentString } from "./transforms/content-string";
 
-const dirname = import.meta.dirname;
-const srcDir = path.join(dirname, "../../tokens");
-const distDir = path.join(dirname, "../tokens");
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const sd = new StyleDictionary({
+const tokenSrc = resolve(__dirname, "../tokens");
+const srcOut = resolve(__dirname, "../src/tokens");
+const distOut = resolve(__dirname, "../dist/tokens");
+
+const baseConfig = {
+  source: [`${tokenSrc}/**/*.tokens.json`],
   hooks: {
     fileHeaders: {
       "most-file-header": mostFileHeader,
@@ -31,46 +35,34 @@ const sd = new StyleDictionary({
       "css/tailwind": cssTailwind,
     },
   },
-  source: [`${srcDir}/**/*.tokens.json`],
   platforms: {
     css: {
-      buildPath: `${distDir}/css/`,
       transformGroup: "css",
       files: [
         {
           destination: "tokens.css",
           format: "css/variables",
-          options: {
-            outputReferences: true,
-          },
+          options: { outputReferences: true },
         },
       ],
-      options: {
-        fileHeader: "most-file-header",
-      },
+      options: { fileHeader: "most-file-header" },
     },
     js: {
-      buildPath: `${distDir}/js/`,
       transformGroup: "js",
       files: [
         {
           destination: "tokens.js",
           format: "javascript/esm",
-          options: {
-            minify: true,
-          },
+          options: { minify: true },
         },
         {
           destination: "tokens.d.ts",
           format: "typescript/esm-declarations",
         },
       ],
-      options: {
-        fileHeader: "most-file-header",
-      },
+      options: { fileHeader: "most-file-header" },
     },
     reactNative: {
-      buildPath: `${distDir}/react-native/`,
       transforms: [
         "name/camel",
         "size/object",
@@ -81,38 +73,24 @@ const sd = new StyleDictionary({
         {
           destination: "tokens.js",
           format: "javascript/esm",
-          options: {
-            minify: true,
-          },
+          options: { minify: true },
         },
-        {
-          destination: "tokens.d.ts",
-          format: "typescript/esm-declarations",
-        },
+        { destination: "tokens.d.ts", format: "typescript/esm-declarations" },
       ],
-      options: {
-        fileHeader: "most-file-header",
-      },
+      options: { fileHeader: "most-file-header" },
     },
     cssInJs: {
-      buildPath: `${distDir}/css-in-js/`,
       transforms: ["attribute/cti", "name/kebab", "content/string"],
       files: [
-        {
-          destination: "tokens.js",
-          format: "css/in-js",
-        },
+        { destination: "tokens.js", format: "css/in-js" },
         {
           destination: "tokens.d.ts",
           format: "typescript/css-in-js-esm-declarations",
         },
       ],
-      options: {
-        fileHeader: "most-file-header",
-      },
+      options: { fileHeader: "most-file-header" },
     },
     tailwind: {
-      buildPath: `${distDir}/tailwind/`,
       transforms: [
         "attribute/cti",
         "name/kebab",
@@ -128,12 +106,24 @@ const sd = new StyleDictionary({
           },
         },
       ],
-      options: {
-        fileHeader: "most-file-header",
-      },
+      options: { fileHeader: "most-file-header" },
     },
   },
-  log: { verbosity: "default" },
-});
+  log: { verbosity: "default" as const },
+};
 
-sd.buildAllPlatforms();
+function buildTokens(outDir: string) {
+  const sd = new StyleDictionary({
+    ...baseConfig,
+    platforms: Object.fromEntries(
+      Object.entries(baseConfig.platforms).map(([name, cfg]) => [
+        name,
+        { ...cfg, buildPath: `${outDir}/${name}/` },
+      ]),
+    ),
+  });
+  sd.buildAllPlatforms();
+}
+
+buildTokens(srcOut);
+buildTokens(distOut);
