@@ -323,7 +323,7 @@ function SwatchPickerModeToggle({
       />
       <button
         onClick={() => handleModeToggle("solid")}
-        className="swatch-picker-solid-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-neutral-60 disabled:[&_svg]:fill-neutral-110"
+        className="swatch-picker-solid-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-neutral-110 disabled:[&_svg]:fill-neutral-60"
         aria-label="Switch to solid color mode"
         disabled={disabled}
       >
@@ -331,7 +331,7 @@ function SwatchPickerModeToggle({
       </button>
       <button
         onClick={() => handleModeToggle("gradient")}
-        className="swatch-picker-gradient-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-neutral-60 disabled:[&_svg]:fill-neutral-110"
+        className="swatch-picker-gradient-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-neutral-110 disabled:[&_svg]:fill-neutral-60"
         aria-label="Switch to gradient color mode"
         disabled={disabled}
       >
