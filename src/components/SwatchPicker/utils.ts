@@ -20,9 +20,10 @@ export function getRandomColor(): ColorInstance {
 }
 
 export function getRandomInternalSwatch(
-  mode: InternalSwatch["mode"] = "gradient",
+  mode: InternalSwatch["mode"] | null | undefined = "gradient",
 ): InternalSwatch {
-  switch (mode) {
+  const normalizedMode = mode ?? "gradient";
+  switch (normalizedMode) {
     case "solid": {
       return {
         mode: "solid",
@@ -38,14 +39,14 @@ export function getRandomInternalSwatch(
       };
     }
     default: {
-      const _exhaustiveCheck: never = mode;
+      const _exhaustiveCheck: never = normalizedMode;
       throw new Error(`Unhandled swatch mode: ${_exhaustiveCheck}`);
     }
   }
 }
 
 export function getRandomSwatch(
-  mode: InternalSwatch["mode"] = "gradient",
+  mode: InternalSwatch["mode"] | null | undefined = "gradient",
 ): Swatch {
   return convertInternalSwatchToSwatch(getRandomInternalSwatch(mode));
 }
