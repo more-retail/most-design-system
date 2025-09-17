@@ -7,6 +7,7 @@ import {
   SwatchPickerPreview,
   SwatchPickerSavedSwatches,
   SwatchPickerWheel,
+  getLastSavedMode,
 } from "@/components/SwatchPicker";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         onSwatchChange={(color) => console.log("Swatch changed: ", color)}
         onSwatchSave={(color) => console.log("Swatch saved: ", color)}
         swatch={swatch}
-        disabled
+        // disabled
       >
         <div className="flex flex-col items-center gap-5 p-4 font-sans">
           <SwatchPickerModeToggle />
@@ -36,6 +37,7 @@ function App() {
       <button
         className="h-12 cursor-pointer rounded-full bg-orange-60 px-4 typography-label-30 text-white"
         onClick={() => {
+          console.log("Last saved mode was: ", getLastSavedMode());
           setSwatch({ mode: "gradient", colors: ["#bdc3c7", "#bdc3c7"] });
         }}
       >

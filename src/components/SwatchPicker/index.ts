@@ -6,6 +6,6 @@ export {
   SwatchPickerSavedSwatches,
 } from "./SwatchPicker";
 
-export { getRandomSwatch } from "./utils";
+export { getRandomSwatch, getLastSavedMode } from "./utils";
 
 export type { Swatch, SwatchMode } from "./types";

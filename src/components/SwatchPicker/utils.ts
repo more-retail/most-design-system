@@ -7,8 +7,9 @@ import {
   DEFAULT_MAX_LIGHTNESS,
   DEFAULT_MIN_LIGHTNESS,
   DEFAULT_SATURATION,
+  SAVED_SWATCHES_KEY,
 } from "./constants";
-import { InternalSwatch, Swatch } from "./types";
+import { InternalSwatch, Swatch, SwatchMode } from "./types";
 
 export function getRandomColor(): ColorInstance {
   return Color.hsl(
@@ -129,4 +130,27 @@ export function clampInternalSwatch(swatch: InternalSwatch): InternalSwatch {
       };
     }
   }
+}
+
+export function getLastSavedMode(): SwatchMode | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const item = window.localStorage.getItem(SAVED_SWATCHES_KEY);
+    const parsed: unknown = item ? JSON.parse(item) : [];
+
+    if (
+      Array.isArray(parsed) &&
+      parsed.length > 0 &&
+      typeof parsed[0] === "object" &&
+      parsed[0] !== null &&
+      "mode" in parsed[0]
+    ) {
+      return parsed[0].mode;
+    }
+  } catch (error) {
+    console.error("Error reading last mode from saved swatches", error);
+  }
+
+  return null;
 }
