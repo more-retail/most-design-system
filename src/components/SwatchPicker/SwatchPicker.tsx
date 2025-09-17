@@ -544,21 +544,6 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
       hasMovedRef.current = false;
       document.body.style.cursor = "grabbing";
 
-      // Store the current hue on pressing the Shift key to lock the movement
-      if (
-        "nativeEvent" in e &&
-        "shiftKey" in e.nativeEvent &&
-        e.nativeEvent.shiftKey
-      ) {
-        lockedHueRef.current = (
-          internalSwatchRef.current.mode === "solid"
-            ? internalSwatchRef.current.color
-            : internalSwatchRef.current.colors[0]
-        ).hue();
-      } else {
-        lockedHueRef.current = null;
-      }
-
       if (primaryKnobRef.current) {
         primaryKnobRef.current.style.transition =
           "transform 100ms ease-out, background-color 100ms ease-out, border-width 100ms ease-out";
@@ -607,7 +592,26 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
     setIsDragging(false);
   }, [handleSaveSwatch, setIsDragging]);
 
+  const handleKeyDown = React.useCallback((e: KeyboardEvent) => {
+    if (e.key === "Shift" && lockedHueRef.current === null) {
+      lockedHueRef.current = (
+        internalSwatchRef.current.mode === "solid"
+          ? internalSwatchRef.current.color
+          : internalSwatchRef.current.colors[0]
+      ).hue();
+    }
+  }, []);
+
+  const handleKeyUp = React.useCallback((e: KeyboardEvent) => {
+    if (e.key === "Shift") {
+      lockedHueRef.current = null;
+    }
+  }, []);
+
   React.useEffect(() => {
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
+
     if (!isDragging) return;
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -620,8 +624,10 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
       window.removeEventListener("touchmove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("touchend", handleMouseUp);
+      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isDragging, handleMouseMove, handleMouseUp]);
+  }, [isDragging, handleMouseMove, handleMouseUp, handleKeyDown, handleKeyUp]);
 
   const handleDoubleClick = React.useCallback(() => {
     if (disabled) return;
