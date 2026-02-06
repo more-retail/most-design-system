@@ -477,6 +477,90 @@
         },
         "$type": "typography"
       }
+    },
+    "mono": {
+      "10": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "21px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "16px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "12px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "9px",
+          "fontWeight": 400,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
+    },
+    "monoThick": {
+      "10": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "21px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "32px"
+        },
+        "$type": "typography"
+      },
+      "20": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "16px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "24px"
+        },
+        "$type": "typography"
+      },
+      "30": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "12px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "16px"
+        },
+        "$type": "typography"
+      },
+      "40": {
+        "$value": {
+          "fontFamily": "DM Mono",
+          "fontSize": "9px",
+          "fontWeight": 500,
+          "letterSpacing": "0px",
+          "lineHeight": "12px"
+        },
+        "$type": "typography"
+      }
     }
   }
 }
