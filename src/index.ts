@@ -1,6 +1,9 @@
 export { Button } from "@/components/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "@/components/Button";
 
+export { PasswordField } from "@/components/PasswordField";
+export type { PasswordFieldProps } from "@/components/PasswordField";
+
 export {
   SwatchPicker,
   SwatchPickerModeToggle,
