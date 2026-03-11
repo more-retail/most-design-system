@@ -1,3 +1,19 @@
+/* Google Fonts — DM Sans, DM Mono, Fraunces */
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap");
+
+/*
+  Fabriga is a commercial font licensed by More retail.
+  Self-host the font files and add @font-face declarations here, e.g.:
+
+  @font-face {
+    font-family: "Fabriga";
+    src: url("./fonts/Fabriga-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+*/
+
 @import "tailwindcss";
 @import "./tokens/tailwind/tokens.css";
 @import "tw-animate-css";
