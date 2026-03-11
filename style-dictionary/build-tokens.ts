@@ -102,7 +102,7 @@ const baseConfig = {
           destination: "tokens.css",
           format: "css/tailwind",
           options: {
-            disableDefaultNamespaces: ["color", "text", "tracking", "leading"],
+            disableDefaultNamespaces: ["color", "text", "tracking", "leading", "spacing"],
           },
         },
       ],
