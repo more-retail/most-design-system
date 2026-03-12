@@ -74,6 +74,56 @@
       "$value": "48px",
       "$type": "dimension",
       "$description": "48px — input height"
+    },
+    "150": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "56px"
+    },
+    "160": {
+      "$value": "64px",
+      "$type": "dimension",   
+      "$description": "64px"
+    },
+    "170": {
+      "$value": "72px",
+      "$type": "dimension",
+      "$description": "72px"
+    },
+    "180": {
+      "$value": "80px",
+      "$type": "dimension",   
+      "$description": "80px"
+    },
+    "190": {
+      "$value": "88px",
+      "$type": "dimension",
+      "$description": "88px"
+    },
+    "200": {
+      "$value": "96px",
+      "$type": "dimension",
+      "$description": "96px"
+    },
+    "210": {  
+      "$value": "104px",
+      "$type": "dimension",
+      "$description": "104px"
+    },
+    "220": {
+      "$value": "112px",
+      "$type": "dimension",
+      "$description": "112px"
+    },
+    "230": {
+      "$value": "120px",
+      "$type": "dimension",
+      "$description": "120px"
+    },
+    "240": {
+      "$value": "128px",  
+      "$type": "dimension",
+      "$description": "128px"
     }
   }
 }

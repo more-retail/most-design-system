@@ -32,7 +32,7 @@ const sizeStyles: Record<
   }
 > = {
   lg: {
-    height: "h-[64px]",
+    height: "h-160",
     px: "px-80",
     pxIcon: "px-80",
     gap: "gap-50",
@@ -94,7 +94,7 @@ const variantStyles: Record<
     base: "hover:bg-neutral-10 active:bg-neutral-20",
     text: "text-neutral-110",
     disabledBg: "",
-    disabledText: "disabled:text-neutral-40",
+    disabledText: "disabled:text-neutral-40"
   },
 };
 
