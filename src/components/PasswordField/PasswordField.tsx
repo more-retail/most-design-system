@@ -74,7 +74,7 @@ function PasswordField({
       >
         {/* Leading key icon */}
         <div className="bg-white flex items-center justify-center rounded-lg shrink-0 size-100">
-          <KeyIcon className="size-60 text-orange-60" />
+          <KeyIcon className="size-60 fill-orange-60" />
         </div>
 
         {/* Password input */}
@@ -94,9 +94,9 @@ function PasswordField({
           className="shrink-0 size-60 flex items-center justify-center text-neutral-70 hover:text-neutral-110 transition-colors"
         >
           {showPassword ? (
-            <VisibilityOffIcon className="size-60" />
+            <VisibilityOffIcon className="size-60 fill-white" />
           ) : (
-            <VisibilityIcon className="size-60" />
+            <VisibilityIcon className="size-60 fill-white" />
           )}
         </button>
       </div>
