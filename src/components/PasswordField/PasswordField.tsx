@@ -19,6 +19,10 @@ interface PasswordFieldProps
   error?: boolean;
   errorMessage?: string;
   disabled?: boolean;
+  /** When provided, renders a "Forgot Password?" link beside the label */
+  forgotPasswordLabel?: string;
+  /** Called when the forgot password link is clicked */
+  onForgotPassword?: () => void;
 }
 
 function PasswordField({
@@ -29,6 +33,8 @@ function PasswordField({
   error = false,
   errorMessage,
   disabled = false,
+  forgotPasswordLabel = "Forgot Password?",
+  onForgotPassword,
   className,
   ...inputProps
 }: PasswordFieldProps) {
@@ -37,15 +43,25 @@ function PasswordField({
   return (
     <div className={cn("flex flex-col gap-40 items-start w-[300px]", className)}>
       {showLabel && (
-        <label
-          htmlFor={id}
-          className={cn(
-            "typography-para-30 text-neutral-110 truncate w-full",
-            error && "text-red-60",
+        <div className="flex gap-50 items-start w-full">
+          <label
+            htmlFor={id}
+            className={cn(
+              "typography-para-30 text-neutral-110 truncate flex-1 min-w-0"
+            )}
+          >
+            {label}
+          </label>
+          {forgotPasswordLabel && (
+            <button
+              type="button"
+              onClick={onForgotPassword}
+              className="shrink-0 typography-label-30 text-orange-60 whitespace-nowrap"
+            >
+              {forgotPasswordLabel}
+            </button>
           )}
-        >
-          {label}
-        </label>
+        </div>
       )}
       <div
         className={cn(

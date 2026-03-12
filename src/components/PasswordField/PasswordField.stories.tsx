@@ -13,6 +13,8 @@ const meta: Meta<typeof PasswordField> = {
     error: { control: "boolean" },
     errorMessage: { control: "text" },
     disabled: { control: "boolean" },
+    forgotPasswordLabel: { control: "text" },
+    onForgotPassword: { action: "forgotPassword" },
   },
   args: {
     label: "Password",
@@ -46,4 +48,19 @@ export const ErrorWithMessage: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true, defaultValue: "mysecretpassword" },
+};
+
+export const WithForgotPassword: Story = {
+  args: {
+    forgotPasswordLabel: "Forgot Password?",
+  },
+};
+
+export const WithForgotPasswordAndError: Story = {
+  args: {
+    forgotPasswordLabel: "Forgot Password?",
+    error: true,
+    defaultValue: "wrongpass",
+    errorMessage: "Incorrect password. Please try again.",
+  },
 };
