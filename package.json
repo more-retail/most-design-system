@@ -88,8 +88,6 @@
     "@material-symbols/svg-700": "^0.34.1",
     "clsx": "^2.1.1",
     "color": "^5.0.0",
-    "react-native": "^0.84.1",
-    "react-native-svg": "^15.15.4",
     "tailwind-merge": "^3.3.1",
     "tsup": "^8.5.1"
   },
@@ -137,7 +135,20 @@
   "peerDependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-native": "^0.84.1",
+    "react-native-svg": "^15.15.4",
     "tailwindcss": "^4.1.12"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",
