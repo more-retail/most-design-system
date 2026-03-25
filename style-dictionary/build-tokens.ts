@@ -7,6 +7,7 @@ import { cssInJs } from "./formats/css-in-js";
 import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
 import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
 import { cssTailwind } from "./formats/css-tailwind";
+import { reactNativeStylesheet } from "./formats/react-native-stylesheet";
 import { typographyCss } from "./transforms/typography-css";
 import { typographyReactNative } from "./transforms/typography-react-native";
 import { contentString } from "./transforms/content-string";
@@ -33,6 +34,7 @@ const baseConfig = {
       "typescript/esm-declarations": typescriptEsmDeclarations,
       "typescript/css-in-js-esm-declarations": typescriptCssInJsEsmDeclarations,
       "css/tailwind": cssTailwind,
+      "reactNative/stylesheet": reactNativeStylesheet,
     },
   },
   platforms: {
@@ -76,6 +78,7 @@ const baseConfig = {
           options: { minify: true },
         },
         { destination: "tokens.d.ts", format: "typescript/esm-declarations" },
+        { destination: "stylesheet.ts", format: "reactNative/stylesheet" },
       ],
       options: { fileHeader: "most-file-header" },
     },
