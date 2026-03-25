@@ -30,24 +30,19 @@ type Story = StoryObj<typeof PasswordField>;
 
 export const Default: Story = {};
 
-export const WithValue: Story = {
-  args: { defaultValue: "mysecretpassword" },
-};
-
 export const Error: Story = {
-  args: { error: true, defaultValue: "wrongpass" },
+  args: { error: true },
 };
 
 export const ErrorWithMessage: Story = {
   args: {
     error: true,
-    defaultValue: "wrongpass",
     errorMessage: "Incorrect password. Please try again.",
   },
 };
 
 export const Disabled: Story = {
-  args: { disabled: true, defaultValue: "mysecretpassword" },
+  args: { disabled: true },
 };
 
 export const WithForgotPassword: Story = {
@@ -60,7 +55,6 @@ export const WithForgotPasswordAndError: Story = {
   args: {
     forgotPasswordLabel: "Forgot Password?",
     error: true,
-    defaultValue: "wrongpass",
     errorMessage: "Incorrect password. Please try again.",
   },
 };

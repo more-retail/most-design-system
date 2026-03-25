@@ -4,44 +4,39 @@ import KeyIcon from "@material-symbols/svg-700/sharp/key-fill.svg?react";
 import VisibilityIcon from "@material-symbols/svg-700/sharp/visibility-fill.svg?react";
 import VisibilityOffIcon from "@material-symbols/svg-700/sharp/visibility_off-fill.svg?react";
 
-import { type OptionalCn, cn as defaultCn } from "@/utils/cn";
+import { cn } from "@/utils/cn";
 
 /* -------------------------------------------------------------------------------------------------
  * PasswordField
  * -----------------------------------------------------------------------------------------------*/
 
-interface PasswordFieldProps
-  extends OptionalCn,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "id" | "type"> {
+interface PasswordFieldProps {
   id?: string;
   label?: string;
   showLabel?: boolean;
   error?: boolean;
   errorMessage?: string;
   disabled?: boolean;
-  /** When provided, renders a "Forgot Password?" link beside the label */
+  placeholder?: string;
   forgotPasswordLabel?: string;
-  /** Called when the forgot password link is clicked */
   onForgotPassword?: () => void;
 }
 
 function PasswordField({
-  cn = defaultCn,
   id,
   label = "Password",
   showLabel = true,
   error = false,
   errorMessage,
   disabled = false,
+  placeholder,
   forgotPasswordLabel = "Forgot Password?",
   onForgotPassword,
-  className,
-  ...inputProps
 }: PasswordFieldProps) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <div className={cn("flex flex-col gap-40 items-start w-[300px]", className)}>
+    <div className={cn("flex flex-col gap-40 items-start w-[300px]")}>
       {showLabel && (
         <div className="flex gap-50 items-start w-full">
           <label
@@ -82,8 +77,8 @@ function PasswordField({
           id={id}
           type={showPassword ? "text" : "password"}
           disabled={disabled}
+          placeholder={placeholder}
           className="flex-1 min-w-0 w-full bg-transparent outline-none typography-para-30 text-neutral-110 placeholder:text-neutral-40"
-          {...inputProps}
         />
 
         {/* Visibility toggle */}

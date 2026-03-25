@@ -1,6 +1,6 @@
 import React from "react";
 
-import { type OptionalCn, cn as defaultCn } from "@/utils/cn";
+import { cn } from "@/utils/cn";
 
 /* -------------------------------------------------------------------------------------------------
  * Button
@@ -9,13 +9,14 @@ import { type OptionalCn, cn as defaultCn } from "@/utils/cn";
 type ButtonVariant = "primary" | "secondary" | "tertiary" | "ghost";
 type ButtonSize = "lg" | "md" | "sm" | "xs";
 
-interface ButtonProps
-  extends OptionalCn,
-    React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 // ── Size tokens ──────────────────────────────────────────────────────────────
@@ -101,15 +102,13 @@ const variantStyles: Record<
 // ── Component ────────────────────────────────────────────────────────────────
 
 function Button({
-  cn = defaultCn,
   variant = "primary",
   size = "md",
   leadingIcon,
   trailingIcon,
-  className,
   children,
   disabled,
-  ...buttonProps
+  onClick,
 }: ButtonProps) {
   const ss = sizeStyles[size];
   const vs = variantStyles[variant];
@@ -118,8 +117,9 @@ function Button({
   return (
     <button
       disabled={disabled}
+      onClick={onClick}
       className={cn(
-        "inline-flex items-center justify-center overflow-hidden rounded-full",
+        "inline-flex items-center h-60 justify-center overflow-hidden rounded-full",
         "cursor-pointer transition-colors",
         "disabled:pointer-events-none",
         ss.height,
@@ -129,9 +129,7 @@ function Button({
         vs.text,
         vs.disabledBg,
         vs.disabledText,
-        className,
       )}
-      {...buttonProps}
     >
       {leadingIcon && (
         <span className={cn("shrink-0 flex items-center justify-center", ss.iconSize)}>
