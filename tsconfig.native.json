@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    // Drop DOM — React Native doesn't have a DOM
+    "lib": ["ES2020"],
+    // React Native JSX transform
+    "jsx": "react-native"
+  },
+  "include": ["src", "index.native.ts"]
+}
