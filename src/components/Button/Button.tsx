@@ -1,156 +1,87 @@
 import React from "react";
 
+import { type VariantProps, cva } from "class-variance-authority";
+
 import { cn } from "@/utils/cn";
 
-/* -------------------------------------------------------------------------------------------------
- * Button
- * -----------------------------------------------------------------------------------------------*/
-
-type ButtonVariant = "primary" | "secondary" | "tertiary" | "ghost";
-type ButtonSize = "lg" | "md" | "sm" | "xs";
-
-interface ButtonProps {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
-  children?: React.ReactNode;
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-// ── Size tokens ──────────────────────────────────────────────────────────────
-
-const sizeStyles: Record<
-  ButtonSize,
+const buttonVariants = cva(
+  [
+    "inline-flex items-center justify-center overflow-hidden rounded-full",
+    "cursor-pointer transition-colors typography-label-thick-30",
+    "disabled:pointer-events-none disabled:text-neutral-40 disabled:cursor-not-allowed",
+    "[&_svg]:shrink-0 [&_svg]:fill-current [&_svg:not([class*='size-'])]:size-60",
+  ],
   {
-    height: string;
-    px: string;
-    /** Horizontal padding for icon-only (no label) mode */
-    pxIcon: string;
-    gap: string;
-    iconSize: string;
-  }
-> = {
-  lg: {
-    height: "h-160",
-    px: "px-80",
-    pxIcon: "px-80",
-    gap: "gap-50",
-    iconSize: "size-60",
+    variants: {
+      variant: {
+        primary: [
+          "bg-orange-60 text-white",
+          "shadow-[0px_4px_12px_0px_rgba(250,75,22,0.5)]",
+          "hover:shadow-[0px_4px_12px_0px_rgba(250,75,22,0.75)]",
+          "active:bg-orange-70",
+          "disabled:bg-neutral-20 disabled:shadow-none",
+        ],
+        secondary: [
+          "bg-neutral-100 text-white",
+          "hover:shadow-[0px_4px_12px_0px_rgba(23,33,40,0.25)]",
+          "active:bg-neutral-110",
+          "disabled:bg-neutral-20 disabled:shadow-none",
+        ],
+        tertiary: [
+          "bg-neutral-10 text-neutral-110",
+          "hover:shadow-[0px_4px_12px_0px_rgba(23,33,40,0.05)]",
+          "active:bg-neutral-20",
+          "disabled:bg-neutral-20 disabled:shadow-none",
+        ],
+        ghost: [
+          "text-neutral-110",
+          "hover:bg-neutral-10",
+          "active:bg-neutral-20",
+        ],
+      },
+      size: {
+        lg: "h-160 px-80 gap-50",
+        md: "h-140 px-60 gap-50",
+        sm: "h-110 px-50 gap-40",
+        xs: "h-80 px-40 gap-30 [&_svg:not([class*='size-'])]:size-50",
+        icon: "size-140",
+        "icon-lg": "size-160",
+        "icon-sm": "size-110",
+        "icon-xs": "size-80 [&_svg:not([class*='size-'])]:size-50",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
   },
-  md: {
-    height: "h-140",
-    px: "px-60",
-    pxIcon: "px-60",
-    gap: "gap-50",
-    iconSize: "size-60"
-  },
-  sm: {
-    height: "h-110",
-    px: "px-50",
-    pxIcon: "px-[10px]",
-    gap: "gap-40",
-    iconSize: "size-60"
-  },
-  xs: {
-    height: "h-80",
-    px: "px-40",
-    pxIcon: "px-[6px]",
-    gap: "gap-30",
-    iconSize: "size-50"
-  },
-};
+);
 
-// ── Variant tokens ───────────────────────────────────────────────────────────
+type ButtonVariant = NonNullable<
+  VariantProps<typeof buttonVariants>["variant"]
+>;
+type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>["size"]>;
 
-const variantStyles: Record<
-  ButtonVariant,
-  {
-    base: string;
-    text: string;
-    disabledBg: string;
-    disabledText: string;
-  }
-> = {
-  primary: {
-    base: "bg-orange-60 shadow-[0px_4px_12px_0px_rgba(250,75,22,0.5)] hover:shadow-[0px_4px_12px_0px_rgba(250,75,22,0.75)] active:bg-orange-70",
-    text: "text-white",
-    disabledBg: "disabled:bg-neutral-20 disabled:shadow-none",
-    disabledText: "disabled:text-neutral-40"
-  },
-  secondary: {
-    base: "bg-neutral-100 hover:shadow-[0px_4px_12px_0px_rgba(23,33,40,0.25)] active:bg-neutral-110",
-    text: "text-white",
-    disabledBg: "disabled:bg-neutral-20 disabled:shadow-none",
-    disabledText: "disabled:text-neutral-40"
-  },
-  tertiary: {
-    base: "bg-neutral-10 hover:shadow-[0px_4px_12px_0px_rgba(23,33,40,0.05)] active:bg-neutral-20",
-    text: "text-neutral-110",
-    disabledBg: "disabled:bg-neutral-20 disabled:shadow-none",
-    disabledText: "disabled:text-neutral-40"
-  },
-  ghost: {
-    base: "hover:bg-neutral-10 active:bg-neutral-20",
-    text: "text-neutral-110",
-    disabledBg: "",
-    disabledText: "disabled:text-neutral-40"
-  },
-};
-
-// ── Component ────────────────────────────────────────────────────────────────
+interface ButtonProps
+  extends React.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {}
 
 function Button({
   variant = "primary",
   size = "md",
-  leadingIcon,
-  trailingIcon,
-  children,
-  disabled,
-  onClick,
+  className,
+  ...props
 }: ButtonProps) {
-  const ss = sizeStyles[size];
-  const vs = variantStyles[variant];
-  const isIconOnly = !children && !!leadingIcon && !trailingIcon;
-
   return (
     <button
-      disabled={disabled}
-      onClick={onClick}
-      className={cn(
-        "inline-flex items-center h-60 justify-center overflow-hidden rounded-full",
-        "cursor-pointer transition-colors",
-        "disabled:pointer-events-none",
-        ss.height,
-        isIconOnly ? ss.pxIcon : ss.px,
-        ss.gap,
-        vs.base,
-        vs.text,
-        vs.disabledBg,
-        vs.disabledText,
-      )}
-    >
-      {leadingIcon && (
-        <span className={cn("shrink-0 flex items-center justify-center", ss.iconSize)}>
-          {leadingIcon}
-        </span>
-      )}
-
-      {children && (
-        <span className="typography-label-thick-30 whitespace-nowrap">{children}</span>
-      )}
-
-      {trailingIcon && (
-        <span className={cn("shrink-0 flex items-center justify-center", ss.iconSize)}>
-          {trailingIcon}
-        </span>
-      )}
-    </button>
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...props}
+    />
   );
 }
 
 Button.displayName = "Button";
 
-export { Button };
+export { Button, buttonVariants };
 export type { ButtonProps, ButtonVariant, ButtonSize };

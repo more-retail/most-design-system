@@ -82,7 +82,6 @@
     "pack": "npm run build  && npm pack",
     "tsup:watch": "npx tsup --config tsup.native.config.ts --watch",
     "dev:react": "vite build --watch"
-
   },
   "dependencies": {
     "@material-symbols/svg-700": "^0.34.1",
@@ -109,6 +108,7 @@
     "@vitejs/plugin-react-swc": "^4.0.1",
     "@vitest/browser-playwright": "^4.0.18",
     "@vitest/coverage-v8": "^4.0.18",
+    "class-variance-authority": "^0.7.1",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
