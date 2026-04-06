@@ -1,60 +1,40 @@
+import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+
 import CheckIcon from "@material-symbols/svg-700/sharp/check-fill.svg?react";
 import CheckIndeterminateSmallIcon from "@material-symbols/svg-700/sharp/check_indeterminate_small-fill.svg?react";
 
 import { cn } from "@/utils/cn";
 
-/* -------------------------------------------------------------------------------------------------
- * Checkbox
- * -----------------------------------------------------------------------------------------------*/
-
-
-interface CheckboxProps {
-  /** false = unchecked, "indeterminate" = mixed, true = checked */
-  checked?: boolean | "indeterminate";
-  /** Called with the next boolean value on click (indeterminate → true) */
-  onChange?: (checked: boolean) => void;
-  disabled?: boolean
-}
-
-// ── Component ────────────────────────────────────────────────────────────────
-
-const Checkbox = ({
-  checked = false,
-  onChange,
-  disabled = false,
-}: CheckboxProps) => {
-  const isChecked = checked === true;
-  const isIndeterminate = checked === "indeterminate";
-  const isFilled = isChecked || isIndeterminate;
-
-  const handleClick = () => onChange?.(!isChecked);
-
+function Checkbox({ className, checked, indeterminate, ...props }: CheckboxPrimitive.Root.Props) {
   return (
-    <button
-      type="button"
-      role="checkbox"
-      aria-checked={isIndeterminate ? "mixed" : isChecked}
-      disabled={disabled}
-      onClick={handleClick}
+    <CheckboxPrimitive.Root
+      data-slot="checkbox"
+      checked={checked}
+      indeterminate={indeterminate}
       className={cn(
-        // Always border-2 to prevent layout shift on state changes
-        "size-80  rounded-lg flex items-center justify-center shrink-0",
-        "transition-all duration-150 outline-none border-2",
-        isFilled
-          ? "bg-orange-60 border-neutral-20"
-          : "bg-neutral-10 hover:bg-neutral-20 border-transparent",
-        disabled && "opacity-40 pointer-events-none",
+        "size-80 rounded-lg flex items-center justify-center shrink-0",
+        "cursor-pointer transition-all duration-150 outline-none border-2",
+        "bg-neutral-10 hover:bg-neutral-20 border-transparent",
+        "data-[checked]:bg-orange-60 data-[checked]:hover:bg-orange-60 data-[checked]:border-neutral-20",
+        "data-[indeterminate]:bg-orange-60 data-[indeterminate]:hover:bg-orange-60 data-[indeterminate]:border-neutral-20",
+        "disabled:pointer-events-none disabled:opacity-40",
+        className,
       )}
+      {...props}
     >
-      {isIndeterminate && (
-        <CheckIndeterminateSmallIcon className="size-70 fill-white" />
-      )}
-      {isChecked && <CheckIcon className="size-70 fill-white" />}
-    </button>
+      <CheckboxPrimitive.Indicator
+        data-slot="checkbox-indicator"
+        className="grid place-content-center"
+      >
+        {indeterminate
+          ? <CheckIndeterminateSmallIcon className="size-70 fill-white" />
+          : <CheckIcon className="size-70 fill-white" />
+        }
+      </CheckboxPrimitive.Indicator>
+    </CheckboxPrimitive.Root>
   );
 }
 
 Checkbox.displayName = "Checkbox";
 
 export { Checkbox };
-export type { CheckboxProps };

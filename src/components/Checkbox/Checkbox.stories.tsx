@@ -8,15 +8,13 @@ const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
   tags: ["autodocs"],
   argTypes: {
-    checked: {
-      control: "select",
-      options: ["false", "indeterminate", "true"],
-      mapping: { false: false, true: true, indeterminate: "indeterminate" },
-    },
+    checked: { control: "boolean" },
+    indeterminate: { control: "boolean" },
     disabled: { control: "boolean" },
   },
   args: {
     checked: false,
+    indeterminate: false,
     disabled: false,
   },
 };
@@ -28,10 +26,8 @@ type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
   render: (args) => {
-    const [checked, setChecked] = React.useState<boolean | "indeterminate">(
-      args.checked ?? false,
-    );
-    return <Checkbox {...args} checked={checked} onChange={setChecked} />;
+    const [checked, setChecked] = React.useState(args.checked ?? false);
+    return <Checkbox {...args} checked={checked} onCheckedChange={setChecked} />;
   },
 };
 
@@ -42,7 +38,7 @@ export const Unchecked: Story = {
 };
 
 export const Indeterminate: Story = {
-  args: { checked: "indeterminate" },
+  args: { checked: false, indeterminate: true },
 };
 
 export const Checked: Story = {
@@ -54,7 +50,7 @@ export const DisabledUnchecked: Story = {
 };
 
 export const DisabledIndeterminate: Story = {
-  args: { disabled: true, checked: "indeterminate" },
+  args: { disabled: true, checked: false, indeterminate: true },
 };
 
 export const DisabledChecked: Story = {
@@ -65,26 +61,25 @@ export const DisabledChecked: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div className="flex flex-col gap-[24px] p-60">
-      <div className="flex items-center gap-[24px]">
+    <div className="flex flex-col gap-80 p-60">
+      <div className="flex items-center gap-80">
         <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Unchecked</p>
         <Checkbox checked={false} />
       </div>
-      <div className="flex items-center gap-[24px]">
+      <div className="flex items-center gap-80">
         <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Indeterminate</p>
-        <Checkbox checked="indeterminate" />
+        <Checkbox indeterminate />
       </div>
-      <div className="flex items-center gap-[24px]">
+      <div className="flex items-center gap-80">
         <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Checked</p>
         <Checkbox checked={true} />
       </div>
-      <div className="flex items-center gap-[24px]">
+      <div className="flex items-center gap-80">
         <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Disabled</p>
         <Checkbox checked={false} disabled />
-        <Checkbox checked="indeterminate" disabled />
+        <Checkbox indeterminate disabled />
         <Checkbox checked={true} disabled />
       </div>
     </div>
   ),
-  decorators: [(Story) => <Story />],
 };
