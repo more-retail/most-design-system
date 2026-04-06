@@ -97,3 +97,4 @@ OtpGroup.displayName = "OtpGroup";
 OtpSlot.displayName = "OtpSlot";
 
 export { OtpField, OtpGroup, OtpSlot };
+export type { OtpFieldProps };
