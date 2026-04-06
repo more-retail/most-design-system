@@ -8,20 +8,15 @@ const meta: Meta<typeof OtpField> = {
   component: OtpField,
   tags: ["autodocs"],
   argTypes: {
-    length: { control: { type: "number", min: 4, max: 8 } },
+    maxLength: { control: { type: "number", min: 4, max: 8 } },
     disabled: { control: "boolean" },
     error: { control: "boolean" },
-    showLabel: { control: "boolean" },
-    resendCountdown: { control: { type: "number", min: 0, max: 60 } },
   },
   args: {
-    label: "OTP",
-    showLabel: true,
-    length: 4,
+    maxLength: 4,
     value: "",
     disabled: false,
     error: false,
-    resendCountdown: 0,
   },
 };
 
@@ -43,33 +38,16 @@ export const Populated: Story = {
   args: { value: "1234" },
 };
 
-export const WithResendCountdown: Story = {
-  args: { resendCountdown: 59 },
-};
-
-export const PopulatedWithCountdown: Story = {
-  args: { value: "1234", resendCountdown: 59 },
-};
-
 export const Disabled: Story = {
   args: { disabled: true },
 };
 
-export const Error: Story = {
-  args: {
-    value: "1234",
-    error: true,
-    errorMessage: "A friendly error message",
-  },
+export const DisabledPopulated: Story = {
+  args: { value: "1234", disabled: true },
 };
 
-export const ErrorWithCountdown: Story = {
-  args: {
-    value: "1234",
-    error: true,
-    errorMessage: "A friendly error message",
-    resendCountdown: 59,
-  },
+export const Error: Story = {
+  args: { value: "1234", error: true },
 };
 
 // ── All states grid ───────────────────────────────────────────────────────────
@@ -77,24 +55,11 @@ export const ErrorWithCountdown: Story = {
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-[48px] p-60">
-      <OtpField label="OTP" value="" />
-      <OtpField label="OTP" value="" resendCountdown={59} />
-      <OtpField label="OTP" value="1234" />
-      <OtpField label="OTP" value="1234" resendCountdown={59} />
-      <OtpField label="OTP" value="" disabled />
-      <OtpField
-        label="OTP"
-        value="1234"
-        error
-        errorMessage="A friendly error message"
-      />
-      <OtpField
-        label="OTP"
-        value="1234"
-        error
-        errorMessage="A friendly error message"
-        resendCountdown={59}
-      />
+      <OtpField maxLength={4} value="" />
+      <OtpField maxLength={4} value="1234" />
+      <OtpField maxLength={4} value="" disabled />
+      <OtpField maxLength={4} value="1234" disabled />
+      <OtpField maxLength={4} value="1234" error />
     </div>
   ),
 };
