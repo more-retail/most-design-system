@@ -1,246 +1,408 @@
 import React from "react";
+import { type VariantProps, cva } from "class-variance-authority";
+import { Select as SelectPrimitive } from "@base-ui/react/select";
 
-import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 import ArrowDropDownIcon from "@material-symbols/svg-700/sharp/arrow_drop_down-fill.svg?react";
+import CheckIcon from "@material-symbols/svg-700/sharp/check-fill.svg?react";
+import KeyboardArrowDownIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_down-fill.svg?react";
+import KeyboardArrowUpIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_up-fill.svg?react";
 
 import { cn } from "@/utils/cn";
 
-/* -------------------------------------------------------------------------------------------------
- * Dropdown
- * -----------------------------------------------------------------------------------------------*/
-
 type DropdownSize = "md" | "sm";
 
-interface DropdownOption {
-  value: string;
-  label: string;
-  icon?: React.ReactNode;
+interface DropdownContextValue {
+  size: DropdownSize;
 }
 
-/*
- * Size specs (derived from Figma):
- *   md → trigger h=48px  rounded=12px  px=16px  gap=12px  item-h=48px  item-px=16px  item-rounded=12px
- *   sm → trigger h=36px  rounded=8px   px=12px  gap=12px  item-h=36px  item-px=12px  item-rounded=8px
- */
-const sizeStyles: Record<
-  DropdownSize,
+const DropdownContext = React.createContext<DropdownContextValue>({ size: "md" });
+
+function useDropdownContext() {
+  return React.useContext(DropdownContext);
+}
+
+const dropdownTriggerVariants = cva(
+  [
+    "group w-full inline-flex items-center outline-none cursor-pointer select-none",
+    "border-2 border-transparent",
+    "transition-[border-color,background-color,box-shadow] duration-150",
+    "bg-neutral-10",
+    "typography-para-30",
+    "[&_svg]:shrink-0 [&_svg]:fill-current [&_svg:not([class*='size-'])]:size-60",
+    "disabled:bg-neutral-20 disabled:pointer-events-none disabled:cursor-not-allowed",
+    "data-[popup-open]:border-neutral-110",
+    "rounded-xl",
+  ],
   {
-    triggerH: string;
-    px: string;
-    gap: string;
-    rounded: string;
-    itemH: string;
-    itemPx: string;
-    itemRounded: string;
-  }
-> = {
-  md: {
-    triggerH: "h-140",      // 48px
-    px: "px-60",            // 16px
-    gap: "gap-50",          // 12px
-    rounded: "rounded-30",  // 12px
-    itemH: "h-140",
-    itemPx: "px-60",
-    itemRounded: "rounded-30",
+    variants: {
+      size: {
+        md: "h-140 px-60 gap-50 rounded-30",
+        sm: "h-110 px-50 gap-50 rounded-20",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
   },
-  sm: {
-    triggerH: "h-110",      // 36px
-    px: "px-50",            // 12px
-    gap: "gap-50",          // 12px
-    rounded: "rounded-20",  // 8px
-    itemH: "h-110",
-    itemPx: "px-50",
-    itemRounded: "rounded-20",
-  },
-};
+);
 
-interface DropdownProps {
+
+const dropdownItemVariants = cva(
+  [
+    "w-full inline-flex items-center gap-40 shrink-0 cursor-default outline-none select-none",
+    "border-2 border-transparent",
+    "typography-para-30 text-neutral-110",
+    "transition-colors duration-100",
+    // base-ui data-attribute states
+    "data-[highlighted]:bg-neutral-10 data-[selected]:border-neutral-110",
+    "data-[selected]:border-neutral-110",
+    "data-[disabled]:text-neutral-40 data-[disabled]:pointer-events-none",
+    // SVG auto-sizing
+    "[&_svg]:shrink-0 [&_svg]:fill-current [&_svg:not([class*='size-'])]:size-60",
+    "rounded-xl"
+  ],
+  {
+    variants: {
+      size: {
+        md: "h-140 px-60 rounded-30",
+        sm: "h-110 px-50 rounded-20",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+
+type DropdownTriggerSize = NonNullable<VariantProps<typeof dropdownTriggerVariants>["size"]>;
+type DropdownItemSize = NonNullable<VariantProps<typeof dropdownItemVariants>["size"]>;
+
+
+interface DropdownProps extends SelectPrimitive.Root.Props<string> {
   size?: DropdownSize;
-  options: DropdownOption[];
-  /** Controlled selected value */
-  value?: string;
-  /** Called with the option's value when selected */
-  onChange?: (value: string) => void;
-  placeholder?: string;
-  label?: string;
-  showLabel?: boolean;
-  /** Optional icon shown at the left of the trigger */
-  icon?: React.ReactNode;
-  showIcon?: boolean;
-  disabled?: boolean;
-  /** Pass a string to show an error message, or `true` for error styling only */
-  error?: string | boolean;
 }
 
-// ── Component ────────────────────────────────────────────────────────────────
-
-const Dropdown = ({
-  size = "md",
-  options,
-  value,
-  onChange,
-  placeholder = "Placeholder",
-  label = "Label",
-  showLabel = true,
-  icon,
-  showIcon = true,
-  disabled = false,
-  error,
-}: DropdownProps) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const selectedOption = options.find((o) => o.value === value);
-  const hasValue = !!selectedOption;
-  const hasError = !!error;
-  const errorMessage = typeof error === "string" ? error : undefined;
-  const ss = sizeStyles[size];
-
-  // Close on outside click
-  React.useEffect(() => {
-    if (!isOpen) return;
-    function handleMouseDown(e: MouseEvent) {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleMouseDown);
-    return () => document.removeEventListener("mousedown", handleMouseDown);
-  }, [isOpen]);
-
-  // Always keep border-2 to prevent layout shift; only color changes on hover/open
-  const triggerBorder = hasError
-    ? "border-2 border-red-70 hover:shadow-[0px_0px_0px_2px_#fde2e0]"
-    : isOpen
-    ? "border-2 border-neutral-110"
-    : "border-2 border-transparent hover:border-neutral-20";
-
+function Dropdown({ size = "md", children, ...props }: DropdownProps) {
   return (
-    <div
-      ref={containerRef}
-      className={cn("flex flex-col gap-40 items-start w-full")}
-    >
-      {/* Label */}
-      {showLabel && (
-        <span
-          className={cn(
-            "typography-para-30 truncate w-full",
-            disabled ? "text-neutral-60" : "text-neutral-110",
-          )}
-        >
-          {label}
-        </span>
-      )}
-
-      {/* Trigger + Menu wrapper (relative anchor for the menu) */}
-      <div className="relative w-full">
-        <button
-          type="button"
-          disabled={disabled}
-          aria-haspopup="listbox"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((v) => !v)}
-          className={cn(
-            "w-full flex items-center transition-all duration-150 rounded-xl outline-none",
-            ss.triggerH,
-            ss.px,
-            ss.gap,
-            ss.rounded,
-            disabled ? "bg-neutral-20 pointer-events-none" : "bg-neutral-10",
-            triggerBorder,
-          )}
-        >
-          {/* Optional trigger icon — defaults to apps grid icon */}
-          {showIcon && (
-            <span className="shrink-0 size-60 flex items-center justify-center text-neutral-110">
-              {icon ?? <AppsIcon className="size-60 fill-white" />}
-            </span>
-          )}
-
-          {/* Trigger text */}
-          <span
-            className={cn(
-              "flex-1 min-w-0 text-left typography-para-30 truncate",
-              hasValue
-                ? disabled
-                  ? "text-neutral-60"
-                  : "text-neutral-110"
-                : "text-neutral-40",
-            )}
-          >
-            {hasValue ? selectedOption!.label : placeholder}
-          </span>
-
-          {/* Chevron */}
-          <ArrowDropDownIcon
-            className={cn(
-              "shrink-0 size-60 transition-transform duration-150",
-              disabled ? "text-neutral-40" : "text-neutral-110",
-              isOpen && "rotate-180",
-            )}
-          />
-        </button>
-
-        {/* Menu */}
-        {isOpen && (
-          <div
-            role="listbox"
-            className={cn(
-              "absolute left-0 right-0 top-full mt-[6px] z-50",
-              "bg-white border border-neutral-10 rounded-60",
-              "shadow-[0px_4px_20px_0px_rgba(23,33,40,0.05)]",
-              "p-50 flex flex-col gap-30 overflow-hidden rounded-xl",
-            )}
-          >
-            {options.map((option) => {
-              const isSelected = option.value === value;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  role="option"
-                  aria-selected={isSelected}
-                  onClick={() => {
-                    onChange?.(option.value);
-                    setIsOpen(false);
-                  }}
-                  className={cn(
-                    "w-full flex items-center gap-40 shrink-0 rounded-xl",
-                    ss.itemH,
-                    ss.itemPx,
-                    ss.itemRounded,
-                    "typography-para-30 text-neutral-110 text-left",
-                    "transition-colors duration-100",
-                    isSelected
-                      ? "border-2 border-neutral-110"
-                      : " hover:border-2 hover:border-neutral-110",
-                  )}
-                >
-                  {option.icon && (
-                    <span className="shrink-0 size-60 flex items-center justify-center">
-                      {option.icon}
-                    </span>
-                  )}
-                  <span className="flex-1 truncate">{option.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Error message */}
-      {errorMessage && (
-        <span className="typography-para-30 text-red-70">{errorMessage}</span>
-      )}
-    </div>
+    <DropdownContext.Provider value={{ size }}>
+      <SelectPrimitive.Root data-slot="dropdown" {...props}>
+        {children}
+      </SelectPrimitive.Root>
+    </DropdownContext.Provider>
   );
 }
 
 Dropdown.displayName = "Dropdown";
 
-export { Dropdown };
-export type { DropdownProps, DropdownSize, DropdownOption };
+interface DropdownLabelProps extends SelectPrimitive.Label.Props {
+  disabled?: boolean;
+}
+
+function DropdownLabel({ className, disabled, ...props }: DropdownLabelProps) {
+  return (
+    <SelectPrimitive.Label
+      data-slot="dropdown-label"
+      className={cn(
+        "typography-para-30 truncate w-full",
+        disabled ? "text-neutral-60" : "text-neutral-110",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+DropdownLabel.displayName = "DropdownLabel";
+
+interface DropdownTriggerProps extends SelectPrimitive.Trigger.Props {
+  error?: boolean;
+  icon?: React.ReactNode;
+  showIcon?: boolean;
+  placeholder?: React.ReactNode;
+}
+
+function DropdownTrigger({
+  className,
+  error = false,
+  icon,
+  showIcon = false,
+  placeholder = "Select…",
+  ...props
+}: DropdownTriggerProps) {
+  const { size } = useDropdownContext();
+
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="dropdown-trigger"
+      className={cn(
+        dropdownTriggerVariants({ size }),
+        error
+          ? "border-red-70 data-[popup-open]:border-red-70 hover:shadow-[0px_0px_0px_2px_var(--color-red-20)]"
+          : "hover:border-neutral-20",
+        className,
+      )}
+      {...props}
+    >
+
+      {showIcon && icon && (
+        <span
+          data-slot="dropdown-trigger-icon"
+          className="shrink-0 size-60 flex items-center justify-center text-neutral-110 disabled:text-neutral-40"
+        >
+          {icon}
+        </span>
+      )}
+
+      <SelectPrimitive.Value
+        data-slot="dropdown-value"
+        placeholder={placeholder}
+        className="flex-1 min-w-0 text-left truncate text-neutral-110 data-[placeholder]:text-neutral-40"
+      />
+
+      <SelectPrimitive.Icon
+        data-slot="dropdown-chevron"
+        className="shrink-0 transition-transform duration-150 data-[open]:rotate-180"
+      >
+        <ArrowDropDownIcon />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  );
+}
+
+DropdownTrigger.displayName = "DropdownTrigger";
+
+
+type DropdownContentProps = SelectPrimitive.Popup.Props &
+  Pick<SelectPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger">;
+
+function DropdownContent({
+  className,
+  children,
+  side = "bottom",
+  sideOffset = 6,
+  align = "start",
+  alignOffset = 0,
+  alignItemWithTrigger = false,
+  ...props
+}: DropdownContentProps) {
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Positioner
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        alignItemWithTrigger={alignItemWithTrigger}
+        className="z-50 outline-none w-(--anchor-width)"
+      >
+        <SelectPrimitive.Popup
+          data-slot="dropdown-content"
+          className={cn(
+            "bg-white border border-neutral-10 rounded-xl",
+            "shadow-[0px_4px_20px_0px_rgba(23,33,40,0.05)]",
+            "p-50 flex flex-col gap-30",
+            "max-h-[var(--available-height)] overflow-y-auto overflow-x-hidden",
+            "origin-[var(--transform-origin)]",
+            "data-[open]:animate-in data-[open]:fade-in-0 data-[open]:zoom-in-95",
+            "data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95",
+            "duration-150",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </SelectPrimitive.Popup>
+      </SelectPrimitive.Positioner>
+    </SelectPrimitive.Portal>
+  );
+}
+
+DropdownContent.displayName = "DropdownContent";
+interface DropdownItemProps extends SelectPrimitive.Item.Props {
+  icon?: React.ReactNode;
+}
+
+function DropdownItem({ className, icon, children, ...props }: DropdownItemProps) {
+  const { size } = useDropdownContext();
+
+  const childArray = React.Children.toArray(children);
+  const indicatorChildren = childArray.filter(
+    (child) => React.isValidElement(child) && child.type === DropdownItemIndicator,
+  );
+  const textChildren = childArray.filter(
+    (child) => !(React.isValidElement(child) && child.type === DropdownItemIndicator),
+  );
+
+  return (
+    <SelectPrimitive.Item
+      data-slot="dropdown-item"
+      className={cn(dropdownItemVariants({ size }), className)}
+      {...props}
+    >
+      {icon && (
+        <span
+          data-slot="dropdown-item-icon"
+          className="shrink-0 size-60 flex items-center justify-center"
+        >
+          {icon}
+        </span>
+      )}
+
+      <SelectPrimitive.ItemText
+        data-slot="dropdown-item-text"
+        className="flex-1 truncate"
+      >
+        {textChildren}
+      </SelectPrimitive.ItemText>
+
+      {indicatorChildren}
+    </SelectPrimitive.Item>
+  );
+}
+
+DropdownItem.displayName = "DropdownItem";
+
+function DropdownItemIndicator({ className, ...props }: SelectPrimitive.ItemIndicator.Props) {
+  return (
+    <SelectPrimitive.ItemIndicator
+      data-slot="dropdown-item-indicator"
+      className={cn(
+        "flex items-center justify-end  text-neutral-110",
+        className,
+      )}
+      {...props}
+    >
+      <CheckIcon className="size-50" />
+    </SelectPrimitive.ItemIndicator>
+  );
+}
+
+DropdownItemIndicator.displayName = "DropdownItemIndicator";
+
+function DropdownGroup({ className, ...props }: SelectPrimitive.Group.Props) {
+  return (
+    <SelectPrimitive.Group
+      data-slot="dropdown-group"
+      className={cn("flex flex-col gap-30", className)}
+      {...props}
+    />
+  );
+}
+
+DropdownGroup.displayName = "DropdownGroup";
+
+function DropdownGroupLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) {
+  return (
+    <SelectPrimitive.GroupLabel
+      data-slot="dropdown-group-label"
+      className={cn(
+        "typography-label-30 text-neutral-60 px-60 truncate",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+DropdownGroupLabel.displayName = "DropdownGroupLabel";
+
+function DropdownSeparator({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="dropdown-separator"
+      role="separator"
+      aria-orientation="horizontal"
+      className={cn("-mx-50 h-px bg-neutral-20 shrink-0", className)}
+      {...props}
+    />
+  );
+}
+
+DropdownSeparator.displayName = "DropdownSeparator";
+
+
+function DropdownScrollUpArrow({ className, ...props }: SelectPrimitive.ScrollUpArrow.Props) {
+  return (
+    <SelectPrimitive.ScrollUpArrow
+      data-slot="dropdown-scroll-up"
+      className={cn(
+        "flex items-center justify-center py-20 text-neutral-60 cursor-default",
+        className,
+      )}
+      {...props}
+    >
+      <KeyboardArrowUpIcon className="size-60" />
+    </SelectPrimitive.ScrollUpArrow>
+  );
+}
+
+DropdownScrollUpArrow.displayName = "DropdownScrollUpArrow";
+
+function DropdownScrollDownArrow({ className, ...props }: SelectPrimitive.ScrollDownArrow.Props) {
+  return (
+    <SelectPrimitive.ScrollDownArrow
+      data-slot="dropdown-scroll-down"
+      className={cn(
+        "flex items-center justify-center py-20 text-neutral-60 cursor-default",
+        className,
+      )}
+      {...props}
+    >
+      <KeyboardArrowDownIcon className="size-60" />
+    </SelectPrimitive.ScrollDownArrow>
+  );
+}
+
+DropdownScrollDownArrow.displayName = "DropdownScrollDownArrow";
+
+
+interface DropdownHintProps extends React.ComponentProps<"p"> {
+  variant?: "default" | "error";
+}
+
+function DropdownHint({ className, variant = "default", ...props }: DropdownHintProps) {
+  return (
+    <p
+      data-slot="dropdown-hint"
+      className={cn(
+        "typography-para-30",
+        variant === "error" ? "text-red-70" : "text-neutral-60",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+DropdownHint.displayName = "DropdownHint";
+
+
+export {
+  Dropdown,
+  DropdownLabel,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownItemIndicator,
+  DropdownGroup,
+  DropdownGroupLabel,
+  DropdownSeparator,
+  DropdownScrollUpArrow,
+  DropdownScrollDownArrow,
+  DropdownHint,
+  dropdownTriggerVariants,
+  dropdownItemVariants,
+};
+
+export type {
+  DropdownProps,
+  DropdownSize,
+  DropdownTriggerSize,
+  DropdownItemSize,
+  DropdownTriggerProps,
+  DropdownContentProps,
+  DropdownItemProps,
+  DropdownLabelProps,
+  DropdownHintProps,
+};
