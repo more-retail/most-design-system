@@ -1,9 +1,13 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { OtpField } from "./OtpField";
+import { OtpField, OtpGroup, OtpSlot } from "./OtpField";
 
-const meta: Meta<typeof OtpField> = {
+type StoryArgs = React.ComponentProps<typeof OtpField> & {
+  error?: boolean;
+};
+
+const meta: Meta<StoryArgs> = {
   title: "Components/OtpField",
   component: OtpField,
   tags: ["autodocs"],
@@ -14,28 +18,41 @@ const meta: Meta<typeof OtpField> = {
   },
   args: {
     maxLength: 4,
-    value: "",
     disabled: false,
     error: false,
+  },
+  render: ({ error, maxLength = 4, ...args }) => {
+    const [value, setValue] = React.useState("");
+    return (
+      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+        <OtpGroup>
+          {Array.from({ length: maxLength }).map((_, i) => (
+            <OtpSlot key={i} index={i} error={error} />
+          ))}
+        </OtpGroup>
+      </OtpField>
+    );
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof OtpField>;
+type Story = StoryObj<StoryArgs>;
 
-// ── Playground ────────────────────────────────────────────────────────────────
-
-export const Default: Story = {
-  render: (args) => {
-    const [value, setValue] = React.useState(args.value ?? "");
-    return <OtpField {...args} value={value} onChange={setValue} />;
-  },
-};
-
-// ── States ────────────────────────────────────────────────────────────────────
+export const Default: Story = {};
 
 export const Populated: Story = {
-  args: { value: "1234" },
+  render: ({ error, maxLength = 4, ...args }) => {
+    const [value, setValue] = React.useState("1234");
+    return (
+      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+        <OtpGroup>
+          {Array.from({ length: maxLength }).map((_, i) => (
+            <OtpSlot key={i} index={i} error={error} />
+          ))}
+        </OtpGroup>
+      </OtpField>
+    );
+  },
 };
 
 export const Disabled: Story = {
@@ -43,23 +60,65 @@ export const Disabled: Story = {
 };
 
 export const DisabledPopulated: Story = {
-  args: { value: "1234", disabled: true },
+  args: { disabled: true },
+  render: ({ error, maxLength = 4, ...args }) => {
+    const [value, setValue] = React.useState("1234");
+    return (
+      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+        <OtpGroup>
+          {Array.from({ length: maxLength }).map((_, i) => (
+            <OtpSlot key={i} index={i} error={error} />
+          ))}
+        </OtpGroup>
+      </OtpField>
+    );
+  },
 };
 
 export const Error: Story = {
-  args: { value: "1234", error: true },
+  args: { error: true },
+  render: ({ error, maxLength = 4, ...args }) => {
+    const [value, setValue] = React.useState("1234");
+    return (
+      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+        <OtpGroup>
+          {Array.from({ length: maxLength }).map((_, i) => (
+            <OtpSlot key={i} index={i} error={error} />
+          ))}
+        </OtpGroup>
+      </OtpField>
+    );
+  },
 };
 
 // ── All states grid ───────────────────────────────────────────────────────────
 
+const StaticOtp = ({
+  value,
+  disabled,
+  error,
+}: {
+  value: string;
+  disabled?: boolean;
+  error?: boolean;
+}) => (
+  <OtpField maxLength={4} value={value} disabled={disabled} onChange={() => {}}>
+    <OtpGroup>
+      {Array.from({ length: 4 }).map((_, i) => (
+        <OtpSlot key={i} index={i} error={error} />
+      ))}
+    </OtpGroup>
+  </OtpField>
+);
+
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-[48px] p-60">
-      <OtpField maxLength={4} value="" />
-      <OtpField maxLength={4} value="1234" />
-      <OtpField maxLength={4} value="" disabled />
-      <OtpField maxLength={4} value="1234" disabled />
-      <OtpField maxLength={4} value="1234" error />
+      <StaticOtp value="" />
+      <StaticOtp value="1234" />
+      <StaticOtp value="" disabled />
+      <StaticOtp value="1234" disabled />
+      <StaticOtp value="1234" error />
     </div>
   ),
 };
