@@ -43,7 +43,10 @@ const PasswordField = ({
           <button
             type="button"
             onClick={onForgotPassword}
-            className={cn("shrink-0 typography-label-30 whitespace-nowrap text-orange-60", disabled && "text-neutral-40")}
+            className={cn(
+              "shrink-0 typography-label-30 whitespace-nowrap text-orange-60",
+              disabled && "text-neutral-40",
+            )}
           >
             Forgot Password?
           </button>
@@ -52,8 +55,18 @@ const PasswordField = ({
 
       <InputGroup className={cn(disabled && "pointer-events-none")}>
         <InputGroupAddon align="inline-start">
-          <div className={cn("flex size-100 shrink-0 items-center justify-center rounded-lg bg-white", disabled && "bg-neutral-10")}  >
-            <KeyIcon className={cn("size-60 fill-orange-60", disabled && "fill-neutral-40")} />
+          <div
+            className={cn(
+              "flex size-100 shrink-0 items-center justify-center rounded-lg bg-white",
+              disabled && "bg-neutral-10",
+            )}
+          >
+            <KeyIcon
+              className={cn(
+                "size-60 fill-orange-60",
+                disabled && "fill-neutral-40",
+              )}
+            />
           </div>
         </InputGroupAddon>
         <InputGroupInput
@@ -70,18 +83,16 @@ const PasswordField = ({
             disabled={disabled}
           >
             {showPassword ? (
-              <VisibilityOffIcon className="size-60" />
-            ) : (
               <VisibilityIcon className="size-60" />
+            ) : (
+              <VisibilityOffIcon className="size-60" />
             )}
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
 
       {errorMessage && (
-        <p className={cn("typography-para-30 text-red-70")}>
-          {errorMessage}
-        </p>
+        <p className={cn("typography-para-30 text-red-70")}>{errorMessage}</p>
       )}
     </div>
   );
