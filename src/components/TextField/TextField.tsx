@@ -100,7 +100,6 @@ function TextField({
 
   const labelClass = cn(
     "typography-para-30 text-neutral-110 truncate w-full",
-    error && !isGhost && "text-red-60",
   );
 
   if (isGhost) {
@@ -127,8 +126,8 @@ function TextField({
               "w-full rounded-xl bg-transparent outline-none min-h-140 px-60 py-50",
               "typography-para-30 text-neutral-110 placeholder:text-neutral-40",
               "transition-colors",
-              "hover:bg-neutral-10 hover:border-2 hover:border-neutral-20",
-              isFocused && "bg-neutral-10 border-2 border-neutral-110",
+              "hover:bg-neutral-20 hover:ring-1 hover:ring-inset hover:ring-neutral-20",
+              isFocused && "bg-neutral-10 border-neutral-110 ring-1 ring-inset ring-neutral-110",
               disabled && "opacity-40 pointer-events-none",
             )}
             {...props}
@@ -170,10 +169,6 @@ function TextField({
           </Label>
         )}
         <InputGroup
-          className={cn(
-            "p-60",
-            disabled && "pointer-events-none",
-          )}
         >
           <InputGroupTextarea
             id={id}
@@ -220,8 +215,8 @@ function TextField({
           {label}
         </Label>
       )}
-      <InputGroup className={cn(disabled && "pointer-events-none")}>
-        {React.isValidElement(leadingIcon) && (
+      <InputGroup className={cn("overflow-hidden", disabled && "pointer-events-none")}>
+        {leadingIcon && (
           <InputGroupAddon align="inline-start">
             <div className="bg-white flex items-center justify-center rounded-lg shrink-0 size-100">
               {leadingIcon}
@@ -238,14 +233,14 @@ function TextField({
           type={type}
           {...props}
         />
-        {React.isValidElement(trailingIcon) && (
+        {trailingIcon && (
           <InputGroupAddon align="inline-end">
             <div className="text-neutral-70">{trailingIcon}</div>
           </InputGroupAddon>
         )}
       </InputGroup>
       {error && errorMessage && (
-        <p  className="typography-para-30 text-red-60">{errorMessage}</p>
+        <p  className="typography-para-30 text-red-70">{errorMessage}</p>
       )}
     </div>
   );
