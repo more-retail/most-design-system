@@ -23,26 +23,6 @@ const meta: Meta<typeof Hint> = {
 export default meta;
 type Story = StoryObj<typeof Hint>;
 
-export const Default: Story = {};
-
-export const Warning: Story = {
-  args: { variant: "warning" },
-};
-
-export const Error: Story = {
-  args: { variant: "error" },
-};
-
-export const Success: Story = {
-  args: { variant: "success" },
-};
-
-export const CustomText: Story = {
-  args: {
-    variant: "default",
-    text: "Your session will expire in 5 minutes.",
-  },
-};
 
 export const CustomIcon: Story = {
   render: (args) => (
