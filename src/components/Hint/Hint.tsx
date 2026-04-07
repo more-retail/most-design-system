@@ -1,93 +1,64 @@
-
 import React from "react";
+import { type VariantProps, cva } from "class-variance-authority";
 
 import DoneAllIcon from "@material-symbols/svg-700/sharp/done_all-fill.svg?react";
 import EmergencyHomeIcon from "@material-symbols/svg-700/sharp/emergency_home-fill.svg?react";
 import InfoIcon from "@material-symbols/svg-700/sharp/info_i-fill.svg?react";
 import WarningIcon from "@material-symbols/svg-700/sharp/warning-fill.svg?react";
 
-import {cn } from "@/utils/cn";
+import { cn } from "@/utils/cn";
 
-/* -------------------------------------------------------------------------------------------------
- * Hint
- * -----------------------------------------------------------------------------------------------*/
-
-type HintVariant = "default" | "warning" | "error" | "success";
-
-interface HintProps  {
-  variant?: HintVariant;
-  text?: string;
-  className?: string;
-}
-
-const variantConfig: Record<
-  HintVariant,
+const hintVariants = cva(
+  [
+    "flex flex-col gap-40 items-start p-50 rounded-xl max-w-[440px]",
+    "[&_svg]:fill-current [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-60",
+  ],
   {
-    bg: string;
-    textColor: string;
-    fillColor: string;
-    Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-    defaultText: string;
-  }
-> = {
-  default: {
-    bg: "bg-orange-5",
-    textColor: "text-orange-60",
-    fillColor: "fill-orange-60",
-    Icon: InfoIcon,
-    defaultText:
-      "This is a default message to provide general information to the user.",
+    variants: {
+      variant: {
+        default: "bg-orange-5 text-orange-60",
+        warning: "bg-red-5 text-red-70",
+        error: "bg-red-5 text-red-70",
+        success: "bg-green-5 text-green-70",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
   },
-  warning: {
-    bg: "bg-red-5",
-    textColor: "text-red-70",
-    fillColor: "fill-red-70",
-    Icon: WarningIcon,
-    defaultText:
-      "Please review this information, there may be something to check.",
-  },
-  error: {
-    bg: "bg-red-5",
-    textColor: "text-red-70",
-    fillColor: "fill-red-70",
-    Icon: EmergencyHomeIcon,
-    defaultText:
-      "Something went wrong. Please try again or fix the highlighted issue.",
-  },
-  success: {
-    bg: "bg-green-5",
-    textColor: "text-green-70",
-    fillColor: "fill-green-70",
-    Icon: DoneAllIcon,
-    defaultText: "Action completed successfully! Everything looks good.",
-  },
+);
+
+type HintVariant = NonNullable<VariantProps<typeof hintVariants>["variant"]>;
+
+
+const ICONS: Record<HintVariant, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  default: InfoIcon,
+  warning: WarningIcon,
+  error: EmergencyHomeIcon,
+  success: DoneAllIcon,
 };
 
-const Hint = ({
-  variant = "default",
-  text,
-  className,
-}: HintProps) => {
-  const { bg, textColor, fillColor, Icon, defaultText } =
-    variantConfig[variant];
+interface HintProps extends React.ComponentProps<"div"> {
+  variant?: HintVariant;
+  text?: string;
+}
+
+function Hint({ variant = "default", text, className, children, ...props }: HintProps) {
+  const Icon = ICONS[variant];
 
   return (
     <div
-      className={cn(
-        "flex flex-col gap-40 items-start p-50 rounded-xl w-[440px] ",
-        bg,
-        className
-      )}
+      data-slot="hint"
+      className={cn(hintVariants({ variant }), className)}
+      {...props}
     >
-      <Icon className={cn("size-60 shrink-0", fillColor)} />
-      <p className={cn("typography-para-30", textColor)}>
-        {text ?? defaultText}
-      </p>
+      {children ?? <Icon />}
+      <p className="typography-para-30">{text}</p>
     </div>
   );
 }
 
 Hint.displayName = "Hint";
 
-export { Hint };
-export type { HintProps };
+export { Hint, hintVariants };
+export type { HintProps, HintVariant };
