@@ -1,107 +1,91 @@
 import React from "react";
 
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/InputGroup/InputGroup";
+import { Label } from "@/components/Label";
+import { cn } from "@/utils/cn";
+
 import KeyIcon from "@material-symbols/svg-700/sharp/key-fill.svg?react";
 import VisibilityIcon from "@material-symbols/svg-700/sharp/visibility-fill.svg?react";
 import VisibilityOffIcon from "@material-symbols/svg-700/sharp/visibility_off-fill.svg?react";
 
-import { cn } from "@/utils/cn";
-
-/* -------------------------------------------------------------------------------------------------
- * PasswordField
- * -----------------------------------------------------------------------------------------------*/
-
-interface PasswordFieldProps {
-  id?: string;
-  label?: string;
-  showLabel?: boolean;
-  error?: boolean;
+interface PasswordFieldProps
+  extends Omit<React.ComponentProps<"input">, "type"> {
   errorMessage?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  forgotPasswordLabel?: string;
   onForgotPassword?: () => void;
 }
 
-const PasswordField =({
-  id,
-  label = "Password",
-  showLabel = true,
-  error = false,
+const PasswordField = ({
   errorMessage,
-  disabled = false,
+  disabled,
   placeholder,
-  forgotPasswordLabel = "Forgot Password?",
   onForgotPassword,
+  ...props
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <div className={cn("flex flex-col gap-40 items-start w-[300px]")}>
-      {showLabel && (
-        <div className="flex gap-50 items-start w-full">
-          <label
-            htmlFor={id}
-            className={cn(
-              "typography-para-30 text-neutral-110 truncate flex-1 min-w-0"
-            )}
-          >
-            {label}
-          </label>
-          {forgotPasswordLabel && (
-            <button
-              type="button"
-              onClick={onForgotPassword}
-              className="shrink-0 typography-label-30 text-orange-60 whitespace-nowrap"
-            >
-              {forgotPasswordLabel}
-            </button>
+    <div className="flex w-[300px] flex-col items-start gap-40">
+      <div className="flex w-full items-start gap-50">
+        <Label
+          className={cn(
+            "min-w-0 flex-1 truncate typography-para-30 text-neutral-110",
+            disabled && "text-neutral-40",
           )}
-        </div>
-      )}
-      <div
-        className={cn(
-          "flex gap-50 h-140 items-center pl-40 pr-60 py-40 rounded-xl w-full transition-colors",
-          "bg-neutral-10 hover:bg-neutral-20",
-          "has-[:focus]:ring-2 has-[:focus]:ring-neutral-110 has-[:focus]:ring-inset",
-          error && "ring-2 ring-red-60 ring-inset",
-          disabled && "opacity-40 pointer-events-none",
+        >
+          Password
+        </Label>
+        {onForgotPassword && (
+          <button
+            type="button"
+            onClick={onForgotPassword}
+            className={cn("shrink-0 typography-label-30 whitespace-nowrap text-orange-60", disabled && "text-neutral-40")}
+          >
+            Forgot Password?
+          </button>
         )}
-      >
-        {/* Leading key icon */}
-        <div className="bg-white flex items-center justify-center rounded-lg shrink-0 size-100">
-          <KeyIcon className="size-60 fill-orange-60" />
-        </div>
+      </div>
 
-        {/* Password input */}
-        <input
-          id={id}
+      <InputGroup className={cn(disabled && "pointer-events-none")}>
+        <InputGroupAddon align="inline-start">
+          <div className={cn("flex size-100 shrink-0 items-center justify-center rounded-lg bg-white", disabled && "bg-neutral-10")}  >
+            <KeyIcon className={cn("size-60 fill-orange-60", disabled && "fill-neutral-40")} />
+          </div>
+        </InputGroupAddon>
+        <InputGroupInput
           type={showPassword ? "text" : "password"}
           disabled={disabled}
           placeholder={placeholder}
-          className="flex-1 min-w-0 w-full bg-transparent outline-none typography-para-30 text-neutral-110 placeholder:text-neutral-40"
+          aria-invalid={!!errorMessage || undefined}
+          {...props}
         />
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            onClick={() => setShowPassword((v) => !v)}
+            disabled={disabled}
+          >
+            {showPassword ? (
+              <VisibilityOffIcon className="size-60" />
+            ) : (
+              <VisibilityIcon className="size-60" />
+            )}
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
 
-        {/* Visibility toggle */}
-        <button
-          type="button"
-          aria-label={showPassword ? "Hide password" : "Show password"}
-          onClick={() => setShowPassword((v) => !v)}
-          className="shrink-0 size-60 flex items-center justify-center text-neutral-70 hover:text-neutral-110 transition-colors"
-        >
-          {showPassword ? (
-            <VisibilityOffIcon className="size-60 fill-white" />
-          ) : (
-            <VisibilityIcon className="size-60 fill-white" />
-          )}
-        </button>
-      </div>
-
-      {error && errorMessage && (
-        <p className="typography-para-30 text-red-60">{errorMessage}</p>
+      {errorMessage && (
+        <p className={cn("typography-para-30 text-red-70")}>
+          {errorMessage}
+        </p>
       )}
     </div>
   );
-}
+};
 
 PasswordField.displayName = "PasswordField";
 
