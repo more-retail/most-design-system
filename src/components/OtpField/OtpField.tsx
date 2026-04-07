@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { OTPInput, OTPInputContext, type OTPInputProps } from "input-otp";
 import { cn } from "@/utils/cn";
@@ -84,11 +82,6 @@ function OtpSeparator({ ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
-OtpField.displayName = "OtpField";
-OtpGroup.displayName = "OtpGroup";
-OtpSlot.displayName = "OtpSlot";
-OtpSeparator.displayName = "OtpSeparator";
 
 export { OtpField, OtpGroup, OtpSlot, OtpSeparator };
 export type { OtpFieldProps };

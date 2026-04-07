@@ -137,6 +137,39 @@ export const WithError: Story = {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * showIcon control
+ * -----------------------------------------------------------------------------------------------*/
+
+export const ShowIcon: StoryObj<{ showIcon: boolean }> = {
+  argTypes: {
+    showIcon: { control: "boolean" },
+  },
+  args: {
+    showIcon: true,
+  },
+  render: ({ showIcon }) => {
+    const [value, setValue] = React.useState<string | null>(null);
+    return (
+      <div className="flex flex-col gap-40 w-full">
+        <Dropdown value={value ?? undefined} onValueChange={setValue}>
+          <DropdownLabel>Leading Icon</DropdownLabel>
+          <DropdownTrigger
+            placeholder="Select an option"
+            showIcon={showIcon}
+            icon={<PersonIcon />}
+          />
+          <DropdownContent>
+            <DropdownItem value="option-1">Option 1</DropdownItem>
+            <DropdownItem value="option-2">Option 2</DropdownItem>
+            <DropdownItem value="option-3">Option 3</DropdownItem>
+          </DropdownContent>
+        </Dropdown>
+      </div>
+    );
+  },
+};
+
+/* -------------------------------------------------------------------------------------------------
  * With Leading Icon (trigger)
  * -----------------------------------------------------------------------------------------------*/
 

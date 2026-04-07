@@ -118,6 +118,7 @@ const SlidingButton = ({
         onTransitionEnd={() => setTransitioning(false)}
       >
         <ArrowForwardIcon
+          fill="white"
           className={cn(
             "size-60 shrink-0",
             disabled ? "text-neutral-40" : "text-white",
