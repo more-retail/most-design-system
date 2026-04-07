@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+
+import { TextField } from "./TextField";
+
 import CalendarIcon from "@material-symbols/svg-700/sharp/date_range-fill.svg?react";
 import PersonFillIcon from "@material-symbols/svg-700/sharp/person-fill.svg?react";
 import SearchIcon from "@material-symbols/svg-700/sharp/search-fill.svg?react";
-
-import { TextField } from "./TextField";
 
 const meta: Meta<typeof TextField> = {
   title: "Components/TextField",
@@ -11,24 +12,16 @@ const meta: Meta<typeof TextField> = {
   tags: ["autodocs"],
   argTypes: {
     label: { control: "text" },
-    showLabel: { control: "boolean" },
     placeholder: { control: "text" },
-    error: { control: "boolean" },
     errorMessage: { control: "text" },
     disabled: { control: "boolean" },
-    multiline: { control: "boolean" },
-    variant: { control: "radio", options: ["default", "ghost"] },
-    richControls: { control: "boolean" },
+    variant: { control: "radio", options: ["default", "ghost", "multiline"] },
   },
   args: {
     label: "Label",
-    showLabel: true,
     placeholder: "Placeholder…",
-    error: false,
     disabled: false,
-    multiline: false,
     variant: "default",
-    richControls: false,
   },
 };
 
@@ -41,7 +34,11 @@ export const Default: Story = {};
 
 export const WithLeadingIcon: Story = {
   args: {
-    leadingIcon: <PersonFillIcon className="size-60 text-orange-60" />,
+    leadingIcon: (
+      <div className="flex size-100 shrink-0 items-center justify-center rounded-lg bg-white">
+        <PersonFillIcon className="size-60 fill-orange-60" />{" "}
+      </div>
+    ),
   },
 };
 
@@ -59,12 +56,11 @@ export const WithBothIcons: Story = {
 };
 
 export const Error: Story = {
-  args: { error: true, defaultValue: "Invalid input" },
+  args: { defaultValue: "Invalid input" },
 };
 
 export const ErrorWithMessage: Story = {
   args: {
-    error: true,
     defaultValue: "Invalid input",
     errorMessage: "This field is required.",
   },
@@ -74,27 +70,24 @@ export const Disabled: Story = {
   args: { disabled: true, defaultValue: "Can't edit this" },
 };
 
-// ── Multiline ────────────────────────────────────────────────────────────────
-
-export const Multiline: Story = {
-  args: { multiline: true },
-};
-
 export const MultilineWithRichControls: Story = {
-  args: { multiline: true, richControls: true },
+  args: { variant: "multiline" },
 };
 
 export const MultilineError: Story = {
   args: {
-    multiline: true,
-    error: true,
+    variant: "multiline",
     defaultValue: "Invalid input",
     errorMessage: "This field is required.",
   },
 };
 
 export const MultilineDisabled: Story = {
-  args: { multiline: true, disabled: true, defaultValue: "Can't edit this" },
+  args: {
+    variant: "multiline",
+    disabled: true,
+    defaultValue: "Can't edit this",
+  },
 };
 
 // ── Ghost ─────────────────────────────────────────────────────────────────────

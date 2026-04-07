@@ -13,24 +13,19 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex h-140 w-[300px] min-w-0 items-center rounded-xl  bg-neutral-10 transition-colors outline-none",
-        "hover:bg-neutral-10 hover:ring-2 hover:ring-inset hover:ring-neutral-20",
+        "group/input-group relative flex h-140 w-[300px] min-w-0 items-center rounded-xl bg-neutral-10 transition-colors outline-none",
+        "border-2 border-transparent",
+        "hover:bg-neutral-10 hover:border-neutral-20",
         "has-disabled:bg-neutral-20",
         "has-[:disabled]:[&>input]:text-neutral-60",
         "has-[:disabled]:[&>input::placeholder]:text-neutral-60",
         "has-[[data-slot=input-group-control]:focus-visible]:border-neutral-110",
-        "has-[[data-slot=input-group-control]:focus-visible]:ring-2",
-        "has-[[data-slot=input-group-control]:focus-visible]:ring-inset",
-        "has-[[data-slot=input-group-control]:focus-visible]:ring-neutral-110",
-        "has-[[data-slot][aria-invalid=true]]:border-red-70",
-        "has-[[data-slot][aria-invalid=true]]:ring-1",
-        "has-[[data-slot][aria-invalid=true]]:ring-inset",
-        "has-[[data-slot][aria-invalid=true]]:ring-red-70",
+        "has-[[data-slot][aria-invalid=true]]:[border-width:1px] has-[[data-slot][aria-invalid=true]]:border-red-70 has-[[data-slot][aria-invalid=true]]:hover:shadow-[0_0_0_2px_var(--color-red-20)]",
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col",
         "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col",
         "has-[>textarea]:h-auto",
-        "has-[>[data-align=inline-start]]:[&>input]:pl-40",
-        "has-[>[data-align=inline-end]]:[&>input]:pr-40",
+        "has-[>[data-align=inline-start]]:[&>input]:pl-50 ",
+        "has-[>[data-align=inline-end]]:[&>input]:pr-50",
         className,
       )}
       {...props}
@@ -44,7 +39,7 @@ const inputGroupAddonVariants = cva(
     variants: {
       align: {
         "inline-start": "order-first pl-40 has-[>button]:-ml-30",
-        "inline-end": "order-last pr-40 has-[>button]:-mr-30",
+        "inline-end": "order-last pr-60 has-[>button]:-mr-30",
         "block-start": "order-first w-full justify-start px-50 pt-40",
         "block-end": "order-last w-full justify-start px-50 pb-40",
       },
@@ -118,10 +113,10 @@ function InputGroupInput({
       data-slot="input-group-control"
       className={cn(
         "h-full flex-1 rounded-none border-0 bg-transparent",
-        "hover:bg-transparent",
-        "focus-visible:border-0 focus-visible:ring-0",
+        "hover:bg-transparent hover:border-0",
+        "focus-visible:border-0",
         "disabled:bg-transparent",
-        "aria-invalid:border-0 aria-invalid:ring-0",
+        "aria-invalid:border-0 aria-invalid:hover:shadow-none",
         className,
       )}
       {...props}
@@ -138,10 +133,10 @@ function InputGroupTextarea({
       data-slot="input-group-control"
       className={cn(
         "min-h-0 flex-1 resize-none rounded-none border-0 bg-transparent",
-        "p-60 hover:bg-transparent",
-        "focus-visible:border-0 focus-visible:ring-0",
+        "hover:bg-transparent hover:border-0",
+        "focus-visible:border-0",
         "disabled:bg-transparent",
-        "aria-invalid:border-0 aria-invalid:ring-0",
+        "aria-invalid:border-0 aria-invalid:hover:shadow-none",
         className,
       )}
       {...props}
