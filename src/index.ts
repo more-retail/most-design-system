@@ -29,7 +29,6 @@ export {
   DropdownTrigger,
   DropdownContent,
   DropdownItem,
-  DropdownItemIndicator,
   DropdownGroup,
   DropdownGroupLabel,
   DropdownSeparator,
