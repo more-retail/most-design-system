@@ -95,15 +95,12 @@ function DropdownChipTrigger({
       data-slot="dropdown-chip-trigger"
       className={cn(
         dropdownChipTriggerVariants({ variant, size }),
-        error
-          ? "border-2 border-red-70 hover:border-red-70 hover:shadow-[0px_0px_0px_2px_var(--color-red-20)] data-[popup-open]:border-red-70"
-          : "",
-
+        error &&
+          "border-2 border-red-70 hover:border-red-70 hover:shadow-[0px_0px_0px_2px_var(--color-red-20)] data-[popup-open]:border-red-70",
         className,
       )}
       {...props}
     >
-      {/* Icon + Value group */}
       <span
         className={cn(
           "flex shrink-0 items-center",
@@ -129,7 +126,6 @@ function DropdownChipTrigger({
         />
       </span>
 
-      {/* Trailing chevron */}
       <SelectPrimitive.Icon
         data-slot="dropdown-chip-chevron"
         className="shrink-0 transition-transform duration-150 group-data-[popup-open]:rotate-180"
@@ -184,7 +180,9 @@ function DropdownChipContent({
           )}
           {...props}
         >
-          <SelectPrimitive.List>{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="flex flex-col gap-10">
+            {children}
+          </SelectPrimitive.List>
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>

@@ -43,8 +43,8 @@ const dropdownItemVariants = cva(
     "border-2 border-transparent",
     "typography-para-30 text-neutral-110",
     "transition-colors duration-100",
-    "data-[highlighted]:border-neutral-110 ",
-    "data-[selected]:border-neutral-110",
+    "data-[highlighted]:border-neutral-10 ",
+    "data-[checked]:border-neutral-110",
     "data-[disabled]:text-neutral-40 data-[disabled]:pointer-events-none",
     "[&_svg]:shrink-0 [&_svg]:fill-current [&_svg:not([class*='size-'])]:size-60",
     "rounded-xl"
@@ -205,7 +205,7 @@ function DropdownContent({
           )}
           {...props}
         >
-          <MenuPrimitive.RadioGroup value={value} onValueChange={onValueChange}>
+          <MenuPrimitive.RadioGroup value={value} onValueChange={onValueChange} className="flex flex-col gap-30">
             {children}
           </MenuPrimitive.RadioGroup>
         </MenuPrimitive.Popup>
