@@ -6,7 +6,6 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
 import ArrowDropDownIcon from "@material-symbols/svg-700/sharp/arrow_drop_down-fill.svg?react";
-import CheckIcon from "@material-symbols/svg-700/sharp/check-fill.svg?react";
 import KeyboardArrowDownIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_down-fill.svg?react";
 import KeyboardArrowUpIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_up-fill.svg?react";
 
@@ -165,10 +164,7 @@ type DropdownContentProps = MenuPrimitive.Popup.Props &
   Pick<
     MenuPrimitive.Positioner.Props,
     "side" | "sideOffset" | "align" | "alignOffset"
-  > & {
-    value?: string;
-    onValueChange?: (value: string) => void;
-  };
+  >;
 
 const DropdownContent: React.FC<DropdownContentProps> = ({
   className,
@@ -177,8 +173,6 @@ const DropdownContent: React.FC<DropdownContentProps> = ({
   sideOffset = 6,
   align = "start",
   alignOffset = 0,
-  value,
-  onValueChange,
   ...props
 }) => {
   return (
@@ -206,46 +200,32 @@ const DropdownContent: React.FC<DropdownContentProps> = ({
           )}
           {...props}
         >
-          <MenuPrimitive.RadioGroup
-            value={value}
-            onValueChange={onValueChange}
-            className="flex flex-col gap-30"
-          >
-            {children}
-          </MenuPrimitive.RadioGroup>
+          {children}
         </MenuPrimitive.Popup>
       </MenuPrimitive.Positioner>
     </MenuPrimitive.Portal>
   );
 };
 
-interface DropdownItemProps extends MenuPrimitive.RadioItem.Props {
+interface DropdownItemProps extends MenuPrimitive.Item.Props {
   size?: DropdownSize;
   icon?: React.ReactNode;
+  selected?: boolean;
 }
 
 const DropdownItem: React.FC<DropdownItemProps> = ({
   className,
   size = "md",
   icon,
+  selected,
   children,
   ...props
 }) => {
-  const childArray = React.Children.toArray(children);
-  const indicatorChildren = childArray.filter(
-    (child) =>
-      React.isValidElement(child) && child.type === DropdownItemIndicator,
-  );
-  const textChildren = childArray.filter(
-    (child) =>
-      !(React.isValidElement(child) && child.type === DropdownItemIndicator),
-  );
-
   return (
-    <MenuPrimitive.RadioItem
+    <MenuPrimitive.Item
       data-slot="dropdown-item"
       closeOnClick
-      className={cn(dropdownItemVariants({ size }), className)}
+      className={cn(dropdownItemVariants({ size }), selected && "border-neutral-110", className)}
       {...props}
     >
       {icon && (
@@ -258,32 +238,11 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       )}
 
       <span data-slot="dropdown-item-text" className="flex-1 truncate">
-        {textChildren}
+        {children}
       </span>
-
-      {indicatorChildren}
-    </MenuPrimitive.RadioItem>
+    </MenuPrimitive.Item>
   );
 };
-
-const DropdownItemIndicator: React.FC<
-  MenuPrimitive.RadioItemIndicator.Props
-> = ({ className, ...props }) => {
-  return (
-    <MenuPrimitive.RadioItemIndicator
-      data-slot="dropdown-item-indicator"
-      className={cn(
-        "flex items-center justify-end text-neutral-110",
-        className,
-      )}
-      {...props}
-    >
-      <CheckIcon className="size-50" />
-    </MenuPrimitive.RadioItemIndicator>
-  );
-};
-
-DropdownItemIndicator.displayName = "DropdownItemIndicator";
 
 const DropdownGroup: React.FC<MenuPrimitive.Group.Props> = ({
   className,
@@ -393,7 +352,6 @@ export {
   DropdownTrigger,
   DropdownContent,
   DropdownItem,
-  DropdownItemIndicator,
   DropdownGroup,
   DropdownGroupLabel,
   DropdownSeparator,
