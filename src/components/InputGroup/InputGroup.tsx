@@ -7,7 +7,10 @@ import { Input } from "@/components/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
 import { cn } from "@/utils/cn";
 
-const InputGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
+const InputGroup: React.FC<React.ComponentProps<"div">> = ({
+  className,
+  ...props
+}) => {
   return (
     <div
       data-slot="input-group"
@@ -15,7 +18,7 @@ const InputGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
       className={cn(
         "group/input-group relative flex h-140 w-[300px] min-w-0 items-center rounded-xl bg-neutral-10 transition-colors outline-none",
         "border-2 border-transparent",
-        "hover:bg-neutral-10 hover:border-neutral-20",
+        "hover:border-neutral-20 hover:bg-neutral-10",
         "has-disabled:bg-neutral-20",
         "has-[:disabled]:[&>input]:text-neutral-60",
         "has-[:disabled]:[&>input::placeholder]:text-neutral-60",
@@ -24,14 +27,14 @@ const InputGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col",
         "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col",
         "has-[>textarea]:h-auto",
-        "has-[>[data-align=inline-start]]:[&>input]:pl-50 ",
+        "has-[>[data-align=inline-start]]:[&>input]:pl-50",
         "has-[>[data-align=inline-end]]:[&>input]:pr-50",
         className,
       )}
       {...props}
     />
   );
-}
+};
 
 const inputGroupAddonVariants = cva(
   "flex h-auto cursor-text items-center justify-center gap-50 py-40 typography-para-30 text-neutral-40 select-none group-data-[disabled=true]/input-group:opacity-40 [&>svg:not([class*='size-'])]:size-60",
@@ -50,11 +53,9 @@ const inputGroupAddonVariants = cva(
   },
 );
 
-const  InputGroupAddon =({
-  className,
-  align = "inline-start",
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) => {
+const InputGroupAddon: React.FC<
+  React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>
+> = ({ className, align = "inline-start", ...props }) => {
   return (
     <div
       role="group"
@@ -70,17 +71,19 @@ const  InputGroupAddon =({
       {...props}
     />
   );
-}
+};
 
-const InputGroupButton =({
+const InputGroupButton: React.FC<
+  Omit<React.ComponentProps<typeof Button>, "type"> & {
+    type?: "button" | "submit" | "reset";
+  }
+> = ({
   className,
   type = "button",
   variant = "ghost",
   size = "icon-xs",
   ...props
-}: Omit<React.ComponentProps<typeof Button>, "type"> & {
-  type?: "button" | "submit" | "reset";
-}) =>{
+}) => {
   return (
     <Button
       type={type}
@@ -90,9 +93,12 @@ const InputGroupButton =({
       {...props}
     />
   );
-}
+};
 
-const  InputGroupText = ({ className, ...props }: React.ComponentProps<"span">) =>  {
+const InputGroupText: React.FC<React.ComponentProps<"span">> = ({
+  className,
+  ...props
+}) => {
   return (
     <span
       className={cn(
@@ -102,18 +108,18 @@ const  InputGroupText = ({ className, ...props }: React.ComponentProps<"span">) 
       {...props}
     />
   );
-}
+};
 
-const  InputGroupInput = ({
+const InputGroupInput: React.FC<React.ComponentProps<"input">> = ({
   className,
   ...props
-}: React.ComponentProps<"input">) => {
+}) => {
   return (
     <Input
       data-slot="input-group-control"
       className={cn(
         "h-full flex-1 rounded-none border-0 bg-transparent",
-        "hover:bg-transparent hover:border-0",
+        "hover:border-0 hover:bg-transparent",
         "focus-visible:border-0",
         "disabled:bg-transparent",
         "aria-invalid:border-0 aria-invalid:hover:shadow-none",
@@ -122,18 +128,18 @@ const  InputGroupInput = ({
       {...props}
     />
   );
-}
+};
 
-const  InputGroupTextarea = ({
+const InputGroupTextarea: React.FC<React.ComponentProps<"textarea">> = ({
   className,
   ...props
-}: React.ComponentProps<"textarea">) => {
+}) => {
   return (
     <Textarea
       data-slot="input-group-control"
       className={cn(
         "min-h-0 flex-1 resize-none rounded-none border-0 bg-transparent",
-        "hover:bg-transparent hover:border-0",
+        "hover:border-0 hover:bg-transparent",
         "focus-visible:border-0",
         "disabled:bg-transparent",
         "aria-invalid:border-0 aria-invalid:hover:shadow-none",
@@ -142,7 +148,7 @@ const  InputGroupTextarea = ({
       {...props}
     />
   );
-}
+};
 
 export {
   InputGroup,

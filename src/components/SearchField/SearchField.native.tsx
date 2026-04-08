@@ -3,11 +3,16 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  View,
   type TextInputProps,
+  View,
 } from "react-native";
-import { color, spacing, typography } from "../../tokens/reactNative/stylesheet";
+
 import { CloseIcon, SearchIcon } from "../../icons/index.native";
+import {
+  color,
+  spacing,
+  typography,
+} from "../../tokens/reactNative/stylesheet";
 
 /* -------------------------------------------------------------------------------------------------
  * Types
@@ -15,7 +20,8 @@ import { CloseIcon, SearchIcon } from "../../icons/index.native";
 
 type SearchFieldSize = "md" | "sm";
 
-interface SearchFieldProps extends Omit<TextInputProps, "editable" | "style" | "onChange"> {
+interface SearchFieldProps
+  extends Omit<TextInputProps, "editable" | "style" | "onChange"> {
   size?: SearchFieldSize;
   value?: string;
   onChange?: (value: string) => void;
@@ -28,16 +34,29 @@ interface SearchFieldProps extends Omit<TextInputProps, "editable" | "style" | "
  * Size map — mirrors web sizeStyles
  * -----------------------------------------------------------------------------------------------*/
 
-const sizeMap: Record<SearchFieldSize, { height: number; paddingHorizontal: number; gap: number; width: number }> = {
-  md: { height: spacing[140], paddingHorizontal: spacing[60], gap: spacing[50], width: 300 },
-  sm: { height: spacing[110], paddingHorizontal: spacing[50], gap: spacing[40], width: 240 },
+const sizeMap: Record<
+  SearchFieldSize,
+  { height: number; paddingHorizontal: number; gap: number; width: number }
+> = {
+  md: {
+    height: spacing[140],
+    paddingHorizontal: spacing[60],
+    gap: spacing[50],
+    width: 300,
+  },
+  sm: {
+    height: spacing[110],
+    paddingHorizontal: spacing[50],
+    gap: spacing[40],
+    width: 240,
+  },
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Component
  * -----------------------------------------------------------------------------------------------*/
 
-const SearchField = ({
+const SearchField: React.FC<SearchFieldProps> = ({
   size = "md",
   value = "",
   onChange,
@@ -47,7 +66,7 @@ const SearchField = ({
   onFocus,
   onBlur,
   ...inputProps
-}: SearchFieldProps) => {
+}) => {
   const [focused, setFocused] = React.useState(false);
   const inputRef = React.useRef<TextInput>(null);
 
@@ -57,7 +76,7 @@ const SearchField = ({
   const handleClear = () => {
     onClear?.();
     inputRef.current?.focus();
-  }
+  };
 
   const ss = sizeMap[size];
 
@@ -65,9 +84,14 @@ const SearchField = ({
     <View
       style={[
         styles.root,
-        { width: ss.width, height: ss.height, paddingHorizontal: ss.paddingHorizontal, gap: ss.gap },
+        {
+          width: ss.width,
+          height: ss.height,
+          paddingHorizontal: ss.paddingHorizontal,
+          gap: ss.gap,
+        },
         focused && styles.rootFocused,
-        disabled && styles.rootDisabled
+        disabled && styles.rootDisabled,
       ]}
       pointerEvents={disabled ? "none" : undefined}
     >
@@ -110,7 +134,7 @@ const SearchField = ({
       )}
     </View>
   );
-}
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Styles

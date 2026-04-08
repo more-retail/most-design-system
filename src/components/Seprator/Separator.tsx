@@ -2,13 +2,13 @@ import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 
 import { cn } from "@/utils/cn";
 
-export interface SeparatorProps extends SeparatorPrimitive.Props {}
+export type SeparatorProps = SeparatorPrimitive.Props;
 
-const Separator = ({
+const Separator: React.FC<SeparatorProps> = ({
   className,
   orientation = "horizontal",
   ...props
-}: SeparatorProps) => {
+}) => {
   return (
     <SeparatorPrimitive
       data-slot="separator"

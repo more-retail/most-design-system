@@ -1,10 +1,11 @@
 import React from "react";
 
-import { cva, type VariantProps } from "class-variance-authority";
-import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
-import CloseIcon from "@material-symbols/svg-700/sharp/close-fill.svg?react";
+import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
+
+import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
+import CloseIcon from "@material-symbols/svg-700/sharp/close-fill.svg?react";
 
 const toggleChipVariants = cva(
   [
@@ -54,10 +55,15 @@ const toggleChipVariants = cva(
   },
 );
 
-export type ToggleChipVariant = NonNullable<VariantProps<typeof toggleChipVariants>["variant"]>;
-export type ToggleChipSize = NonNullable<VariantProps<typeof toggleChipVariants>["size"]>;
+export type ToggleChipVariant = NonNullable<
+  VariantProps<typeof toggleChipVariants>["variant"]
+>;
+export type ToggleChipSize = NonNullable<
+  VariantProps<typeof toggleChipVariants>["size"]
+>;
 
-export interface ToggleChipProps extends Omit<React.ComponentProps<"button">, "children"> {
+export interface ToggleChipProps
+  extends Omit<React.ComponentProps<"button">, "children"> {
   variant?: ToggleChipVariant;
   size?: ToggleChipSize;
   label?: string;
@@ -67,7 +73,7 @@ export interface ToggleChipProps extends Omit<React.ComponentProps<"button">, "c
   onRemove?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const ToggleChip =({
+const ToggleChip: React.FC<ToggleChipProps> = ({
   className,
   variant,
   size,
@@ -79,7 +85,7 @@ const ToggleChip =({
   onRemove,
   onClick,
   ...props
-}: ToggleChipProps) => {
+}) => {
   return (
     <button
       data-slot="toggle-chip"
@@ -91,19 +97,20 @@ const ToggleChip =({
       {...props}
     >
       {icon && (
-        <span data-slot="toggle-chip-icon" className="flex shrink-0 items-center justify-center">
+        <span
+          data-slot="toggle-chip-icon"
+          className="flex shrink-0 items-center justify-center"
+        >
           {icon}
         </span>
       )}
-      {label && (
-        <span data-slot="toggle-chip-label">{label}</span>
-      )}
+      {label && <span data-slot="toggle-chip-label">{label}</span>}
       {!disabled && (
         <span
           data-slot="toggle-chip-trailing"
           role="button"
           tabIndex={0}
-          className="flex shrink-0 items-center justify-center cursor-pointer"
+          className="flex shrink-0 cursor-pointer items-center justify-center"
           onClick={(e) => {
             console.log("remove clicked");
             e.stopPropagation();
@@ -115,6 +122,6 @@ const ToggleChip =({
       )}
     </button>
   );
-}
+};
 
 export { ToggleChip };

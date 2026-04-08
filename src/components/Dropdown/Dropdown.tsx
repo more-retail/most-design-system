@@ -73,7 +73,7 @@ interface DropdownProps extends MenuPrimitive.Root.Props {
   size?: DropdownSize;
 }
 
-const Dropdown = ({ children, ...props }: DropdownProps) => {
+const Dropdown: React.FC<DropdownProps> = ({ children, ...props }) => {
   return (
     <MenuPrimitive.Root data-slot="dropdown" {...props}>
       {children}
@@ -85,11 +85,11 @@ interface DropdownLabelProps extends React.ComponentProps<"label"> {
   disabled?: boolean;
 }
 
-const DropdownLabel = ({
+const DropdownLabel: React.FC<DropdownLabelProps> = ({
   className,
   disabled,
   ...props
-}: DropdownLabelProps) => {
+}) => {
   return (
     <label
       data-slot="dropdown-label"
@@ -111,7 +111,7 @@ interface DropdownTriggerProps extends MenuPrimitive.Trigger.Props {
   displayValue?: string;
 }
 
-const DropdownTrigger = ({
+const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
   className,
   size = "md",
   error = false,
@@ -119,7 +119,7 @@ const DropdownTrigger = ({
   placeholder = "Select…",
   displayValue,
   ...props
-}: DropdownTriggerProps) => {
+}) => {
   return (
     <MenuPrimitive.Trigger
       data-slot="dropdown-trigger"
@@ -170,7 +170,7 @@ type DropdownContentProps = MenuPrimitive.Popup.Props &
     onValueChange?: (value: string) => void;
   };
 
-const DropdownContent = ({
+const DropdownContent: React.FC<DropdownContentProps> = ({
   className,
   children,
   side = "bottom",
@@ -180,7 +180,7 @@ const DropdownContent = ({
   value,
   onValueChange,
   ...props
-}: DropdownContentProps) => {
+}) => {
   return (
     <MenuPrimitive.Portal>
       <MenuPrimitive.Positioner
@@ -224,13 +224,13 @@ interface DropdownItemProps extends MenuPrimitive.RadioItem.Props {
   icon?: React.ReactNode;
 }
 
-const DropdownItem = ({
+const DropdownItem: React.FC<DropdownItemProps> = ({
   className,
   size = "md",
   icon,
   children,
   ...props
-}: DropdownItemProps) => {
+}) => {
   const childArray = React.Children.toArray(children);
   const indicatorChildren = childArray.filter(
     (child) =>
@@ -266,10 +266,9 @@ const DropdownItem = ({
   );
 };
 
-function DropdownItemIndicator({
-  className,
-  ...props
-}: MenuPrimitive.RadioItemIndicator.Props) {
+const DropdownItemIndicator: React.FC<
+  MenuPrimitive.RadioItemIndicator.Props
+> = ({ className, ...props }) => {
   return (
     <MenuPrimitive.RadioItemIndicator
       data-slot="dropdown-item-indicator"
@@ -282,11 +281,14 @@ function DropdownItemIndicator({
       <CheckIcon className="size-50" />
     </MenuPrimitive.RadioItemIndicator>
   );
-}
+};
 
 DropdownItemIndicator.displayName = "DropdownItemIndicator";
 
-const DropdownGroup = ({ className, ...props }: MenuPrimitive.Group.Props) => {
+const DropdownGroup: React.FC<MenuPrimitive.Group.Props> = ({
+  className,
+  ...props
+}) => {
   return (
     <MenuPrimitive.Group
       data-slot="dropdown-group"
@@ -296,10 +298,10 @@ const DropdownGroup = ({ className, ...props }: MenuPrimitive.Group.Props) => {
   );
 };
 
-const DropdownGroupLabel = ({
+const DropdownGroupLabel: React.FC<MenuPrimitive.GroupLabel.Props> = ({
   className,
   ...props
-}: MenuPrimitive.GroupLabel.Props) => {
+}) => {
   return (
     <MenuPrimitive.GroupLabel
       data-slot="dropdown-group-label"
@@ -312,10 +314,10 @@ const DropdownGroupLabel = ({
   );
 };
 
-const DropdownSeparator = ({
+const DropdownSeparator: React.FC<React.ComponentProps<"div">> = ({
   className,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="dropdown-separator"
@@ -327,10 +329,10 @@ const DropdownSeparator = ({
   );
 };
 
-const DropdownScrollUpArrow = ({
+const DropdownScrollUpArrow: React.FC<React.ComponentProps<"div">> = ({
   className,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="dropdown-scroll-up"
@@ -345,10 +347,10 @@ const DropdownScrollUpArrow = ({
   );
 };
 
-const DropdownScrollDownArrow = ({
+const DropdownScrollDownArrow: React.FC<React.ComponentProps<"div">> = ({
   className,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="dropdown-scroll-down"
@@ -367,11 +369,11 @@ interface DropdownHintProps extends React.ComponentProps<"p"> {
   variant?: "default" | "error";
 }
 
-const DropdownHint = ({
+const DropdownHint: React.FC<DropdownHintProps> = ({
   className,
   variant = "default",
   ...props
-}: DropdownHintProps) => {
+}) => {
   return (
     <p
       data-slot="dropdown-hint"

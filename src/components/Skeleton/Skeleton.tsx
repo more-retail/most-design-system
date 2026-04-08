@@ -1,15 +1,15 @@
-import { cn } from "@/utils/cn"
+import { cn } from "@/utils/cn";
 
-export interface SkeletonProps extends React.ComponentProps<"div"> {}
+export type SkeletonProps = React.ComponentProps<"div">;
 
-const Skeleton = ({ className, ...props }: SkeletonProps) => {
+const Skeleton: React.FC<SkeletonProps> = ({ className, ...props }) => {
   return (
     <div
       data-slot="skeleton"
-      className={cn("animate-pulse rounded-md bg-muted", className)}
+      className={cn("bg-muted animate-pulse rounded-md", className)}
       {...props}
     />
-  )
-}
+  );
+};
 
-export { Skeleton }
+export { Skeleton };

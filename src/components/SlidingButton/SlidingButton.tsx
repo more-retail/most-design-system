@@ -1,14 +1,14 @@
 import React from "react";
 
-import ArrowForwardIcon from "@material-symbols/svg-700/sharp/arrow_forward-fill.svg?react";
+import { cn } from "@/utils/cn";
 
-import {  cn  } from "@/utils/cn";
+import ArrowForwardIcon from "@material-symbols/svg-700/sharp/arrow_forward-fill.svg?react";
 
 /* -------------------------------------------------------------------------------------------------
  * SlidingButton
  * -----------------------------------------------------------------------------------------------*/
 
-interface SlidingButtonProps  {
+interface SlidingButtonProps {
   className?: string;
   label?: string;
   disabled?: boolean;
@@ -19,12 +19,12 @@ interface SlidingButtonProps  {
 const HANDLE_SIZE = 64; // px — square handle
 const COMPLETE_THRESHOLD = 0.85; // fraction of max drag to trigger completion
 
-const SlidingButton = ({
+const SlidingButton: React.FC<SlidingButtonProps> = ({
   label = "Slide To Label",
   disabled = false,
   onComplete,
   className,
-}: SlidingButtonProps) => {
+}) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [dragX, setDragX] = React.useState(0);
   const [completed, setCompleted] = React.useState(false);
@@ -34,7 +34,7 @@ const SlidingButton = ({
 
   const getMaxDrag = () => {
     return (containerRef.current?.offsetWidth ?? 328) - HANDLE_SIZE;
-  }
+  };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (disabled || completed) return;
@@ -42,13 +42,13 @@ const SlidingButton = ({
     setTransitioning(false);
     startX.current = e.clientX - dragX;
     e.currentTarget.setPointerCapture(e.pointerId);
-  }
+  };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging.current) return;
     const max = getMaxDrag();
     setDragX(Math.min(Math.max(0, e.clientX - startX.current), max));
-  }
+  };
 
   const handlePointerUp = () => {
     if (!isDragging.current) return;
@@ -61,7 +61,7 @@ const SlidingButton = ({
     } else {
       setDragX(0);
     }
-  }
+  };
 
   // The handle grows rightward as the user drags — the orange fill expands
   // naturally with the arrow icon always at the leading (right) edge.
@@ -75,7 +75,7 @@ const SlidingButton = ({
     <div
       ref={containerRef}
       className={cn(
-        "bg-neutral-10 relative overflow-hidden rounded-[16px] h-[64px] w-full",
+        "relative h-[64px] w-full overflow-hidden rounded-[16px] bg-neutral-10",
         className,
       )}
     >
@@ -86,9 +86,9 @@ const SlidingButton = ({
           transition: "opacity 0.15s ease",
         }}
         className={cn(
-          "absolute inset-y-0 left-[64px] right-[16px]",
+          "absolute inset-y-0 right-[16px] left-[64px]",
           "flex items-center justify-center text-center",
-          "typography-label-30 pointer-events-none select-none",
+          "pointer-events-none typography-label-30 select-none",
           disabled ? "text-neutral-40" : "text-neutral-110",
         )}
       >
@@ -104,12 +104,12 @@ const SlidingButton = ({
             : "none",
         }}
         className={cn(
-          "absolute left-0 top-0 h-[64px] rounded-[16px]",
+          "absolute top-0 left-0 h-[64px] rounded-[16px]",
           "flex items-center justify-end px-80",
           "touch-none select-none",
           disabled
-            ? "bg-neutral-20 cursor-not-allowed"
-            : "bg-orange-60 shadow-[0px_4px_12px_0px_rgba(250,75,22,0.5)] cursor-grab active:cursor-grabbing",
+            ? "cursor-not-allowed bg-neutral-20"
+            : "cursor-grab bg-orange-60 shadow-[0px_4px_12px_0px_rgba(250,75,22,0.5)] active:cursor-grabbing",
         )}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -127,7 +127,7 @@ const SlidingButton = ({
       </div>
     </div>
   );
-}
+};
 
 SlidingButton.displayName = "SlidingButton";
 

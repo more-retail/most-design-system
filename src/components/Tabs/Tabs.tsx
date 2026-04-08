@@ -4,8 +4,11 @@ import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
 import { cn } from "@/utils/cn";
 
-
-const Tabs = ({ className, orientation = "horizontal", ...props }: TabsPrimitive.Root.Props) => {
+const Tabs: React.FC<TabsPrimitive.Root.Props> = ({
+  className,
+  orientation = "horizontal",
+  ...props
+}) => {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
@@ -19,9 +22,12 @@ const Tabs = ({ className, orientation = "horizontal", ...props }: TabsPrimitive
       {...props}
     />
   );
-}
+};
 
-const TabsList = ({ className, ...props }: TabsPrimitive.List.Props) =>  {
+const TabsList: React.FC<TabsPrimitive.List.Props> = ({
+  className,
+  ...props
+}) => {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
@@ -34,15 +40,14 @@ const TabsList = ({ className, ...props }: TabsPrimitive.List.Props) =>  {
       {...props}
     />
   );
-}
-
+};
 
 interface ShortcutKeyProps {
   className?: string;
   children: React.ReactNode;
 }
 
-const ShortcutKey = ({ className, children }: ShortcutKeyProps) => {
+const ShortcutKey: React.FC<ShortcutKeyProps> = ({ className, children }) => {
   return (
     <span
       className={cn(
@@ -57,28 +62,28 @@ const ShortcutKey = ({ className, children }: ShortcutKeyProps) => {
       {children}
     </span>
   );
-}
+};
 
 interface TabsTriggerProps extends TabsPrimitive.Tab.Props {
   icon?: React.ReactNode;
   shortcutKey?: React.ReactNode;
 }
 
-const TabsTrigger =({
+const TabsTrigger: React.FC<TabsTriggerProps> = ({
   className,
   children,
   icon,
   shortcutKey,
   ...props
-}: TabsTriggerProps) => {
+}) => {
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
       className={cn(
         "group/trigger relative flex flex-col items-start",
-        "overflow-hidden outline-none cursor-pointer select-none",
+        "cursor-pointer overflow-hidden outline-none select-none",
         "pb-40",
-        "after:content-[''] after:absolute after:bottom-0 after:inset-x-0 after:h-0",
+        "after:absolute after:inset-x-0 after:bottom-0 after:h-0 after:content-['']",
         "after:transition-[height,background-color] after:duration-150",
         "hover:after:h-[4px] hover:after:bg-neutral-20",
         "data-active:after:h-[2px] data-active:after:bg-neutral-110",
@@ -91,7 +96,7 @@ const TabsTrigger =({
       <div
         className={cn(
           "flex w-full items-center justify-center p-50",
-          "rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[4px] rounded-br-[4px]",
+          "rounded-tl-[12px] rounded-tr-[12px] rounded-br-[4px] rounded-bl-[4px]",
           "transition-colors duration-150",
           "group-data-[orientation=horizontal]/tabs:flex-row group-data-[orientation=horizontal]/tabs:gap-40",
           "group-data-[orientation=vertical]/tabs:flex-col group-data-[orientation=vertical]/tabs:gap-40",
@@ -104,20 +109,20 @@ const TabsTrigger =({
           </span>
         )}
 
-        <span className="shrink-0 whitespace-nowrap typography-para-thick-30 text-neutral-110">
+        <span className="shrink-0 typography-para-thick-30 whitespace-nowrap text-neutral-110">
           {children}
         </span>
 
-        {shortcutKey !== undefined && (
-          <ShortcutKey>{shortcutKey}</ShortcutKey>
-        )}
+        {shortcutKey !== undefined && <ShortcutKey>{shortcutKey}</ShortcutKey>}
       </div>
     </TabsPrimitive.Tab>
   );
-}
+};
 
-
-const TabsContent = ({ className, ...props }: TabsPrimitive.Panel.Props) =>  {
+const TabsContent: React.FC<TabsPrimitive.Panel.Props> = ({
+  className,
+  ...props
+}) => {
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
@@ -125,7 +130,7 @@ const TabsContent = ({ className, ...props }: TabsPrimitive.Panel.Props) =>  {
       {...props}
     />
   );
-}
+};
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, ShortcutKey };
 

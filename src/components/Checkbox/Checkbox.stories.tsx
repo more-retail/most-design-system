@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Checkbox } from "./Checkbox";
@@ -27,7 +28,9 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {
   render: (args) => {
     const [checked, setChecked] = React.useState(args.checked ?? false);
-    return <Checkbox {...args} checked={checked} onCheckedChange={setChecked} />;
+    return (
+      <Checkbox {...args} checked={checked} onCheckedChange={setChecked} />
+    );
   },
 };
 
@@ -63,19 +66,27 @@ export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-80 p-60">
       <div className="flex items-center gap-80">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Unchecked</p>
+        <p className="tracking-widest w-[120px] typography-label-30 text-neutral-60 uppercase">
+          Unchecked
+        </p>
         <Checkbox checked={false} />
       </div>
       <div className="flex items-center gap-80">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Indeterminate</p>
+        <p className="tracking-widest w-[120px] typography-label-30 text-neutral-60 uppercase">
+          Indeterminate
+        </p>
         <Checkbox indeterminate />
       </div>
       <div className="flex items-center gap-80">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Checked</p>
+        <p className="tracking-widest w-[120px] typography-label-30 text-neutral-60 uppercase">
+          Checked
+        </p>
         <Checkbox checked={true} />
       </div>
       <div className="flex items-center gap-80">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest w-[120px]">Disabled</p>
+        <p className="tracking-widest w-[120px] typography-label-30 text-neutral-60 uppercase">
+          Disabled
+        </p>
         <Checkbox checked={false} disabled />
         <Checkbox indeterminate disabled />
         <Checkbox checked={true} disabled />

@@ -1,15 +1,24 @@
 import React from "react";
 import {
   Pressable,
+  type StyleProp,
   StyleSheet,
   Text,
   TextInput,
   View,
-  type StyleProp,
   type ViewStyle,
 } from "react-native";
-import { color, spacing, typography } from "../../tokens/reactNative/stylesheet";
-import { KeyIcon, VisibilityIcon, VisibilityOffIcon } from "../../icons/index.native";
+
+import {
+  KeyIcon,
+  VisibilityIcon,
+  VisibilityOffIcon,
+} from "../../icons/index.native";
+import {
+  color,
+  spacing,
+  typography,
+} from "../../tokens/reactNative/stylesheet";
 
 interface PasswordFieldProps {
   label?: string;
@@ -22,7 +31,7 @@ interface PasswordFieldProps {
   onForgotPassword?: () => void;
 }
 
-const PasswordField = ({
+const PasswordField: React.FC<PasswordFieldProps> = ({
   label = "Password",
   showLabel = true,
   error = false,
@@ -30,14 +39,13 @@ const PasswordField = ({
   disabled = false,
   forgotPasswordLabel = "Forgot Password?",
   onForgotPassword,
-  placeholder
-}: PasswordFieldProps) => {
+  placeholder,
+}) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
 
   return (
-    <View style={[styles.root]} >
-
+    <View style={[styles.root]}>
       {showLabel && (
         <View style={styles.labelRow}>
           <Text style={textStyles.label} numberOfLines={1}>
@@ -84,30 +92,30 @@ const PasswordField = ({
           accessibilityLabel={showPassword ? "Hide password" : "Show password"}
           accessibilityRole="button"
         >
-          {showPassword
-            ? <VisibilityIcon size={spacing[60]} fill={color.white} />
-            : <VisibilityOffIcon size={spacing[60]} fill={color.white} />
-          }
+          {showPassword ? (
+            <VisibilityIcon size={spacing[60]} fill={color.white} />
+          ) : (
+            <VisibilityOffIcon size={spacing[60]} fill={color.white} />
+          )}
         </Pressable>
       </View>
 
       {error && errorMessage ? (
         <Text style={textStyles.errorText}>{errorMessage}</Text>
       ) : null}
-
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
   root: {
     flexDirection: "column",
-    gap: spacing[40], 
+    gap: spacing[40],
     alignItems: "flex-start",
     width: 300,
   },
   labelRow: {
     flexDirection: "row",
-    gap: spacing[50],   
+    gap: spacing[50],
     alignItems: "flex-start",
     width: "100%",
   },
@@ -121,12 +129,12 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    gap: spacing[50],         
-    height: spacing[140],    
+    gap: spacing[50],
+    height: spacing[140],
     alignItems: "center",
     paddingLeft: spacing[40],
     paddingRight: spacing[60],
-    borderRadius: 12,     
+    borderRadius: 12,
     width: "100%",
     backgroundColor: color.neutral[10],
     borderWidth: 2,
@@ -142,15 +150,14 @@ const styles = StyleSheet.create({
     opacity: 0.4,
   },
 
- 
   keyIconWrapper: {
     backgroundColor: color.white,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 8,      
+    borderRadius: 8,
     flexShrink: 0,
-    width: spacing[100],  
-    height: spacing[100],   
+    width: spacing[100],
+    height: spacing[100],
   },
 
   input: {
@@ -164,8 +171,8 @@ const styles = StyleSheet.create({
 
   visibilityButton: {
     flexShrink: 0,
-    width: spacing[60],    
-    height: spacing[60],   
+    width: spacing[60],
+    height: spacing[60],
     alignItems: "center",
     justifyContent: "center",
   },
@@ -174,13 +181,12 @@ const styles = StyleSheet.create({
   },
 });
 
-
 // ── Composed text styles — StyleSheet.compose called once at module load ───────
 const textStyles = {
-  label:       StyleSheet.compose(typography.para[30],  styles.label),
+  label: StyleSheet.compose(typography.para[30], styles.label),
   forgotLabel: StyleSheet.compose(typography.label[30], styles.forgotLabel),
-  input:       StyleSheet.compose(typography.para[30], styles.input),
-  errorText:   StyleSheet.compose(typography.para[30],  styles.errorText),
+  input: StyleSheet.compose(typography.para[30], styles.input),
+  errorText: StyleSheet.compose(typography.para[30], styles.errorText),
 };
 
 PasswordField.displayName = "PasswordField";

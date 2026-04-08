@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 
 import {
   DropdownChip,
-  DropdownChipTrigger,
   DropdownChipContent,
   DropdownChipItem,
+  DropdownChipTrigger,
 } from "./DropdownChip";
+
+import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 
 const meta: Meta<typeof DropdownChip> = {
   title: "Components/DropdownChip",
@@ -14,7 +15,7 @@ const meta: Meta<typeof DropdownChip> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="p-60 flex items-start gap-40 flex-wrap">
+      <div className="flex flex-wrap items-start gap-40 p-60">
         <Story />
       </div>
     ),
@@ -31,14 +32,20 @@ const OPTIONS = [
   { value: "option-3", label: "Option 3" },
 ];
 
-
 export const FilledLarge: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="filled" size="lg" placeholder="Label" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="filled"
+        size="lg"
+        placeholder="Label"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -48,10 +55,17 @@ export const FilledLarge: Story = {
 export const FilledMedium: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="filled" size="md" placeholder="Label" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="filled"
+        size="md"
+        placeholder="Label"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -61,10 +75,17 @@ export const FilledMedium: Story = {
 export const FilledSmall: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="filled" size="sm" placeholder="Label" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="filled"
+        size="sm"
+        placeholder="Label"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -74,10 +95,17 @@ export const FilledSmall: Story = {
 export const OutlinedLarge: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="outlined" size="lg" placeholder="LABEL" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="outlined"
+        size="lg"
+        placeholder="LABEL"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -87,10 +115,17 @@ export const OutlinedLarge: Story = {
 export const OutlinedMedium: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="outlined" size="md" placeholder="LABEL" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="outlined"
+        size="md"
+        placeholder="LABEL"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -100,10 +135,17 @@ export const OutlinedMedium: Story = {
 export const OutlinedSmall: Story = {
   render: () => (
     <DropdownChip>
-      <DropdownChipTrigger variant="outlined" size="sm" placeholder="LABEL" icon={<AppsIcon />} />
+      <DropdownChipTrigger
+        variant="outlined"
+        size="sm"
+        placeholder="LABEL"
+        icon={<AppsIcon />}
+      />
       <DropdownChipContent>
         {OPTIONS.map((o) => (
-          <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>
+          <DropdownChipItem key={o.value} value={o.value}>
+            {o.label}
+          </DropdownChipItem>
         ))}
       </DropdownChipContent>
     </DropdownChip>
@@ -116,12 +158,22 @@ export const OutlinedSmall: Story = {
 
 export const WithError: Story = {
   render: () => (
-    <div className="flex items-center gap-40 flex-wrap">
+    <div className="flex flex-wrap items-center gap-40">
       {(["lg", "md", "sm"] as const).map((size) => (
         <DropdownChip key={size}>
-          <DropdownChipTrigger variant="filled" size={size} placeholder="Label" icon={<AppsIcon />} error />
+          <DropdownChipTrigger
+            variant="filled"
+            size={size}
+            placeholder="Label"
+            icon={<AppsIcon />}
+            error
+          />
           <DropdownChipContent>
-            {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+            {OPTIONS.map((o) => (
+              <DropdownChipItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownChipItem>
+            ))}
           </DropdownChipContent>
         </DropdownChip>
       ))}
@@ -131,12 +183,21 @@ export const WithError: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <div className="flex items-center gap-40 flex-wrap">
+    <div className="flex flex-wrap items-center gap-40">
       {(["lg", "md", "sm"] as const).map((size) => (
         <DropdownChip key={size} disabled>
-          <DropdownChipTrigger variant="filled" size={size} placeholder="Label" icon={<AppsIcon />} />
+          <DropdownChipTrigger
+            variant="filled"
+            size={size}
+            placeholder="Label"
+            icon={<AppsIcon />}
+          />
           <DropdownChipContent>
-            {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+            {OPTIONS.map((o) => (
+              <DropdownChipItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownChipItem>
+            ))}
           </DropdownChipContent>
         </DropdownChip>
       ))}
@@ -146,12 +207,20 @@ export const Disabled: Story = {
 
 export const NoIcon: Story = {
   render: () => (
-    <div className="flex items-center gap-40 flex-wrap">
+    <div className="flex flex-wrap items-center gap-40">
       {(["lg", "md", "sm"] as const).map((size) => (
         <DropdownChip key={size}>
-          <DropdownChipTrigger variant="filled" size={size} placeholder="Label" />
+          <DropdownChipTrigger
+            variant="filled"
+            size={size}
+            placeholder="Label"
+          />
           <DropdownChipContent>
-            {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+            {OPTIONS.map((o) => (
+              <DropdownChipItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownChipItem>
+            ))}
           </DropdownChipContent>
         </DropdownChip>
       ))}
@@ -166,62 +235,107 @@ export const NoIcon: Story = {
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-80 p-60">
-
       {(["filled", "outlined"] as const).map((variant) => (
         <div key={variant} className="flex flex-col gap-40">
-          <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">{variant}</p>
+          <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
+            {variant}
+          </p>
 
           {(["lg", "md", "sm"] as const).map((size) => (
             <div key={size} className="flex flex-col gap-20">
-              <p className="typography-label-30 text-neutral-40 capitalize">{size}</p>
-              <div className="flex items-center gap-40 flex-wrap">
-
+              <p className="typography-label-30 text-neutral-40 capitalize">
+                {size}
+              </p>
+              <div className="flex flex-wrap items-center gap-40">
                 {/* Default (placeholder) */}
                 <DropdownChip>
-                  <DropdownChipTrigger variant={variant} size={size} placeholder="Label" icon={<AppsIcon />} />
+                  <DropdownChipTrigger
+                    variant={variant}
+                    size={size}
+                    placeholder="Label"
+                    icon={<AppsIcon />}
+                  />
                   <DropdownChipContent>
-                    {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+                    {OPTIONS.map((o) => (
+                      <DropdownChipItem key={o.value} value={o.value}>
+                        {o.label}
+                      </DropdownChipItem>
+                    ))}
                   </DropdownChipContent>
                 </DropdownChip>
 
                 {/* Selected */}
                 <DropdownChip defaultValue="option-1">
-                  <DropdownChipTrigger variant={variant} size={size} placeholder="Label" icon={<AppsIcon />} />
+                  <DropdownChipTrigger
+                    variant={variant}
+                    size={size}
+                    placeholder="Label"
+                    icon={<AppsIcon />}
+                  />
                   <DropdownChipContent>
-                    {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+                    {OPTIONS.map((o) => (
+                      <DropdownChipItem key={o.value} value={o.value}>
+                        {o.label}
+                      </DropdownChipItem>
+                    ))}
                   </DropdownChipContent>
                 </DropdownChip>
 
                 {/* Error */}
                 <DropdownChip>
-                  <DropdownChipTrigger variant={variant} size={size} placeholder="Label" icon={<AppsIcon />} error />
+                  <DropdownChipTrigger
+                    variant={variant}
+                    size={size}
+                    placeholder="Label"
+                    icon={<AppsIcon />}
+                    error
+                  />
                   <DropdownChipContent>
-                    {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+                    {OPTIONS.map((o) => (
+                      <DropdownChipItem key={o.value} value={o.value}>
+                        {o.label}
+                      </DropdownChipItem>
+                    ))}
                   </DropdownChipContent>
                 </DropdownChip>
 
                 {/* Disabled */}
                 <DropdownChip disabled>
-                  <DropdownChipTrigger variant={variant} size={size} placeholder="Label" icon={<AppsIcon />} />
+                  <DropdownChipTrigger
+                    variant={variant}
+                    size={size}
+                    placeholder="Label"
+                    icon={<AppsIcon />}
+                  />
                   <DropdownChipContent>
-                    {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+                    {OPTIONS.map((o) => (
+                      <DropdownChipItem key={o.value} value={o.value}>
+                        {o.label}
+                      </DropdownChipItem>
+                    ))}
                   </DropdownChipContent>
                 </DropdownChip>
 
                 {/* No icon */}
                 <DropdownChip>
-                  <DropdownChipTrigger variant={variant} size={size} placeholder="Label" />
+                  <DropdownChipTrigger
+                    variant={variant}
+                    size={size}
+                    placeholder="Label"
+                  />
                   <DropdownChipContent>
-                    {OPTIONS.map((o) => <DropdownChipItem key={o.value} value={o.value}>{o.label}</DropdownChipItem>)}
+                    {OPTIONS.map((o) => (
+                      <DropdownChipItem key={o.value} value={o.value}>
+                        {o.label}
+                      </DropdownChipItem>
+                    ))}
                   </DropdownChipContent>
                 </DropdownChip>
-
               </div>
             </div>
           ))}
         </div>
       ))}
-
     </div>
   ),
   decorators: [(Story) => <Story />],

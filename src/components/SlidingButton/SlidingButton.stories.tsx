@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { SlidingButton } from "./SlidingButton";
@@ -18,7 +19,7 @@ const meta: Meta<typeof SlidingButton> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-60 max-w-[400px]">
+      <div className="max-w-[400px] p-60">
         <Story />
       </div>
     ),
@@ -92,7 +93,7 @@ export const SlideToSend: Story = {
 export const Narrow: Story = {
   decorators: [
     (Story) => (
-      <div className="p-60 w-[240px]">
+      <div className="w-[240px] p-60">
         <Story />
       </div>
     ),
@@ -103,7 +104,7 @@ export const Narrow: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div className="flex flex-col gap-50 p-60 max-w-[400px]">
+    <div className="flex max-w-[400px] flex-col gap-50 p-60">
       <div className="flex flex-col gap-10">
         <span className="typography-para-30 text-neutral-70">Default</span>
         <SlidingButton label="Slide To Confirm" />

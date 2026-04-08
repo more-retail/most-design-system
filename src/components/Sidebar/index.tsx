@@ -9,11 +9,11 @@ export {
   SidebarItem,
   SidebarProfileItem,
   SidebarToggle,
-} from "./Sidebar"
+} from "./Sidebar";
 
 export type {
   SidebarProviderProps,
   SidebarGroupProps,
   SidebarItemProps,
   SidebarProfileItemProps,
-} from "./Sidebar"
+} from "./Sidebar";

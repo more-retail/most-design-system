@@ -40,14 +40,14 @@ export interface InfoChipProps extends React.ComponentProps<"div"> {
   icon?: React.ReactNode;
 }
 
-function InfoChip({
+const InfoChip: React.FC<InfoChipProps> = ({
   className,
   variant,
   size,
   label,
   icon = <AppsIcon />,
   ...props
-}: InfoChipProps) {
+}) => {
   return (
     <div
       data-slot="info-chip"
@@ -69,6 +69,6 @@ function InfoChip({
       )}
     </div>
   );
-}
+};
 
 export { InfoChip };

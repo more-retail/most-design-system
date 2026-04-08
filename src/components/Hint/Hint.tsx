@@ -1,12 +1,13 @@
 import React from "react";
+
 import { type VariantProps, cva } from "class-variance-authority";
+
+import { cn } from "@/utils/cn";
 
 import DoneAllIcon from "@material-symbols/svg-700/sharp/done_all-fill.svg?react";
 import EmergencyHomeIcon from "@material-symbols/svg-700/sharp/emergency_home-fill.svg?react";
 import InfoIcon from "@material-symbols/svg-700/sharp/info_i-fill.svg?react";
 import WarningIcon from "@material-symbols/svg-700/sharp/warning-fill.svg?react";
-
-import { cn } from "@/utils/cn";
 
 const hintVariants = cva(
   [
@@ -30,7 +31,6 @@ const hintVariants = cva(
 
 type HintVariant = NonNullable<VariantProps<typeof hintVariants>["variant"]>;
 
-
 const ICONS: Record<HintVariant, React.FC<React.SVGProps<SVGSVGElement>>> = {
   default: InfoIcon,
   warning: WarningIcon,
@@ -43,7 +43,13 @@ interface HintProps extends React.ComponentProps<"div"> {
   text?: string;
 }
 
-const Hint = ({ variant = "default", text, className, children, ...props }: HintProps) => {
+const Hint: React.FC<HintProps> = ({
+  variant = "default",
+  text,
+  className,
+  children,
+  ...props
+}) => {
   const Icon = ICONS[variant];
 
   return (
@@ -56,8 +62,7 @@ const Hint = ({ variant = "default", text, className, children, ...props }: Hint
       <p className="typography-para-30">{text}</p>
     </div>
   );
-}
-
+};
 
 export { Hint, hintVariants };
 export type { HintProps, HintVariant };

@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import { OTPInput, OTPInputContext, type OTPInputProps } from "input-otp";
+
 import { cn } from "@/utils/cn";
 
 type OtpFieldProps = Omit<OTPInputProps, "render"> & {
@@ -7,22 +9,29 @@ type OtpFieldProps = Omit<OTPInputProps, "render"> & {
   children: React.ReactNode;
 };
 
-const OtpField = ({ className, containerClassName, ...props }: OtpFieldProps) => {
+const OtpField: React.FC<OtpFieldProps> = ({
+  className,
+  containerClassName,
+  ...props
+}) => {
   return (
     <OTPInput
       data-slot="otp-input"
       containerClassName={cn(
         "flex items-center has-disabled:opacity-50",
-        containerClassName
+        containerClassName,
       )}
       className={cn("disabled:cursor-not-allowed", className)}
       spellCheck={false}
       {...props}
     />
   );
-}
+};
 
-const OtpGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
+const OtpGroup: React.FC<React.ComponentProps<"div">> = ({
+  className,
+  ...props
+}) => {
   return (
     <div
       data-slot="otp-group"
@@ -30,17 +39,14 @@ const OtpGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
       {...props}
     />
   );
-}
+};
 
-const OtpSlot = ({
-  index,
-  error,
-  className,
-  ...props
-}: React.ComponentProps<"div"> & {
-  index: number;
-  error?: boolean;
-}) => {
+const OtpSlot: React.FC<
+  React.ComponentProps<"div"> & {
+    index: number;
+    error?: boolean;
+  }
+> = ({ index, error, className, ...props }) => {
   const { slots } = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = slots?.[index] ?? {};
 
@@ -51,11 +57,11 @@ const OtpSlot = ({
       className={cn(
         "relative flex h-140 w-170 items-center justify-center",
         "rounded-xl bg-neutral-10",
-        "typography-para-30 text-neutral-110 text-center",
-        "outline-none transition-colors",
+        "text-center typography-para-30 text-neutral-110",
+        "transition-colors outline-none",
         isActive && !error && "border-2 border-neutral-110",
         error && "border border-red-70",
-        className
+        className,
       )}
       {...props}
     >
@@ -67,17 +73,11 @@ const OtpSlot = ({
       )}
     </div>
   );
-}
+};
 
-const OtpSeparator = ({ ...props }: React.ComponentProps<"div">) => {
-  return (
-    <div
-      data-slot="otp-separator"
-      role="separator"
-      {...props}
-    />
-  );
-}
+const OtpSeparator: React.FC<React.ComponentProps<"div">> = ({ ...props }) => {
+  return <div data-slot="otp-separator" role="separator" {...props} />;
+};
 
 export { OtpField, OtpGroup, OtpSlot, OtpSeparator };
 export type { OtpFieldProps };

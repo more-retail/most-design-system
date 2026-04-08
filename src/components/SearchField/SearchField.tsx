@@ -1,8 +1,6 @@
 import React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 
-import CloseIcon from "@material-symbols/svg-700/sharp/close.svg?react";
-import SearchIcon from "@material-symbols/svg-700/sharp/search-fill.svg?react";
+import { type VariantProps, cva } from "class-variance-authority";
 
 import {
   InputGroup,
@@ -11,6 +9,9 @@ import {
   InputGroupInput,
 } from "@/components/InputGroup/InputGroup";
 import { cn } from "@/utils/cn";
+
+import CloseIcon from "@material-symbols/svg-700/sharp/close.svg?react";
+import SearchIcon from "@material-symbols/svg-700/sharp/search-fill.svg?react";
 
 const searchFieldVariants = cva("rounded-full", {
   variants: {
@@ -22,7 +23,9 @@ const searchFieldVariants = cva("rounded-full", {
   defaultVariants: { size: "md" },
 });
 
-type SearchFieldSize = NonNullable<VariantProps<typeof searchFieldVariants>["size"]>;
+type SearchFieldSize = NonNullable<
+  VariantProps<typeof searchFieldVariants>["size"]
+>;
 
 interface SearchFieldProps {
   size?: SearchFieldSize;
@@ -35,7 +38,7 @@ interface SearchFieldProps {
   className?: string;
 }
 
-const SearchField = ({
+const SearchField: React.FC<SearchFieldProps> = ({
   size = "md",
   value = "",
   onChange,
@@ -44,7 +47,7 @@ const SearchField = ({
   disabled = false,
   showShortcutKey = false,
   className,
-}: SearchFieldProps) => {
+}) => {
   const [isFocused, setIsFocused] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -66,12 +69,7 @@ const SearchField = ({
   }
 
   return (
-    <InputGroup
-      className={cn(
-        searchFieldVariants({ size }),
-        className,
-      )}
-    >
+    <InputGroup className={cn(searchFieldVariants({ size }), className)}>
       <InputGroupAddon align="inline-start" className="cursor-default pl-60">
         <SearchIcon className="size-60 text-neutral-110" />
       </InputGroupAddon>
@@ -99,7 +97,7 @@ const SearchField = ({
             </InputGroupButton>
           )}
           {showKey && !hasValue && (
-            <div className="flex items-center justify-center min-w-[24px] border border-neutral-40 rounded-lg px-40 py-30">
+            <div className="flex min-w-[24px] items-center justify-center rounded-lg border border-neutral-40 px-40 py-30">
               <span className="typography-label-30 text-neutral-40">/</span>
             </div>
           )}

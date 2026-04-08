@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Switch } from "./Switch";
@@ -65,8 +66,12 @@ export const AllStates: Story = {
     <div className="flex flex-col gap-[48px] p-60">
       {(["md", "sm", "xs"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-[16px]">
-          <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">
-            {size === "md" ? "Regular (md)" : size === "sm" ? "Small (sm)" : "Extra Small (xs)"}
+          <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
+            {size === "md"
+              ? "Regular (md)"
+              : size === "sm"
+                ? "Small (sm)"
+                : "Extra Small (xs)"}
           </p>
           <div className="flex items-center gap-[24px]">
             <Switch size={size} checked={false} />

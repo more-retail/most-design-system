@@ -65,9 +65,9 @@ type DropdownChipSize = NonNullable<
   VariantProps<typeof dropdownChipTriggerVariants>["size"]
 >;
 
-interface DropdownChipProps extends SelectPrimitive.Root.Props<string> {}
+type DropdownChipProps = SelectPrimitive.Root.Props<string>;
 
-const DropdownChip = ({ ...props }: DropdownChipProps) => {
+const DropdownChip: React.FC<DropdownChipProps> = ({ ...props }) => {
   return <SelectPrimitive.Root data-slot="dropdown-chip" {...props} />;
 };
 
@@ -79,7 +79,7 @@ interface DropdownChipTriggerProps extends SelectPrimitive.Trigger.Props {
   placeholder?: string;
 }
 
-const DropdownChipTrigger = ({
+const DropdownChipTrigger: React.FC<DropdownChipTriggerProps> = ({
   className,
   variant = "filled",
   size = "lg",
@@ -87,7 +87,7 @@ const DropdownChipTrigger = ({
   icon,
   placeholder = "Select…",
   ...props
-}: DropdownChipTriggerProps) => {
+}) => {
   return (
     <SelectPrimitive.Trigger
       data-slot="dropdown-chip-trigger"
@@ -140,7 +140,7 @@ type DropdownChipContentProps = SelectPrimitive.Popup.Props &
     "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger"
   >;
 
-const DropdownChipContent = ({
+const DropdownChipContent: React.FC<DropdownChipContentProps> = ({
   className,
   children,
   side = "bottom",
@@ -149,7 +149,7 @@ const DropdownChipContent = ({
   alignOffset = 0,
   alignItemWithTrigger = false,
   ...props
-}: DropdownChipContentProps) => {
+}) => {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -185,13 +185,13 @@ const DropdownChipContent = ({
   );
 };
 
-interface DropdownChipItemProps extends SelectPrimitive.Item.Props {}
+type DropdownChipItemProps = SelectPrimitive.Item.Props;
 
-const DropdownChipItem = ({
+const DropdownChipItem: React.FC<DropdownChipItemProps> = ({
   className,
   children,
   ...props
-}: DropdownChipItemProps) => {
+}) => {
   return (
     <SelectPrimitive.Item
       data-slot="dropdown-chip-item"

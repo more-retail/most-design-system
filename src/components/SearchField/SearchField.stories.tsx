@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { SearchField } from "./SearchField";
@@ -70,18 +71,27 @@ export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-[48px] p-60">
       <div className="flex flex-col gap-[16px]">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">Regular (md)</p>
+        <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
+          Regular (md)
+        </p>
         <SearchField placeholder="Search" value="" />
         <SearchField placeholder="Search" value="Lorem ipsum" />
         <SearchField placeholder="Search" value="" disabled />
         <SearchField placeholder="Search" value="Lorem ipsum" disabled />
       </div>
       <div className="flex flex-col gap-[16px]">
-        <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">Small (sm)</p>
+        <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
+          Small (sm)
+        </p>
         <SearchField size="sm" placeholder="Search" value="" />
         <SearchField size="sm" placeholder="Search" value="Lorem ipsum" />
         <SearchField size="sm" placeholder="Search" value="" disabled />
-        <SearchField size="sm" placeholder="Search" value="Lorem ipsum" disabled />
+        <SearchField
+          size="sm"
+          placeholder="Search"
+          value="Lorem ipsum"
+          disabled
+        />
       </div>
     </div>
   ),

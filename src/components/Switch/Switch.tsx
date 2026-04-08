@@ -5,7 +5,6 @@ import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 
-
 const switchVariants = cva(
   [
     "peer group/switch relative inline-flex shrink-0 items-center rounded-full",
@@ -25,7 +24,7 @@ const switchVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 const switchThumbVariants = cva(
@@ -47,7 +46,7 @@ const switchThumbVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 type SwitchSize = NonNullable<VariantProps<typeof switchVariants>["size"]>;
@@ -56,7 +55,11 @@ interface SwitchProps
   extends SwitchPrimitive.Root.Props,
     VariantProps<typeof switchVariants> {}
 
-function Switch({ size = "md", className, ...props }: SwitchProps) {
+const Switch: React.FC<SwitchProps> = ({
+  size = "md",
+  className,
+  ...props
+}) => {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
@@ -69,7 +72,7 @@ function Switch({ size = "md", className, ...props }: SwitchProps) {
       />
     </SwitchPrimitive.Root>
   );
-}
+};
 
 Switch.displayName = "Switch";
 

@@ -1,23 +1,25 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import PersonIcon from "@material-symbols/svg-700/sharp/person-fill.svg?react";
-import LocationOnIcon from "@material-symbols/svg-700/sharp/location_on-fill.svg?react";
-import TranslateIcon from "@material-symbols/svg-700/sharp/translate-fill.svg?react";
 
 import {
   Dropdown,
-  DropdownLabel,
-  DropdownTrigger,
   DropdownContent,
-  DropdownItem,
-  DropdownItemIndicator,
   DropdownGroup,
   DropdownGroupLabel,
-  DropdownSeparator,
-  DropdownScrollUpArrow,
-  DropdownScrollDownArrow,
   DropdownHint,
+  DropdownItem,
+  DropdownItemIndicator,
+  DropdownLabel,
+  DropdownScrollDownArrow,
+  DropdownScrollUpArrow,
+  DropdownSeparator,
+  DropdownTrigger,
 } from "./Dropdown";
+
+import LocationOnIcon from "@material-symbols/svg-700/sharp/location_on-fill.svg?react";
+import PersonIcon from "@material-symbols/svg-700/sharp/person-fill.svg?react";
+import TranslateIcon from "@material-symbols/svg-700/sharp/translate-fill.svg?react";
 
 const meta: Meta<typeof Dropdown> = {
   title: "Components/Dropdown",
@@ -25,7 +27,7 @@ const meta: Meta<typeof Dropdown> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="p-60 w-[320px]">
+      <div className="w-[320px] p-60">
         <Story />
       </div>
     ),
@@ -47,12 +49,17 @@ export const Default: Story = {
     const [value, setValue] = React.useState("");
     const label = OPTIONS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
-          <DropdownTrigger placeholder="Select an option" displayValue={label} />
+          <DropdownTrigger
+            placeholder="Select an option"
+            displayValue={label}
+          />
           <DropdownContent value={value} onValueChange={setValue}>
             {OPTIONS.map((o) => (
-              <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+              <DropdownItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownItem>
             ))}
           </DropdownContent>
         </Dropdown>
@@ -70,13 +77,19 @@ export const Regular: Story = {
     const [value, setValue] = React.useState("");
     const label = OPTIONS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Regular (md)</DropdownLabel>
-          <DropdownTrigger size="md" placeholder="Select an option" displayValue={label} />
+          <DropdownTrigger
+            size="md"
+            placeholder="Select an option"
+            displayValue={label}
+          />
           <DropdownContent value={value} onValueChange={setValue}>
             {OPTIONS.map((o) => (
-              <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+              <DropdownItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownItem>
             ))}
           </DropdownContent>
         </Dropdown>
@@ -90,13 +103,19 @@ export const Small: Story = {
     const [value, setValue] = React.useState("");
     const label = OPTIONS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Small (sm)</DropdownLabel>
-          <DropdownTrigger size="sm" placeholder="Select an option" displayValue={label} />
+          <DropdownTrigger
+            size="sm"
+            placeholder="Select an option"
+            displayValue={label}
+          />
           <DropdownContent value={value} onValueChange={setValue}>
             {OPTIONS.map((o) => (
-              <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+              <DropdownItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownItem>
             ))}
           </DropdownContent>
         </Dropdown>
@@ -111,7 +130,7 @@ export const Small: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <div className="flex flex-col gap-40 w-full">
+    <div className="flex w-full flex-col gap-40">
       <Dropdown>
         <DropdownLabel disabled>Disabled</DropdownLabel>
         <DropdownTrigger placeholder="Select an option" disabled />
@@ -129,17 +148,25 @@ export const WithError: Story = {
     const [value, setValue] = React.useState("");
     const label = OPTIONS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>With Error</DropdownLabel>
-          <DropdownTrigger placeholder="Select an option" displayValue={label} error />
+          <DropdownTrigger
+            placeholder="Select an option"
+            displayValue={label}
+            error
+          />
           <DropdownContent value={value} onValueChange={setValue}>
             {OPTIONS.map((o) => (
-              <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+              <DropdownItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownItem>
             ))}
           </DropdownContent>
         </Dropdown>
-        <DropdownHint variant="error">Please select a valid option.</DropdownHint>
+        <DropdownHint variant="error">
+          Please select a valid option.
+        </DropdownHint>
       </div>
     );
   },
@@ -154,7 +181,7 @@ export const WithIcon: Story = {
     const [value, setValue] = React.useState("");
     const label = OPTIONS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>With Leading Icon</DropdownLabel>
           <DropdownTrigger
@@ -164,7 +191,9 @@ export const WithIcon: Story = {
           />
           <DropdownContent value={value} onValueChange={setValue}>
             {OPTIONS.map((o) => (
-              <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+              <DropdownItem key={o.value} value={o.value}>
+                {o.label}
+              </DropdownItem>
             ))}
           </DropdownContent>
         </Dropdown>
@@ -188,7 +217,7 @@ export const ItemsWithIcons: Story = {
     const [value, setValue] = React.useState("");
     const label = LANGUAGES.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Language</DropdownLabel>
           <DropdownTrigger
@@ -232,7 +261,7 @@ export const WithGroups: Story = {
     const allRegions = [...REGIONS.Americas, ...REGIONS.Europe];
     const label = allRegions.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Region</DropdownLabel>
           <DropdownTrigger
@@ -244,14 +273,18 @@ export const WithGroups: Story = {
             <DropdownGroup>
               <DropdownGroupLabel>Americas</DropdownGroupLabel>
               {REGIONS.Americas.map((o) => (
-                <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+                <DropdownItem key={o.value} value={o.value}>
+                  {o.label}
+                </DropdownItem>
               ))}
             </DropdownGroup>
             <DropdownSeparator />
             <DropdownGroup>
               <DropdownGroupLabel>Europe</DropdownGroupLabel>
               {REGIONS.Europe.map((o) => (
-                <DropdownItem key={o.value} value={o.value}>{o.label}</DropdownItem>
+                <DropdownItem key={o.value} value={o.value}>
+                  {o.label}
+                </DropdownItem>
               ))}
             </DropdownGroup>
           </DropdownContent>
@@ -276,7 +309,7 @@ export const WithCheckmark: Story = {
     const [value, setValue] = React.useState("");
     const label = PLANS.find((o) => o.value === value)?.label;
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Plan</DropdownLabel>
           <DropdownTrigger placeholder="Select a plan" displayValue={label} />
@@ -299,26 +332,57 @@ export const WithCheckmark: Story = {
  * -----------------------------------------------------------------------------------------------*/
 
 const COUNTRIES = [
-  "Argentina", "Australia", "Brazil", "Canada", "Chile", "China",
-  "Denmark", "Egypt", "Finland", "France", "Germany", "Greece",
-  "Hungary", "India", "Indonesia", "Ireland", "Italy", "Japan",
-  "Mexico", "Netherlands", "New Zealand", "Norway", "Poland",
-  "Portugal", "South Africa", "Spain", "Sweden", "Switzerland",
-  "Turkey", "United Kingdom", "United States",
+  "Argentina",
+  "Australia",
+  "Brazil",
+  "Canada",
+  "Chile",
+  "China",
+  "Denmark",
+  "Egypt",
+  "Finland",
+  "France",
+  "Germany",
+  "Greece",
+  "Hungary",
+  "India",
+  "Indonesia",
+  "Ireland",
+  "Italy",
+  "Japan",
+  "Mexico",
+  "Netherlands",
+  "New Zealand",
+  "Norway",
+  "Poland",
+  "Portugal",
+  "South Africa",
+  "Spain",
+  "Sweden",
+  "Switzerland",
+  "Turkey",
+  "United Kingdom",
+  "United States",
 ];
 
 export const LongList: Story = {
   render: () => {
     const [value, setValue] = React.useState("");
     return (
-      <div className="flex flex-col gap-40 w-full">
+      <div className="flex w-full flex-col gap-40">
         <Dropdown>
           <DropdownLabel>Country</DropdownLabel>
-          <DropdownTrigger placeholder="Select a country" displayValue={value || undefined} />
+          <DropdownTrigger
+            placeholder="Select a country"
+            displayValue={value || undefined}
+          />
           <DropdownContent value={value} onValueChange={setValue}>
             <DropdownScrollUpArrow />
             {COUNTRIES.map((country) => (
-              <DropdownItem key={country} value={country.toLowerCase().replace(/\s/g, "-")}>
+              <DropdownItem
+                key={country}
+                value={country.toLowerCase().replace(/\s/g, "-")}
+              >
                 {country}
               </DropdownItem>
             ))}
@@ -339,11 +403,10 @@ export const AllStates: Story = {
     <div className="flex flex-col gap-80 p-60">
       {(["md", "sm"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-40">
-          <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">
+          <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
             {size === "md" ? "Regular (md)" : "Small (sm)"}
           </p>
-          <div className="flex flex-col gap-60 w-[300px]">
-
+          <div className="flex w-[300px] flex-col gap-60">
             {/* Empty */}
             <Dropdown>
               <DropdownLabel>Empty</DropdownLabel>
@@ -358,7 +421,11 @@ export const AllStates: Story = {
             {/* Disabled */}
             <Dropdown>
               <DropdownLabel disabled>Disabled</DropdownLabel>
-              <DropdownTrigger size={size} placeholder="Select an option" disabled />
+              <DropdownTrigger
+                size={size}
+                placeholder="Select an option"
+                disabled
+              />
               <DropdownContent>
                 <DropdownItem value="option-1">Option 1</DropdownItem>
                 <DropdownItem value="option-2">Option 2</DropdownItem>
@@ -369,13 +436,19 @@ export const AllStates: Story = {
             <div className="flex flex-col gap-40">
               <Dropdown>
                 <DropdownLabel>Error</DropdownLabel>
-                <DropdownTrigger size={size} placeholder="Select an option" error />
+                <DropdownTrigger
+                  size={size}
+                  placeholder="Select an option"
+                  error
+                />
                 <DropdownContent>
                   <DropdownItem value="option-1">Option 1</DropdownItem>
                   <DropdownItem value="option-2">Option 2</DropdownItem>
                 </DropdownContent>
               </Dropdown>
-              <DropdownHint variant="error">Please select a valid option.</DropdownHint>
+              <DropdownHint variant="error">
+                Please select a valid option.
+              </DropdownHint>
             </div>
 
             {/* With leading icon */}
@@ -391,7 +464,6 @@ export const AllStates: Story = {
                 <DropdownItem value="option-2">Option 2</DropdownItem>
               </DropdownContent>
             </Dropdown>
-
           </div>
         </div>
       ))}

@@ -1,7 +1,8 @@
 import React from "react";
-import { type VariantProps, cva } from "class-variance-authority";
-import { cn } from "@/utils/cn";
 
+import { type VariantProps, cva } from "class-variance-authority";
+
+import { cn } from "@/utils/cn";
 
 const snackbarVariants = cva(
   [
@@ -22,11 +23,24 @@ const snackbarVariants = cva(
   },
 );
 
-type SnackbarVariant = NonNullable<VariantProps<typeof snackbarVariants>["variant"]>;
+type SnackbarVariant = NonNullable<
+  VariantProps<typeof snackbarVariants>["variant"]
+>;
 
-const defaultContent: Record<SnackbarVariant, { callout: string; message: string; actionLabel: string }> = {
-  warning: { callout: "Attention!", message: "Lorem ipsum dolor sit amet", actionLabel: "Ok" },
-  error: { callout: "Uh oh!", message: "Something went wrong", actionLabel: "Retry" },
+const defaultContent: Record<
+  SnackbarVariant,
+  { callout: string; message: string; actionLabel: string }
+> = {
+  warning: {
+    callout: "Attention!",
+    message: "Lorem ipsum dolor sit amet",
+    actionLabel: "Ok",
+  },
+  error: {
+    callout: "Uh oh!",
+    message: "Something went wrong",
+    actionLabel: "Retry",
+  },
 };
 
 interface SnackbarProps
@@ -39,7 +53,7 @@ interface SnackbarProps
   onAction?: () => void;
 }
 
-function Snackbar({
+const Snackbar: React.FC<SnackbarProps> = ({
   variant = "warning",
   callout,
   message,
@@ -48,7 +62,7 @@ function Snackbar({
   onAction,
   className,
   ...props
-}: SnackbarProps) {
+}) => {
   const defaults = defaultContent[variant ?? "warning"];
 
   return (
@@ -57,11 +71,11 @@ function Snackbar({
       className={cn(snackbarVariants({ variant }), className)}
       {...props}
     >
-      <div className="flex flex-1 flex-col gap-40 items-start min-w-0">
-        <p className="typography-para-pop-30 italic w-full">
+      <div className="flex min-w-0 flex-1 flex-col items-start gap-40">
+        <p className="w-full typography-para-pop-30 italic">
           {callout ?? defaults.callout}
         </p>
-        <p className="typography-para-30 w-full">
+        <p className="w-full typography-para-30">
           {message ?? defaults.message}
         </p>
       </div>
@@ -71,7 +85,7 @@ function Snackbar({
           data-slot="snackbar-action"
           type="button"
           onClick={onAction}
-          className="shrink-0 flex items-center justify-center overflow-hidden cursor-pointer"
+          className="flex shrink-0 cursor-pointer items-center justify-center overflow-hidden"
         >
           <span className="typography-label-30 whitespace-nowrap">
             {actionLabel ?? defaults.actionLabel}
@@ -80,7 +94,7 @@ function Snackbar({
       )}
     </div>
   );
-}
+};
 
 export { Snackbar, snackbarVariants };
 export type { SnackbarProps, SnackbarVariant };

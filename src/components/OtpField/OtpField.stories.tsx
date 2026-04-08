@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { OtpField, OtpGroup, OtpSlot } from "./OtpField";
@@ -24,7 +25,12 @@ const meta: Meta<StoryArgs> = {
   render: ({ error, maxLength = 4, ...args }) => {
     const [value, setValue] = React.useState("");
     return (
-      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+      <OtpField
+        {...args}
+        maxLength={maxLength}
+        value={value}
+        onChange={setValue}
+      >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
             <OtpSlot key={i} index={i} error={error} />
@@ -44,7 +50,12 @@ export const Populated: Story = {
   render: ({ error, maxLength = 4, ...args }) => {
     const [value, setValue] = React.useState("1234");
     return (
-      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+      <OtpField
+        {...args}
+        maxLength={maxLength}
+        value={value}
+        onChange={setValue}
+      >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
             <OtpSlot key={i} index={i} error={error} />
@@ -64,7 +75,12 @@ export const DisabledPopulated: Story = {
   render: ({ error, maxLength = 4, ...args }) => {
     const [value, setValue] = React.useState("1234");
     return (
-      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+      <OtpField
+        {...args}
+        maxLength={maxLength}
+        value={value}
+        onChange={setValue}
+      >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
             <OtpSlot key={i} index={i} error={error} />
@@ -80,7 +96,12 @@ export const Error: Story = {
   render: ({ error, maxLength = 4, ...args }) => {
     const [value, setValue] = React.useState("1234");
     return (
-      <OtpField {...args} maxLength={maxLength} value={value} onChange={setValue}>
+      <OtpField
+        {...args}
+        maxLength={maxLength}
+        value={value}
+        onChange={setValue}
+      >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
             <OtpSlot key={i} index={i} error={error} />

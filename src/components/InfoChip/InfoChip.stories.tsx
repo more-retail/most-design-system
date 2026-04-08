@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 
 import { InfoChip } from "./InfoChip";
+
+import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 
 const meta: Meta<typeof InfoChip> = {
   title: "Components/InfoChip",
@@ -21,7 +22,6 @@ const meta: Meta<typeof InfoChip> = {
 
 export default meta;
 type Story = StoryObj<typeof InfoChip>;
-
 
 export const FilledMd: Story = {
   args: { variant: "filled", size: "md", icon: <AppsIcon />, label: "Label" },
@@ -52,10 +52,22 @@ export const AllVariants: Story = {
     <div className="flex flex-col gap-80 p-60">
       {(["filled", "outlined"] as const).map((variant) => (
         <div key={variant} className="flex flex-col gap-40">
-          <p className="typography-label-30 text-neutral-60 uppercase tracking-widest">{variant}</p>
-          <div className="flex items-center gap-40 flex-wrap">
-            <InfoChip variant={variant} size="md" icon={<AppsIcon />} label="Label" />
-            <InfoChip variant={variant} size="sm" icon={<AppsIcon />} label="Label" />
+          <p className="tracking-widest typography-label-30 text-neutral-60 uppercase">
+            {variant}
+          </p>
+          <div className="flex flex-wrap items-center gap-40">
+            <InfoChip
+              variant={variant}
+              size="md"
+              icon={<AppsIcon />}
+              label="Label"
+            />
+            <InfoChip
+              variant={variant}
+              size="sm"
+              icon={<AppsIcon />}
+              label="Label"
+            />
             <InfoChip variant={variant} size="md" label="Label" />
             <InfoChip variant={variant} size="sm" label="Label" />
             <InfoChip variant={variant} size="md" icon={<AppsIcon />} />

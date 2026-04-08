@@ -33,7 +33,6 @@ export const Disabled: Story = {
   args: { disabled: true },
 };
 
-
 export const WithForgotPasswordAndError: Story = {
   args: {
     errorMessage: "Incorrect password. Please try again.",

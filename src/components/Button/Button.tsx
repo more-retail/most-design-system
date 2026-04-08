@@ -67,12 +67,12 @@ interface ButtonProps
   extends React.ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {}
 
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   size = "md",
   className,
   ...props
-}: ButtonProps) => {
+}) => {
   return (
     <button
       data-slot="button"

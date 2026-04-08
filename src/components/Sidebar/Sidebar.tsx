@@ -29,7 +29,7 @@ type SidebarProviderProps = React.ComponentProps<"div"> & {
   onCollapsedChange?: (v: boolean) => void;
 };
 
-const SidebarProvider = ({
+const SidebarProvider: React.FC<SidebarProviderProps> = ({
   defaultCollapsed = false,
   collapsed: collapsedProp,
   onCollapsedChange,
@@ -37,7 +37,7 @@ const SidebarProvider = ({
   style,
   children,
   ...props
-}: SidebarProviderProps) => {
+}) => {
   const [_collapsed, _setCollapsed] = React.useState(defaultCollapsed);
   const collapsed = collapsedProp ?? _collapsed;
 
@@ -82,11 +82,11 @@ const SidebarProvider = ({
   );
 };
 
-const Sidebar = ({
+const Sidebar: React.FC<React.ComponentProps<"div">> = ({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   const { collapsed } = useSidebar();
 
   return (
@@ -108,11 +108,11 @@ const Sidebar = ({
   );
 };
 
-const SidebarHeader = ({
+const SidebarHeader: React.FC<React.ComponentProps<"div">> = ({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="sidebar-header"
@@ -129,11 +129,11 @@ const SidebarHeader = ({
   );
 };
 
-const SidebarContent = ({
+const SidebarContent: React.FC<React.ComponentProps<"div">> = ({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="sidebar-content"
@@ -148,11 +148,11 @@ const SidebarContent = ({
   );
 };
 
-const SidebarFooter = ({
+const SidebarFooter: React.FC<React.ComponentProps<"div">> = ({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) => {
+}) => {
   return (
     <div
       data-slot="sidebar-footer"
@@ -173,12 +173,12 @@ type SidebarGroupProps = React.ComponentProps<"div"> & {
   label?: string;
 };
 
-const SidebarGroup = ({
+const SidebarGroup: React.FC<SidebarGroupProps> = ({
   label,
   className,
   children,
   ...props
-}: SidebarGroupProps) => {
+}) => {
   return (
     <div
       data-slot="sidebar-group"
@@ -237,14 +237,14 @@ type SidebarItemProps = Omit<React.ComponentProps<"button">, "children"> &
     badge?: number | string;
   };
 
-const SidebarItem = ({
+const SidebarItem: React.FC<SidebarItemProps> = ({
   icon,
   label,
   isActive = false,
   badge,
   className,
   ...props
-}: SidebarItemProps) => {
+}) => {
   const { collapsed } = useSidebar();
   const state = collapsed ? "collapsed" : "expanded";
 
@@ -299,7 +299,7 @@ type SidebarProfileItemProps = Omit<
   onLogout?: () => void;
 };
 
-const SidebarProfileItem = ({
+const SidebarProfileItem: React.FC<SidebarProfileItemProps> = ({
   avatar,
   name = "Jane Doe",
   email,
@@ -307,7 +307,7 @@ const SidebarProfileItem = ({
   onLogout,
   className,
   ...props
-}: SidebarProfileItemProps) => {
+}) => {
   const { collapsed } = useSidebar();
   const [open, setOpen] = React.useState(false);
 
@@ -432,10 +432,10 @@ const SidebarProfileItem = ({
   );
 };
 
-const SidebarToggle = ({
+const SidebarToggle: React.FC<React.ComponentProps<"button">> = ({
   className,
   ...props
-}: React.ComponentProps<"button">) => {
+}) => {
   const { toggle, collapsed } = useSidebar();
 
   return (

@@ -19,13 +19,13 @@ interface PasswordFieldProps
   onForgotPassword?: () => void;
 }
 
-const PasswordField = ({
+const PasswordField: React.FC<PasswordFieldProps> = ({
   errorMessage,
   disabled,
   placeholder,
   onForgotPassword,
   ...props
-}: PasswordFieldProps) => {
+}) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (

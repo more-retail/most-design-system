@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+
 import { Snackbar } from "./Snackbar";
 
 const meta: Meta<typeof Snackbar> = {

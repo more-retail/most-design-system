@@ -1,11 +1,6 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import SearchIcon from "@material-symbols/svg-700/sharp/search-fill.svg?react";
-import PersonIcon from "@material-symbols/svg-700/sharp/person-fill.svg?react";
-import CalendarIcon from "@material-symbols/svg-700/sharp/date_range-fill.svg?react";
-import CloseIcon from "@material-symbols/svg-700/sharp/close-fill.svg?react";
-import SendIcon from "@material-symbols/svg-700/sharp/send-fill.svg?react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   InputGroup,
@@ -15,6 +10,12 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "./InputGroup";
+
+import CloseIcon from "@material-symbols/svg-700/sharp/close-fill.svg?react";
+import CalendarIcon from "@material-symbols/svg-700/sharp/date_range-fill.svg?react";
+import PersonIcon from "@material-symbols/svg-700/sharp/person-fill.svg?react";
+import SearchIcon from "@material-symbols/svg-700/sharp/search-fill.svg?react";
+import SendIcon from "@material-symbols/svg-700/sharp/send-fill.svg?react";
 
 const meta: Meta<typeof InputGroup> = {
   title: "Components/InputGroup",
@@ -196,7 +197,11 @@ export const Disabled: Story = {
       <InputGroupAddon align="inline-start">
         <PersonIcon />
       </InputGroupAddon>
-      <InputGroupInput placeholder="Username…" disabled defaultValue="Can't edit this" />
+      <InputGroupInput
+        placeholder="Username…"
+        disabled
+        defaultValue="Can't edit this"
+      />
     </InputGroup>
   ),
 };
@@ -205,7 +210,7 @@ export const Disabled: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-[16px] p-60 max-w-[400px]">
+    <div className="flex max-w-[400px] flex-col gap-[16px] p-60">
       <InputGroup>
         <InputGroupInput placeholder="Default" />
       </InputGroup>
@@ -256,7 +261,11 @@ export const AllVariants: Story = {
       </InputGroup>
 
       <InputGroup>
-        <InputGroupInput placeholder="Disabled" disabled defaultValue="Can't edit this" />
+        <InputGroupInput
+          placeholder="Disabled"
+          disabled
+          defaultValue="Can't edit this"
+        />
       </InputGroup>
 
       <InputGroup>
