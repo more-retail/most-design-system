@@ -105,7 +105,10 @@ export { getRandomSwatch, getLastSavedMode } from "@/components/SwatchPicker";
 export type { Swatch, SwatchMode } from "@/components/SwatchPicker";
 
 export { InfoChip } from "@/components/InfoChip";
-export type { InfoChipVariant, InfoChipProps } from "@/components/InfoChip";
+export type { InfoChipVariant, InfoChipSize, InfoChipProps } from "@/components/InfoChip";
+
+export { ToggleChip } from "@/components/ToggleChip";
+export type { ToggleChipVariant, ToggleChipSize, ToggleChipProps } from "@/components/ToggleChip";
 
 export { Label } from "@/components/Label";
 export type { LabelProps } from "@/components/Label";
