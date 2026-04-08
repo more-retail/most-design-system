@@ -1,13 +1,14 @@
 import React from "react";
-import { type VariantProps, cva } from "class-variance-authority";
+
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+import { type VariantProps, cva } from "class-variance-authority";
+
+import { cn } from "@/utils/cn";
 
 import ArrowDropDownIcon from "@material-symbols/svg-700/sharp/arrow_drop_down-fill.svg?react";
 import CheckIcon from "@material-symbols/svg-700/sharp/check-fill.svg?react";
 import KeyboardArrowDownIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_down-fill.svg?react";
 import KeyboardArrowUpIcon from "@material-symbols/svg-700/sharp/keyboard_arrow_up-fill.svg?react";
-
-import { cn } from "@/utils/cn";
 
 type DropdownSize = "md" | "sm";
 
@@ -36,7 +37,6 @@ const dropdownTriggerVariants = cva(
   },
 );
 
-
 const dropdownItemVariants = cva(
   [
     "w-full inline-flex items-center gap-40 shrink-0 cursor-default outline-none select-none",
@@ -47,7 +47,7 @@ const dropdownItemVariants = cva(
     "data-[checked]:border-neutral-110",
     "data-[disabled]:text-neutral-40 data-[disabled]:pointer-events-none",
     "[&_svg]:shrink-0 [&_svg]:fill-current [&_svg:not([class*='size-'])]:size-60",
-    "rounded-xl"
+    "rounded-xl",
   ],
   {
     variants: {
@@ -62,44 +62,46 @@ const dropdownItemVariants = cva(
   },
 );
 
-
-type DropdownTriggerSize = NonNullable<VariantProps<typeof dropdownTriggerVariants>["size"]>;
-type DropdownItemSize = NonNullable<VariantProps<typeof dropdownItemVariants>["size"]>;
-
+type DropdownTriggerSize = NonNullable<
+  VariantProps<typeof dropdownTriggerVariants>["size"]
+>;
+type DropdownItemSize = NonNullable<
+  VariantProps<typeof dropdownItemVariants>["size"]
+>;
 
 interface DropdownProps extends MenuPrimitive.Root.Props {
   size?: DropdownSize;
 }
 
-function Dropdown({ children, ...props }: DropdownProps) {
+const Dropdown = ({ children, ...props }: DropdownProps) => {
   return (
     <MenuPrimitive.Root data-slot="dropdown" {...props}>
       {children}
     </MenuPrimitive.Root>
   );
-}
-
-Dropdown.displayName = "Dropdown";
+};
 
 interface DropdownLabelProps extends React.ComponentProps<"label"> {
   disabled?: boolean;
 }
 
-function DropdownLabel({ className, disabled, ...props }: DropdownLabelProps) {
+const DropdownLabel = ({
+  className,
+  disabled,
+  ...props
+}: DropdownLabelProps) => {
   return (
     <label
       data-slot="dropdown-label"
       className={cn(
-        "typography-para-30 truncate w-full",
+        "w-full truncate typography-para-30",
         disabled ? "text-neutral-60" : "text-neutral-110",
         className,
       )}
       {...props}
     />
   );
-}
-
-DropdownLabel.displayName = "DropdownLabel";
+};
 
 interface DropdownTriggerProps extends MenuPrimitive.Trigger.Props {
   size?: DropdownSize;
@@ -109,7 +111,7 @@ interface DropdownTriggerProps extends MenuPrimitive.Trigger.Props {
   displayValue?: string;
 }
 
-function DropdownTrigger({
+const DropdownTrigger = ({
   className,
   size = "md",
   error = false,
@@ -117,24 +119,23 @@ function DropdownTrigger({
   placeholder = "Select…",
   displayValue,
   ...props
-}: DropdownTriggerProps) {
+}: DropdownTriggerProps) => {
   return (
     <MenuPrimitive.Trigger
       data-slot="dropdown-trigger"
       className={cn(
         dropdownTriggerVariants({ size }),
         error
-          ? "border-red-70 data-[popup-open]:border-red-70 hover:shadow-[0px_0px_0px_2px_var(--color-red-20)]"
+          ? "border-red-70 hover:shadow-[0px_0px_0px_2px_var(--color-red-20)] data-[popup-open]:border-red-70"
           : "hover:border-neutral-20",
         className,
       )}
       {...props}
     >
-
-      { icon && (
+      {icon && (
         <span
           data-slot="dropdown-trigger-icon"
-          className="shrink-0 size-60 flex items-center justify-center text-neutral-110 disabled:text-neutral-40"
+          className="flex size-60 shrink-0 items-center justify-center text-neutral-110 disabled:text-neutral-40"
         >
           {icon}
         </span>
@@ -143,7 +144,7 @@ function DropdownTrigger({
       <span
         data-slot="dropdown-value"
         className={cn(
-          "flex-1 min-w-0 text-left truncate",
+          "min-w-0 flex-1 truncate text-left",
           displayValue ? "text-neutral-110" : "text-neutral-40",
         )}
       >
@@ -158,18 +159,18 @@ function DropdownTrigger({
       </span>
     </MenuPrimitive.Trigger>
   );
-}
-
-DropdownTrigger.displayName = "DropdownTrigger";
-
+};
 
 type DropdownContentProps = MenuPrimitive.Popup.Props &
-  Pick<MenuPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "alignOffset"> & {
+  Pick<
+    MenuPrimitive.Positioner.Props,
+    "side" | "sideOffset" | "align" | "alignOffset"
+  > & {
     value?: string;
     onValueChange?: (value: string) => void;
   };
 
-function DropdownContent({
+const DropdownContent = ({
   className,
   children,
   side = "bottom",
@@ -179,7 +180,7 @@ function DropdownContent({
   value,
   onValueChange,
   ...props
-}: DropdownContentProps) {
+}: DropdownContentProps) => {
   return (
     <MenuPrimitive.Portal>
       <MenuPrimitive.Positioner
@@ -193,10 +194,10 @@ function DropdownContent({
           data-slot="dropdown-content"
           className={cn(
             "w-(--anchor-width)",
-            "bg-white border border-neutral-10 rounded-xl",
+            "rounded-xl border border-neutral-10 bg-white",
             "shadow-[0px_4px_20px_0px_rgba(23,33,40,0.05)]",
-            "p-50 flex flex-col gap-30",
-            "max-h-(--available-height) overflow-y-auto overflow-x-hidden",
+            "flex flex-col gap-30 p-50",
+            "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
             "origin-(--transform-origin)",
             "data-[open]:animate-in data-[open]:fade-in-0 data-[open]:zoom-in-95",
             "data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95",
@@ -205,29 +206,39 @@ function DropdownContent({
           )}
           {...props}
         >
-          <MenuPrimitive.RadioGroup value={value} onValueChange={onValueChange} className="flex flex-col gap-30">
+          <MenuPrimitive.RadioGroup
+            value={value}
+            onValueChange={onValueChange}
+            className="flex flex-col gap-30"
+          >
             {children}
           </MenuPrimitive.RadioGroup>
         </MenuPrimitive.Popup>
       </MenuPrimitive.Positioner>
     </MenuPrimitive.Portal>
   );
-}
-
-DropdownContent.displayName = "DropdownContent";
+};
 
 interface DropdownItemProps extends MenuPrimitive.RadioItem.Props {
   size?: DropdownSize;
   icon?: React.ReactNode;
 }
 
-function DropdownItem({ className, size = "md", icon, children, ...props }: DropdownItemProps) {
+const DropdownItem = ({
+  className,
+  size = "md",
+  icon,
+  children,
+  ...props
+}: DropdownItemProps) => {
   const childArray = React.Children.toArray(children);
   const indicatorChildren = childArray.filter(
-    (child) => React.isValidElement(child) && child.type === DropdownItemIndicator,
+    (child) =>
+      React.isValidElement(child) && child.type === DropdownItemIndicator,
   );
   const textChildren = childArray.filter(
-    (child) => !(React.isValidElement(child) && child.type === DropdownItemIndicator),
+    (child) =>
+      !(React.isValidElement(child) && child.type === DropdownItemIndicator),
   );
 
   return (
@@ -240,27 +251,25 @@ function DropdownItem({ className, size = "md", icon, children, ...props }: Drop
       {icon && (
         <span
           data-slot="dropdown-item-icon"
-          className="shrink-0 size-60 flex items-center justify-center"
+          className="flex size-60 shrink-0 items-center justify-center"
         >
           {icon}
         </span>
       )}
 
-      <span
-        data-slot="dropdown-item-text"
-        className="flex-1 truncate"
-      >
+      <span data-slot="dropdown-item-text" className="flex-1 truncate">
         {textChildren}
       </span>
 
       {indicatorChildren}
     </MenuPrimitive.RadioItem>
   );
-}
+};
 
-DropdownItem.displayName = "DropdownItem";
-
-function DropdownItemIndicator({ className, ...props }: MenuPrimitive.RadioItemIndicator.Props) {
+function DropdownItemIndicator({
+  className,
+  ...props
+}: MenuPrimitive.RadioItemIndicator.Props) {
   return (
     <MenuPrimitive.RadioItemIndicator
       data-slot="dropdown-item-indicator"
@@ -277,7 +286,7 @@ function DropdownItemIndicator({ className, ...props }: MenuPrimitive.RadioItemI
 
 DropdownItemIndicator.displayName = "DropdownItemIndicator";
 
-function DropdownGroup({ className, ...props }: MenuPrimitive.Group.Props) {
+const DropdownGroup = ({ className, ...props }: MenuPrimitive.Group.Props) => {
   return (
     <MenuPrimitive.Group
       data-slot="dropdown-group"
@@ -285,46 +294,48 @@ function DropdownGroup({ className, ...props }: MenuPrimitive.Group.Props) {
       {...props}
     />
   );
-}
+};
 
-DropdownGroup.displayName = "DropdownGroup";
-
-function DropdownGroupLabel({ className, ...props }: MenuPrimitive.GroupLabel.Props) {
+const DropdownGroupLabel = ({
+  className,
+  ...props
+}: MenuPrimitive.GroupLabel.Props) => {
   return (
     <MenuPrimitive.GroupLabel
       data-slot="dropdown-group-label"
       className={cn(
-        "typography-label-30 text-neutral-60 px-60 truncate",
+        "truncate px-60 typography-label-30 text-neutral-60",
         className,
       )}
       {...props}
     />
   );
-}
+};
 
-DropdownGroupLabel.displayName = "DropdownGroupLabel";
-
-function DropdownSeparator({ className, ...props }: React.ComponentProps<"div">) {
+const DropdownSeparator = ({
+  className,
+  ...props
+}: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dropdown-separator"
       role="separator"
       aria-orientation="horizontal"
-      className={cn("-mx-50 h-px bg-neutral-20 shrink-0", className)}
+      className={cn("-mx-50 h-px shrink-0 bg-neutral-20", className)}
       {...props}
     />
   );
-}
+};
 
-DropdownSeparator.displayName = "DropdownSeparator";
-
-
-function DropdownScrollUpArrow({ className, ...props }: React.ComponentProps<"div">) {
+const DropdownScrollUpArrow = ({
+  className,
+  ...props
+}: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dropdown-scroll-up"
       className={cn(
-        "flex items-center justify-center py-20 text-neutral-60 cursor-default",
+        "flex cursor-default items-center justify-center py-20 text-neutral-60",
         className,
       )}
       {...props}
@@ -332,16 +343,17 @@ function DropdownScrollUpArrow({ className, ...props }: React.ComponentProps<"di
       <KeyboardArrowUpIcon className="size-60" />
     </div>
   );
-}
+};
 
-DropdownScrollUpArrow.displayName = "DropdownScrollUpArrow";
-
-function DropdownScrollDownArrow({ className, ...props }: React.ComponentProps<"div">) {
+const DropdownScrollDownArrow = ({
+  className,
+  ...props
+}: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dropdown-scroll-down"
       className={cn(
-        "flex items-center justify-center py-20 text-neutral-60 cursor-default",
+        "flex cursor-default items-center justify-center py-20 text-neutral-60",
         className,
       )}
       {...props}
@@ -349,16 +361,17 @@ function DropdownScrollDownArrow({ className, ...props }: React.ComponentProps<"
       <KeyboardArrowDownIcon className="size-60" />
     </div>
   );
-}
-
-DropdownScrollDownArrow.displayName = "DropdownScrollDownArrow";
-
+};
 
 interface DropdownHintProps extends React.ComponentProps<"p"> {
   variant?: "default" | "error";
 }
 
-function DropdownHint({ className, variant = "default", ...props }: DropdownHintProps) {
+const DropdownHint = ({
+  className,
+  variant = "default",
+  ...props
+}: DropdownHintProps) => {
   return (
     <p
       data-slot="dropdown-hint"
@@ -370,10 +383,7 @@ function DropdownHint({ className, variant = "default", ...props }: DropdownHint
       {...props}
     />
   );
-}
-
-DropdownHint.displayName = "DropdownHint";
-
+};
 
 export {
   Dropdown,

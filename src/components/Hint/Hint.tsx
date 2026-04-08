@@ -43,7 +43,7 @@ interface HintProps extends React.ComponentProps<"div"> {
   text?: string;
 }
 
-function Hint({ variant = "default", text, className, children, ...props }: HintProps) {
+const Hint = ({ variant = "default", text, className, children, ...props }: HintProps) => {
   const Icon = ICONS[variant];
 
   return (
@@ -58,7 +58,6 @@ function Hint({ variant = "default", text, className, children, ...props }: Hint
   );
 }
 
-Hint.displayName = "Hint";
 
 export { Hint, hintVariants };
 export type { HintProps, HintVariant };

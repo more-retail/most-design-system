@@ -109,7 +109,5 @@ const SearchField = ({
   );
 };
 
-SearchField.displayName = "SearchField";
-
 export { SearchField };
 export type { SearchFieldProps, SearchFieldSize };

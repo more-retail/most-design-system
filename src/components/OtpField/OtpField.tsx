@@ -7,11 +7,7 @@ type OtpFieldProps = Omit<OTPInputProps, "render"> & {
   children: React.ReactNode;
 };
 
-function OtpField({
-  className,
-  containerClassName,
-  ...props
-}: OtpFieldProps) {
+const OtpField = ({ className, containerClassName, ...props }: OtpFieldProps) => {
   return (
     <OTPInput
       data-slot="otp-input"
@@ -26,7 +22,7 @@ function OtpField({
   );
 }
 
-function OtpGroup({ className, ...props }: React.ComponentProps<"div">) {
+const OtpGroup = ({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="otp-group"
@@ -36,7 +32,7 @@ function OtpGroup({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function OtpSlot({
+const OtpSlot = ({
   index,
   error,
   className,
@@ -44,7 +40,7 @@ function OtpSlot({
 }: React.ComponentProps<"div"> & {
   index: number;
   error?: boolean;
-}) {
+}) => {
   const { slots } = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = slots?.[index] ?? {};
 
@@ -73,7 +69,7 @@ function OtpSlot({
   );
 }
 
-function OtpSeparator({ ...props }: React.ComponentProps<"div">) {
+const OtpSeparator = ({ ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="otp-separator"

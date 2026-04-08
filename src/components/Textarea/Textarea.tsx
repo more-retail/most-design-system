@@ -2,7 +2,9 @@ import React from "react";
 
 import { cn } from "@/utils/cn";
 
-function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
+export interface TextareaProps extends React.ComponentProps<"textarea"> {}
+
+const Textarea = ({ className, ...props }: TextareaProps) => {
   return (
     <textarea
       data-slot="textarea"

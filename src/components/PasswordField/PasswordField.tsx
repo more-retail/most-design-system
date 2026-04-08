@@ -98,7 +98,5 @@ const PasswordField = ({
   );
 };
 
-PasswordField.displayName = "PasswordField";
-
 export { PasswordField };
 export type { PasswordFieldProps };

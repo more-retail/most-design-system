@@ -67,12 +67,12 @@ interface ButtonProps
   extends React.ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {}
 
-function Button({
+const Button = ({
   variant = "primary",
   size = "md",
   className,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <button
       data-slot="button"
@@ -80,9 +80,7 @@ function Button({
       {...props}
     />
   );
-}
-
-Button.displayName = "Button";
+};
 
 export { Button, buttonVariants };
 export type { ButtonProps, ButtonVariant, ButtonSize };

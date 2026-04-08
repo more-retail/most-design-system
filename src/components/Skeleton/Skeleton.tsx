@@ -1,6 +1,8 @@
 import { cn } from "@/utils/cn"
 
-function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
+export interface SkeletonProps extends React.ComponentProps<"div"> {}
+
+const Skeleton = ({ className, ...props }: SkeletonProps) => {
   return (
     <div
       data-slot="skeleton"

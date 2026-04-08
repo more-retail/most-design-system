@@ -67,11 +67,9 @@ type DropdownChipSize = NonNullable<
 
 interface DropdownChipProps extends SelectPrimitive.Root.Props<string> {}
 
-function DropdownChip({ ...props }: DropdownChipProps) {
+const DropdownChip = ({ ...props }: DropdownChipProps) => {
   return <SelectPrimitive.Root data-slot="dropdown-chip" {...props} />;
-}
-
-DropdownChip.displayName = "DropdownChip";
+};
 
 interface DropdownChipTriggerProps extends SelectPrimitive.Trigger.Props {
   variant?: DropdownChipVariant;
@@ -81,7 +79,7 @@ interface DropdownChipTriggerProps extends SelectPrimitive.Trigger.Props {
   placeholder?: string;
 }
 
-function DropdownChipTrigger({
+const DropdownChipTrigger = ({
   className,
   variant = "filled",
   size = "lg",
@@ -89,7 +87,7 @@ function DropdownChipTrigger({
   icon,
   placeholder = "Select…",
   ...props
-}: DropdownChipTriggerProps) {
+}: DropdownChipTriggerProps) => {
   return (
     <SelectPrimitive.Trigger
       data-slot="dropdown-chip-trigger"
@@ -134,9 +132,7 @@ function DropdownChipTrigger({
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
-}
-
-DropdownChipTrigger.displayName = "DropdownChipTrigger";
+};
 
 type DropdownChipContentProps = SelectPrimitive.Popup.Props &
   Pick<
@@ -144,7 +140,7 @@ type DropdownChipContentProps = SelectPrimitive.Popup.Props &
     "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger"
   >;
 
-function DropdownChipContent({
+const DropdownChipContent = ({
   className,
   children,
   side = "bottom",
@@ -153,7 +149,7 @@ function DropdownChipContent({
   alignOffset = 0,
   alignItemWithTrigger = false,
   ...props
-}: DropdownChipContentProps) {
+}: DropdownChipContentProps) => {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -187,17 +183,15 @@ function DropdownChipContent({
       </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>
   );
-}
-
-DropdownChipContent.displayName = "DropdownChipContent";
+};
 
 interface DropdownChipItemProps extends SelectPrimitive.Item.Props {}
 
-function DropdownChipItem({
+const DropdownChipItem = ({
   className,
   children,
   ...props
-}: DropdownChipItemProps) {
+}: DropdownChipItemProps) => {
   return (
     <SelectPrimitive.Item
       data-slot="dropdown-chip-item"
@@ -220,7 +214,7 @@ function DropdownChipItem({
       </SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
-}
+};
 
 export {
   DropdownChip,

@@ -3,7 +3,9 @@ import { Input as InputPrimitive } from "@base-ui/react/input";
 
 import { cn } from "@/utils/cn";
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+export interface InputProps extends React.ComponentProps<"input"> {}
+
+const Input = ({ className, type, ...props }: InputProps)  => {
   return (
     <InputPrimitive
       type={type}

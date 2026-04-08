@@ -5,11 +5,7 @@ import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import { cn } from "@/utils/cn";
 
 
-function Tabs({
-  className,
-  orientation = "horizontal",
-  ...props
-}: TabsPrimitive.Root.Props) {
+const Tabs = ({ className, orientation = "horizontal", ...props }: TabsPrimitive.Root.Props) => {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
@@ -25,10 +21,7 @@ function Tabs({
   );
 }
 
-Tabs.displayName = "Tabs";
-
-
-function TabsList({ className, ...props }: TabsPrimitive.List.Props) {
+const TabsList = ({ className, ...props }: TabsPrimitive.List.Props) =>  {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
@@ -43,15 +36,13 @@ function TabsList({ className, ...props }: TabsPrimitive.List.Props) {
   );
 }
 
-TabsList.displayName = "TabsList";
-
 
 interface ShortcutKeyProps {
   className?: string;
   children: React.ReactNode;
 }
 
-function ShortcutKey({ className, children }: ShortcutKeyProps) {
+const ShortcutKey = ({ className, children }: ShortcutKeyProps) => {
   return (
     <span
       className={cn(
@@ -68,21 +59,18 @@ function ShortcutKey({ className, children }: ShortcutKeyProps) {
   );
 }
 
-ShortcutKey.displayName = "ShortcutKey";
-
-
 interface TabsTriggerProps extends TabsPrimitive.Tab.Props {
   icon?: React.ReactNode;
   shortcutKey?: React.ReactNode;
 }
 
-function TabsTrigger({
+const TabsTrigger =({
   className,
   children,
   icon,
   shortcutKey,
   ...props
-}: TabsTriggerProps) {
+}: TabsTriggerProps) => {
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
@@ -128,10 +116,8 @@ function TabsTrigger({
   );
 }
 
-TabsTrigger.displayName = "TabsTrigger";
 
-
-function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
+const TabsContent = ({ className, ...props }: TabsPrimitive.Panel.Props) =>  {
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
@@ -140,8 +126,6 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
     />
   );
 }
-
-TabsContent.displayName = "TabsContent";
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, ShortcutKey };
 

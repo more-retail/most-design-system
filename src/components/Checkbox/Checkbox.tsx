@@ -5,7 +5,13 @@ import CheckIndeterminateSmallIcon from "@material-symbols/svg-700/sharp/check_i
 
 import { cn } from "@/utils/cn";
 
-function Checkbox({ className, checked, indeterminate, ...props }: CheckboxPrimitive.Root.Props) {
+interface CheckboxProps extends CheckboxPrimitive.Root.Props {
+  className?: string;
+  checked?: boolean;
+  indeterminate?: boolean;
+}
+
+const Checkbox = ({ className, checked, indeterminate, ...props }: CheckboxProps) => {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
@@ -35,6 +41,5 @@ function Checkbox({ className, checked, indeterminate, ...props }: CheckboxPrimi
   );
 }
 
-Checkbox.displayName = "Checkbox";
-
 export { Checkbox };
+export type { CheckboxProps };

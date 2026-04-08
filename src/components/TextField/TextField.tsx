@@ -43,7 +43,7 @@ interface TextFieldProps
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-function TextField({
+const TextField =({
   id,
   label,
   leadingIcon,
@@ -56,7 +56,7 @@ function TextField({
   className,
   disabled,
   ...props
-}: TextFieldProps) {
+}: TextFieldProps)=> {
   const [isFocused, setIsFocused] = React.useState(false);
 
   const handleFocus = (
@@ -210,8 +210,6 @@ function TextField({
     </div>
   );
 }
-
-TextField.displayName = "TextField";
 
 export { TextField, textFieldVariants };
 export type { TextFieldProps, TextFieldVariant };
