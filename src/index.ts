@@ -69,7 +69,7 @@ export type {
   DropdownChipItemProps,
 } from "@/components/DropdownChip";
 
-export { OtpField } from "@/components/OtpField";
+export {  OtpField, OtpGroup, OtpSlot, OtpSeparator } from "@/components/OtpField";
 export type { OtpFieldProps } from "@/components/OtpField";
 
 export { PasswordField } from "@/components/PasswordField";
@@ -145,3 +145,6 @@ export {
   ShortcutKey,
 } from "@/components/Tabs";
 export type { TabsTriggerProps, ShortcutKeyProps } from "@/components/Tabs";
+
+export type { UserChipProps, UserChipSize, UserChipUser } from "@/components/UserChip";
+export { UserChip } from "@/components/UserChip";
