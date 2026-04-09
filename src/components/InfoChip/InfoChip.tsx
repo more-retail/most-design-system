@@ -7,7 +7,7 @@ import { cn } from "@/utils/cn";
 import AppsIcon from "@material-symbols/svg-700/sharp/apps-fill.svg?react";
 
 const infoChipVariants = cva(
-  "inline-flex items-center typography-para-30 text-neutral-110 [&_svg]:shrink-0 [&_svg]:fill-current",
+  "inline-flex items-center typography-para-thick-30 text-neutral-110 [&_svg]:shrink-0 [&_svg]:fill-current",
   {
     variants: {
       variant: {

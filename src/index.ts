@@ -148,3 +148,6 @@ export type { TabsTriggerProps, ShortcutKeyProps } from "@/components/Tabs";
 
 export type { UserChipProps, UserChipSize, UserChipUser } from "@/components/UserChip";
 export { UserChip } from "@/components/UserChip";
+
+export type { UserFieldProps, UserFieldSize, UserFieldUser } from "@/components/UserField";
+export { UserField } from "@/components/UserField";
