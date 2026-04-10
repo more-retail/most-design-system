@@ -111,11 +111,7 @@ const ToggleChip: React.FC<ToggleChipProps> = ({
           role="button"
           tabIndex={0}
           className="flex shrink-0 cursor-pointer items-center justify-center"
-          onClick={(e) => {
-            console.log("remove clicked");
-            e.stopPropagation();
-            onRemove?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
-          }}
+          onClick={onRemove}
         >
           {trailingIcon}
         </span>
