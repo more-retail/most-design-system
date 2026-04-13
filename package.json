@@ -29,12 +29,22 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/most-design-system.js",
-      "types": "./dist/most-design-system.d.ts"
+      "react-native": {
+        "types": "./dist/native/index.d.ts",
+        "default": "./dist/native/index.cjs"
+      },
+      "types": "./dist/most-design-system.d.ts",
+      "import": "./dist/most-design-system.js"
     },
     "./components/react": {
       "import": "./dist/most-design-system.js",
       "types": "./dist/most-design-system.d.ts"
+    },
+    "./components/react-native": {
+      "types": "./dist/native/index.d.ts",
+      "react-native": "./dist/native/index.cjs",
+      "import": "./dist/native/index.js",
+      "require": "./dist/native/index.cjs"
     },
     "./tokens/js": {
       "import": "./dist/tokens/js/tokens.js",
@@ -43,6 +53,12 @@
     "./tokens/react-native": {
       "import": "./dist/tokens/react-native/tokens.js",
       "types": "./dist/tokens/react-native/tokens.d.ts"
+    },
+    "./tokens/react-native/stylesheet": {
+      "types": "./dist/native/stylesheet.d.ts",
+      "react-native": "./dist/native/stylesheet.cjs",
+      "import": "./dist/native/stylesheet.js",
+      "require": "./dist/native/stylesheet.cjs"
     },
     "./tokens/css": "./dist/tokens/css/tokens.css",
     "./tokens/css-in-js": {
@@ -55,36 +71,68 @@
     "./dist/"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:tokens",
+    "build": "npm run build:tokens && npm run build:lib && npm run build:native",
     "build:lib": "vite build",
     "build:tokens": "vite-node ./style-dictionary/build-tokens.ts",
+    "build:native": "tsup --config tsup.native.config.ts",
     "dev": "vite",
-    "prepare": "npm run build"
+    "prepare": "husky && npm run build",
+    "dev:storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build",
+    "pack": "npm run build  && npm pack",
+    "tsup:watch": "npx tsup --config tsup.native.config.ts --watch",
+    "dev:react": "vite build --watch"
   },
   "dependencies": {
+    "@base-ui/react": "^1.3.0",
     "@material-symbols/svg-700": "^0.34.1",
     "clsx": "^2.1.1",
     "color": "^5.0.0",
-    "tailwind-merge": "^3.3.1"
+    "input-otp": "^1.4.2",
+    "tailwind-merge": "^3.3.1",
+    "tsup": "^8.5.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@microsoft/api-extractor": "^7.52.11",
     "@prettier/sync": "github:prettier/sync",
+    "@react-native/metro-config": "^0.84.1",
+    "@somehow-digital/commitlint-plugin-spellcheck": "^1.1.0",
+    "@storybook/addon-a11y": "^10.2.17",
+    "@storybook/addon-docs": "^10.2.17",
+    "@storybook/addon-onboarding": "^10.2.17",
+    "@storybook/addon-vitest": "^10.2.17",
+    "@storybook/react-vite": "^10.2.17",
     "@tailwindcss/vite": "^4.1.12",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.8",
     "@vitejs/plugin-react-swc": "^4.0.1",
+    "@vitest/browser-playwright": "^4.0.18",
+    "commitlint-plugin-tense": "^1.0.9",
+    "@vitest/coverage-v8": "^4.0.18",
+    "class-variance-authority": "^0.7.1",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-storybook": "^10.2.17",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "playwright": "^1.58.2",
     "prettier": "^3.6.2",
     "prettier-plugin-packagejson": "^2.5.19",
     "prettier-plugin-tailwindcss": "^0.6.14",
+    "react-dom": "^19.2.4",
+    "react-native": "^0.84.1",
+    "react-native-svg": "^15.15.4",
+    "react-native-svg-transformer": "^1.5.3",
     "rollup-preserve-directives": "^1.1.3",
+    "storybook": "^10.2.17",
     "style-dictionary": "^5.0.2",
     "tailwindcss": "*",
     "tw-animate-css": "^1.3.7",
@@ -93,12 +141,26 @@
     "unplugin-dts": "^1.0.0-beta.6",
     "vite": "^7.1.3",
     "vite-node": "^3.2.4",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^4.5.0",
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-native": "^0.84.1",
+    "react-native-svg": "^15.15.4",
     "tailwindcss": "^4.1.12"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",
