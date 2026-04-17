@@ -15,7 +15,7 @@ export type UserFieldUser = UserChipUser;
 
 const userFieldTriggerVariants = cva(
   [
-    "w-full inline-flex items-center cursor-pointer select-none outline-none",
+    "group w-full inline-flex items-center cursor-pointer select-none outline-none",
     "typography-para-30",
     "[&_svg]:shrink-0 [&_svg]:fill-current",
     "transition-[border-color,box-shadow] duration-150",
@@ -147,7 +147,7 @@ function DropdownItem({
       onClick={() => onSelect(user)}
       className={cn(
         "flex h-120 w-full shrink-0 items-center justify-between outline-none",
-        "border-2 border-transparent rounded-xl",
+        "rounded-xl border-2 border-transparent",
         "hover:border-neutral-10 focus-visible:border-neutral-110",
         "transition-colors duration-100",
       )}
@@ -171,7 +171,12 @@ function DropdownItem({
         </span>
       </div>
       {user.role && (
-        <InfoChip size="sm" label={user.role} icon={null} className="shrink-0" />
+        <InfoChip
+          size="sm"
+          label={user.role}
+          icon={null}
+          className="shrink-0"
+        />
       )}
     </button>
   );
@@ -253,7 +258,7 @@ const UserField: React.FC<UserFieldProps> = ({
       </span>
       <ArrowDropDownIcon
         className={cn(
-          "size-60 shrink-0",
+          "size-60 shrink-0 transition-transform group-data-[popup-open]:rotate-180",
           disabled ? "text-neutral-40" : "text-neutral-110",
         )}
       />
@@ -304,11 +309,7 @@ const UserField: React.FC<UserFieldProps> = ({
     return (
       <div data-slot="user-field" className={wrapperCls}>
         {label && <span className={labelCls}>{label}</span>}
-        <button
-          type="button"
-          disabled={disabled}
-          className={triggerCls}
-        >
+        <button type="button" disabled={disabled} className={triggerCls}>
           {triggerContent}
         </button>
         {error && errorMessage && (
