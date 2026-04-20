@@ -16,6 +16,7 @@ const meta: Meta<StoryArgs> = {
     maxLength: { control: { type: "number", min: 4, max: 8 } },
     disabled: { control: "boolean" },
     error: { control: "boolean" },
+    errorMessage: { control: "text" },
   },
   args: {
     maxLength: 4,
@@ -30,6 +31,7 @@ const meta: Meta<StoryArgs> = {
         maxLength={maxLength}
         value={value}
         onChange={setValue}
+        onResend={() => console.log("Resend clicked")}
       >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
@@ -55,6 +57,29 @@ export const Populated: Story = {
         maxLength={maxLength}
         value={value}
         onChange={setValue}
+        onResend={() => console.log("Resend clicked")}
+      >
+        <OtpGroup>
+          {Array.from({ length: maxLength }).map((_, i) => (
+            <OtpSlot key={i} index={i} error={error} />
+          ))}
+        </OtpGroup>
+      </OtpField>
+    );
+  },
+};
+
+export const Error: Story = {
+  args: { error: true, errorMessage: "A friendly error message" },
+  render: ({ error, maxLength = 4, ...args }) => {
+    const [value, setValue] = React.useState("1234");
+    return (
+      <OtpField
+        {...args}
+        maxLength={maxLength}
+        value={value}
+        onChange={setValue}
+        onResend={() => console.log("Resend clicked")}
       >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
@@ -68,10 +93,6 @@ export const Populated: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true },
-};
-
-export const DisabledPopulated: Story = {
-  args: { disabled: true },
   render: ({ error, maxLength = 4, ...args }) => {
     const [value, setValue] = React.useState("1234");
     return (
@@ -80,27 +101,7 @@ export const DisabledPopulated: Story = {
         maxLength={maxLength}
         value={value}
         onChange={setValue}
-      >
-        <OtpGroup>
-          {Array.from({ length: maxLength }).map((_, i) => (
-            <OtpSlot key={i} index={i} error={error} />
-          ))}
-        </OtpGroup>
-      </OtpField>
-    );
-  },
-};
-
-export const Error: Story = {
-  args: { error: true },
-  render: ({ error, maxLength = 4, ...args }) => {
-    const [value, setValue] = React.useState("1234");
-    return (
-      <OtpField
-        {...args}
-        maxLength={maxLength}
-        value={value}
-        onChange={setValue}
+        onResend={() => console.log("Resend clicked")}
       >
         <OtpGroup>
           {Array.from({ length: maxLength }).map((_, i) => (
@@ -118,12 +119,21 @@ const StaticOtp = ({
   value,
   disabled,
   error,
+  errorMessage,
 }: {
   value: string;
   disabled?: boolean;
   error?: boolean;
+  errorMessage?: string;
 }) => (
-  <OtpField maxLength={4} value={value} disabled={disabled} onChange={() => {}}>
+  <OtpField
+    maxLength={4}
+    value={value}
+    disabled={disabled}
+    errorMessage={errorMessage}
+    onResend={() => {}}
+    onChange={() => {}}
+  >
     <OtpGroup>
       {Array.from({ length: 4 }).map((_, i) => (
         <OtpSlot key={i} index={i} error={error} />
@@ -139,7 +149,7 @@ export const AllStates: Story = {
       <StaticOtp value="1234" />
       <StaticOtp value="" disabled />
       <StaticOtp value="1234" disabled />
-      <StaticOtp value="1234" error />
+      <StaticOtp value="1234" error errorMessage="A friendly error message" />
     </div>
   ),
 };
