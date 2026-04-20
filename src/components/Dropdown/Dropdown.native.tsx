@@ -35,6 +35,8 @@ type DropdownSize = "md" | "sm";
 interface DropdownContextValue {
   open: boolean;
   setOpen: (v: boolean) => void;
+  value: string | undefined;
+  onValueChange: (v: string) => void;
   size: DropdownSize;
   triggerLayout: { x: number; y: number; width: number; height: number } | null;
   setTriggerLayout: (layout: {
@@ -49,6 +51,8 @@ interface DropdownContextValue {
 const DropdownContext = createContext<DropdownContextValue>({
   open: false,
   setOpen: () => {},
+  value: undefined,
+  onValueChange: () => {},
   size: "md",
   triggerLayout: null,
   setTriggerLayout: () => {},
@@ -57,20 +61,17 @@ const DropdownContext = createContext<DropdownContextValue>({
 
 interface DropdownProps {
   children: React.ReactNode;
+  defaultValue?: string;
   size?: DropdownSize;
-  defaultOpen?: boolean;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   children,
+  defaultValue,
   size = "md",
-  defaultOpen = false,
-  open: controlledOpen,
-  onOpenChange,
 }) => {
-  const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const [value, setValue] = useState<string | undefined>(defaultValue);
+  const [open, setOpen] = useState(false);
   const [triggerLayout, setTriggerLayout] = useState<{
     x: number;
     y: number;
@@ -79,27 +80,18 @@ const Dropdown: React.FC<DropdownProps> = ({
   } | null>(null);
   const triggerRef = useRef<View>(null);
 
-  const isControlled = controlledOpen !== undefined;
-  const open = isControlled ? controlledOpen : internalOpen;
-
-  const setOpen = useCallback(
-    (v: boolean) => {
-      if (!isControlled) setInternalOpen(v);
-      onOpenChange?.(v);
-    },
-    [isControlled, onOpenChange],
-  );
-
   const contextValue = useMemo(
     () => ({
       open,
       setOpen,
+      value,
+      onValueChange: setValue,
       size,
       triggerLayout,
       setTriggerLayout,
       triggerRef,
     }),
-    [open, setOpen, size, triggerLayout],
+    [open, value, size, triggerLayout],
   );
 
   return (
@@ -150,9 +142,10 @@ const DropdownTrigger = memo<DropdownTriggerProps>(
     displayValue,
     style,
   }) => {
-    const { open, setOpen, size, setTriggerLayout, triggerRef } =
+    const { open, setOpen, value, size, setTriggerLayout, triggerRef } =
       useContext(DropdownContext);
 
+    const resolvedDisplayValue = displayValue ?? value;
     const TRIGGER_HEIGHT = size === "md" ? spacing[140] : spacing[110];
     const PADDING_H = size === "md" ? spacing[60] : spacing[50];
 
@@ -185,9 +178,13 @@ const DropdownTrigger = memo<DropdownTriggerProps>(
       () =>
         StyleSheet.compose(
           StyleSheet.compose(typography.para[30], styles.triggerValue),
-          { color: displayValue ? color.neutral[110] : color.neutral[40] },
+          {
+            color: resolvedDisplayValue
+              ? color.neutral[110]
+              : color.neutral[40],
+          },
         ),
-      [displayValue],
+      [resolvedDisplayValue],
     );
 
     const chevronFill = disabled ? color.neutral[40] : color.neutral[110];
@@ -202,7 +199,7 @@ const DropdownTrigger = memo<DropdownTriggerProps>(
         {icon && <View style={styles.triggerIcon}>{icon}</View>}
 
         <Text numberOfLines={1} style={valueStyle}>
-          {displayValue ?? placeholder}
+          {resolvedDisplayValue ?? placeholder}
         </Text>
 
         <View style={styles.chevron}>
@@ -334,6 +331,7 @@ const DropdownContent = memo<DropdownContentProps>(
 
 interface DropdownItemProps {
   children: React.ReactNode;
+  value?: string;
   onSelect?: () => void;
   selected?: boolean;
   disabled?: boolean;
@@ -342,18 +340,35 @@ interface DropdownItemProps {
 }
 
 const DropdownItem = memo<DropdownItemProps>(
-  ({ children, onSelect, selected = false, disabled = false, icon, style }) => {
-    const { setOpen, size } = useContext(DropdownContext);
+  ({
+    children,
+    value,
+    onSelect,
+    selected: selectedProp,
+    disabled = false,
+    icon,
+    style,
+  }) => {
+    const {
+      setOpen,
+      size,
+      value: contextValue,
+      onValueChange,
+    } = useContext(DropdownContext);
     const [pressed, setPressed] = useState(false);
+
+    const selected =
+      selectedProp ?? (value !== undefined ? contextValue === value : false);
 
     const ITEM_HEIGHT = size === "md" ? spacing[140] : spacing[110];
     const PADDING_H = size === "md" ? spacing[60] : spacing[50];
 
     const handlePress = useCallback(() => {
       if (disabled) return;
+      if (value !== undefined) onValueChange(value);
       onSelect?.();
       setOpen(false);
-    }, [disabled, onSelect, setOpen]);
+    }, [disabled, value, onValueChange, onSelect, setOpen]);
 
     const handlePressIn = useCallback(() => setPressed(true), []);
     const handlePressOut = useCallback(() => setPressed(false), []);
