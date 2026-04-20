@@ -69,7 +69,12 @@ export type {
   DropdownChipItemProps,
 } from "@/components/DropdownChip";
 
-export {  OtpField, OtpGroup, OtpSlot, OtpSeparator } from "@/components/OtpField";
+export {
+  OtpField,
+  OtpGroup,
+  OtpSlot,
+  OtpSeparator,
+} from "@/components/OtpField";
 export type { OtpFieldProps } from "@/components/OtpField";
 
 export { PasswordField } from "@/components/PasswordField";
@@ -104,10 +109,18 @@ export { getRandomSwatch, getLastSavedMode } from "@/components/SwatchPicker";
 export type { Swatch, SwatchMode } from "@/components/SwatchPicker";
 
 export { InfoChip } from "@/components/InfoChip";
-export type { InfoChipVariant, InfoChipSize, InfoChipProps } from "@/components/InfoChip";
+export type {
+  InfoChipVariant,
+  InfoChipSize,
+  InfoChipProps,
+} from "@/components/InfoChip";
 
 export { ToggleChip } from "@/components/ToggleChip";
-export type { ToggleChipVariant, ToggleChipSize, ToggleChipProps } from "@/components/ToggleChip";
+export type {
+  ToggleChipVariant,
+  ToggleChipSize,
+  ToggleChipProps,
+} from "@/components/ToggleChip";
 
 export { Label } from "@/components/Label";
 export type { LabelProps } from "@/components/Label";
@@ -146,8 +159,19 @@ export {
 } from "@/components/Tabs";
 export type { TabsTriggerProps, ShortcutKeyProps } from "@/components/Tabs";
 
-export type { UserChipProps, UserChipSize, UserChipUser } from "@/components/UserChip";
+export type {
+  UserChipProps,
+  UserChipSize,
+  UserChipUser,
+} from "@/components/UserChip";
 export { UserChip } from "@/components/UserChip";
 
-export type { UserFieldProps, UserFieldSize, UserFieldUser } from "@/components/UserField";
+export type {
+  UserFieldProps,
+  UserFieldSize,
+  UserFieldUser,
+} from "@/components/UserField";
 export { UserField } from "@/components/UserField";
+
+export { Dropzone, dropzoneVariants } from "@/components/Dropzone";
+export type { DropzoneProps, DropzoneState } from "@/components/Dropzone";
