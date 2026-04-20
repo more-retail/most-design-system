@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Pressable,
-  type StyleProp,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  type ViewStyle,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import {
   KeyIcon,
@@ -19,93 +11,99 @@ import {
   spacing,
   typography,
 } from "../../tokens/reactNative/stylesheet";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "../InputGroup/InputGroup.native";
 
 interface PasswordFieldProps {
-  label?: string;
-  showLabel?: boolean;
-  error?: boolean;
   errorMessage?: string;
   disabled?: boolean;
   placeholder?: string;
-  forgotPasswordLabel?: string;
   onForgotPassword?: () => void;
 }
 
 const PasswordField: React.FC<PasswordFieldProps> = ({
-  label = "Password",
-  showLabel = true,
-  error = false,
   errorMessage,
   disabled = false,
-  forgotPasswordLabel = "Forgot Password?",
-  onForgotPassword,
   placeholder,
+  onForgotPassword,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [focused, setFocused] = React.useState(false);
 
   return (
-    <View style={[styles.root]}>
-      {showLabel && (
-        <View style={styles.labelRow}>
-          <Text style={textStyles.label} numberOfLines={1}>
-            {label}
-          </Text>
-          {forgotPasswordLabel ? (
-            <Pressable onPress={onForgotPassword} hitSlop={8}>
-              <Text style={textStyles.forgotLabel}>{forgotPasswordLabel}</Text>
-            </Pressable>
-          ) : null}
-        </View>
-      )}
-
-      <View
-        style={[
-          styles.inputContainer,
-          focused && styles.inputContainerFocused,
-          error && styles.inputContainerError,
-          disabled && styles.inputContainerDisabled,
-        ]}
-      >
-        <View style={styles.keyIconWrapper}>
-          <KeyIcon size={spacing[60]} fill={color.orange[60]} />
-        </View>
-
-        <TextInput
-          secureTextEntry={!showPassword}
-          editable={!disabled}
-          style={textStyles.input}
-          placeholderTextColor={color.neutral[40]}
-          placeholder={placeholder}
-          onFocus={(e) => {
-            setFocused(true);
-          }}
-          onBlur={(e) => {
-            setFocused(false);
-          }}
-        />
-
-        <Pressable
-          onPress={() => setShowPassword((v) => !v)}
-          hitSlop={8}
-          style={styles.visibilityButton}
-          accessibilityLabel={showPassword ? "Hide password" : "Show password"}
-          accessibilityRole="button"
+    <View style={styles.root}>
+      <View style={styles.labelRow}>
+        <Text
+          style={[textStyles.label, disabled && styles.labelDisabled]}
+          numberOfLines={1}
         >
-          {showPassword ? (
-            <VisibilityIcon size={spacing[60]} fill={color.white} />
-          ) : (
-            <VisibilityOffIcon size={spacing[60]} fill={color.white} />
-          )}
-        </Pressable>
+          Password
+        </Text>
+        {onForgotPassword && (
+          <Pressable onPress={onForgotPassword} hitSlop={8} disabled={disabled}>
+            <Text
+              style={[
+                textStyles.forgotLabel,
+                disabled && styles.forgotLabelDisabled,
+              ]}
+            >
+              Forgot Password?
+            </Text>
+          </Pressable>
+        )}
       </View>
 
-      {error && errorMessage ? (
-        <Text style={textStyles.errorText}>{errorMessage}</Text>
-      ) : null}
+      <InputGroup error={!!errorMessage} disabled={disabled}>
+        <InputGroupAddon align="inline-start">
+          <View
+            style={[
+              styles.keyIconWrapper,
+              disabled && styles.keyIconWrapperDisabled,
+            ]}
+          >
+            <KeyIcon
+              size={spacing[60]}
+              fill={disabled ? color.neutral[40] : color.orange[60]}
+            />
+          </View>
+        </InputGroupAddon>
+
+        <InputGroupInput
+          secureTextEntry={!showPassword}
+          placeholder={placeholder}
+        />
+
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            onPress={() => setShowPassword((v) => !v)}
+            accessibilityLabel={
+              showPassword ? "Hide password" : "Show password"
+            }
+          >
+            {showPassword ? (
+              <VisibilityIcon
+                size={spacing[60]}
+                fill={disabled ? color.neutral[40] : color.neutral[110]}
+              />
+            ) : (
+              <VisibilityOffIcon
+                size={spacing[60]}
+                fill={disabled ? color.neutral[40] : color.neutral[110]}
+              />
+            )}
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
+
+      {/* Error message */}
+      {errorMessage && <Text style={textStyles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   root: {
     flexDirection: "column",
@@ -119,37 +117,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     width: "100%",
   },
-  label: {
-    color: color.neutral[110],
-    flex: 1,
+  labelDisabled: {
+    color: color.neutral[40],
   },
-  forgotLabel: {
-    color: color.orange[60],
-    flexShrink: 0,
+  forgotLabelDisabled: {
+    color: color.neutral[40],
   },
-  inputContainer: {
-    flexDirection: "row",
-    gap: spacing[50],
-    height: spacing[140],
-    alignItems: "center",
-    paddingLeft: spacing[40],
-    paddingRight: spacing[60],
-    borderRadius: 12,
-    width: "100%",
-    backgroundColor: color.neutral[10],
-    borderWidth: 2,
-    borderColor: "transparent",
-  },
-  inputContainerFocused: {
-    borderColor: color.neutral[110],
-  },
-  inputContainerError: {
-    borderColor: color.red[60],
-  },
-  inputContainerDisabled: {
-    opacity: 0.4,
-  },
-
   keyIconWrapper: {
     backgroundColor: color.white,
     alignItems: "center",
@@ -159,37 +132,27 @@ const styles = StyleSheet.create({
     width: spacing[100],
     height: spacing[100],
   },
-
-  input: {
-    flex: 1,
-    color: color.neutral[110],
-    backgroundColor: "transparent",
-    padding: 0,
-    margin: 0,
-    outlineWidth: 0,
+  keyIconWrapperDisabled: {
+    backgroundColor: color.neutral[10],
   },
-
-  visibilityButton: {
+  label: {
+    color: color.neutral[110],
+    flex: 1,
+  },
+  forgotLabel: {
+    color: color.orange[60],
     flexShrink: 0,
-    width: spacing[60],
-    height: spacing[60],
-    alignItems: "center",
-    justifyContent: "center",
   },
   errorText: {
-    color: color.red[60],
+    color: color.red[70],
   },
 });
 
-// ── Composed text styles — StyleSheet.compose called once at module load ───────
 const textStyles = {
   label: StyleSheet.compose(typography.para[30], styles.label),
   forgotLabel: StyleSheet.compose(typography.label[30], styles.forgotLabel),
-  input: StyleSheet.compose(typography.para[30], styles.input),
   errorText: StyleSheet.compose(typography.para[30], styles.errorText),
 };
-
-PasswordField.displayName = "PasswordField";
 
 export { PasswordField };
 export type { PasswordFieldProps };
