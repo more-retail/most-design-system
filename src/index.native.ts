@@ -57,12 +57,6 @@ export type {
   TextFieldVariant,
 } from "@/components/TextField/TextField.native";
 
-export { SlidingButton } from "@/components/SlidingButton/SlidingButton.native";
-export type {
-  SlidingButtonProps,
-  SlidingButtonRef,
-} from "@/components/SlidingButton/SlidingButton.native";
-
 export { Switch } from "@/components/Switch/Switch.native";
 export type {
   SwitchProps,
