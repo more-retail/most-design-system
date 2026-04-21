@@ -9,11 +9,11 @@ import React, {
 } from "react";
 import {
   Animated,
+  FlatList,
   LayoutChangeEvent,
   Modal,
   Platform,
   Pressable,
-  ScrollView,
   StyleProp,
   StyleSheet,
   Text,
@@ -327,14 +327,15 @@ const DropdownChipContent = memo<DropdownChipContentProps>(
           onLayout={handleLayout}
           style={style ? [contentStyle, style] : contentStyle}
         >
-          <ScrollView
+          <FlatList
             style={styles.contentScroll}
             bounces={false}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
-          >
-            {children}
-          </ScrollView>
+            data={React.Children.toArray(children)}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item }) => <>{item}</>}
+          />
         </Animated.View>
       </Modal>
     );
