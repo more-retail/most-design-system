@@ -1,8 +1,6 @@
-import { fileHeader } from "style-dictionary/utils";
+import { format } from "oxfmt";
 import type { FormatFn, FormatFnArguments } from "style-dictionary/types";
-import prettier from "@prettier/sync";
-
-const { format } = prettier;
+import { fileHeader } from "style-dictionary/utils";
 
 /**
  * Outputs composite tokens in CSS-in-JS syntax format
@@ -10,7 +8,6 @@ const { format } = prettier;
 export const cssInJs: FormatFn = async ({
   file,
   dictionary,
-  options,
 }: FormatFnArguments) => {
   const cssInJsTokens = dictionary.allTokens.reduce(
     (result: Record<string, unknown>, token) => {
@@ -19,7 +16,7 @@ export const cssInJs: FormatFn = async ({
       }
       return result;
     },
-    {}
+    {},
   );
 
   const output =
@@ -28,9 +25,5 @@ export const cssInJs: FormatFn = async ({
     JSON.stringify(cssInJsTokens, null, 2);
 
   // Return prettified
-  return format(output, {
-    parser: "typescript",
-    printWidth: 500,
-    ...options?.prettier,
-  });
+  return (await format("tokens.ts", output, { printWidth: 500 })).code;
 };
