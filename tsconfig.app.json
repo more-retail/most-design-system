@@ -2,11 +2,8 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["node"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Don't emit */
@@ -21,13 +18,8 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-    },
+      "@/*": ["src/*"]
+    }
   },
-  "include": [
-    "src",
-    "style-dictionary"
-  ],
+  "include": ["src", "style-dictionary"]
 }

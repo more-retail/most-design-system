@@ -34,7 +34,7 @@ export default defineConfig({
       formats: ["es"],
       fileName: "most-design-system",
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ["react", "react-dom", "tailwindcss"],
     },
   },
