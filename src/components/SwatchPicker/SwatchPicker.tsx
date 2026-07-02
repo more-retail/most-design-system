@@ -25,10 +25,6 @@ import {
 import DialogsIcon from "@material-symbols/svg-700/sharp/dialogs.svg?react";
 import GradientIcon from "@material-symbols/svg-700/sharp/gradient.svg?react";
 
-/* -------------------------------------------------------------------------------------------------
- * ColorPickerContext)
- * -----------------------------------------------------------------------------------------------*/
-
 interface SwatchPickerContextValue extends Cn {
   swatch: Swatch;
   internalSwatch: InternalSwatch;
@@ -51,10 +47,6 @@ function useSwatchPickerContext() {
   }
   return context;
 }
-
-/* -------------------------------------------------------------------------------------------------
- * ColorPicker (ColorPickerProvider)
- * -----------------------------------------------------------------------------------------------*/
 
 interface SwatchPickerProps extends OptionalCn {
   swatch?: Swatch;
@@ -261,12 +253,7 @@ function SwatchPicker(props: SwatchPickerProps) {
   );
 }
 
-/* -------------------------------------------------------------------------------------------------
- * ColorPickerModeToggle
- * -----------------------------------------------------------------------------------------------*/
-
-interface SwatchPickerModeToggleProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface SwatchPickerModeToggleProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 function SwatchPickerModeToggle({
@@ -341,10 +328,6 @@ function SwatchPickerModeToggle({
   );
 }
 
-/* -------------------------------------------------------------------------------------------------
- * SwatchPickerWheel
- * -----------------------------------------------------------------------------------------------*/
-
 interface SwatchPickerWheelProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
@@ -403,20 +386,6 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
   const [secondaryColorVisualHue, setSecondaryColorVisualHue] = React.useState(
     internalSwatch.mode === "gradient" ? internalSwatch.colors[1].hue() : 0,
   );
-  React.useEffect(() => {
-    const target =
-      internalSwatch.mode === "gradient" ? internalSwatch.colors[1].hue() : 0;
-    const current = secondaryColorVisualHue;
-    const diff = target - (current % 360);
-    let newVisualHue = current + diff;
-    if (diff > 180) {
-      newVisualHue = current + (diff - 360);
-    } else if (diff < -180) {
-      newVisualHue = current + (diff + 360);
-    }
-    setSecondaryColorVisualHue(newVisualHue);
-  }, [internalSwatch]);
-
   React.useEffect(() => {
     setSecondaryColorVisualHue((secondaryColorVisualHue) => {
       const target =
@@ -655,6 +624,17 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
             conic-gradient(from 90deg, hsl(0, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(60, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(120, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(180, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(240, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(300, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%), hsl(0, ${DEFAULT_SATURATION}%, ${DEFAULT_MIN_LIGHTNESS}%))
           `,
       }}
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
+      role="slider"
+      tabIndex={0}
+      aria-label="Color wheel"
+      aria-valuenow={Math.round(
+        internalSwatch.mode === "solid"
+          ? internalSwatch.color.hue()
+          : internalSwatch.colors[0].hue(),
+      )}
+      aria-valuemin={0}
+      aria-valuemax={359}
       data-disabled={disabled}
       onMouseDown={handleMouseDown}
       onTouchStart={handleMouseDown}
@@ -673,8 +653,6 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
             marginLeft: `-${primaryKnobSizeRef.current / 2}px`,
             marginTop: `-${primaryKnobSizeRef.current / 2}px`,
           }}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
         />
       </div>
       {internalSwatch.mode === "gradient" && (
@@ -700,12 +678,7 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
   );
 }
 
-/* -------------------------------------------------------------------------------------------------
- * SwatchPickerPreview
- * -----------------------------------------------------------------------------------------------*/
-
-interface SwatchPickerPreviewProps
-  extends React.ButtonHTMLAttributes<HTMLDivElement> {
+interface SwatchPickerPreviewProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
@@ -731,12 +704,7 @@ function SwatchPickerPreview({
   );
 }
 
-/* -------------------------------------------------------------------------------------------------
- * ColorPickerSavedSwatches
- * -----------------------------------------------------------------------------------------------*/
-
-interface SwatchPickerSavedSwatchesProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface SwatchPickerSavedSwatchesProps extends React.HTMLAttributes<HTMLDivElement> {
   onSavedSwatchSelect?: (swatch: Swatch) => void;
   className?: string;
 }
@@ -824,7 +792,6 @@ function SwatchPickerSavedSwatches({
             key={swatchKey}
             onClick={() => handleSelectSavedSwatch(swatch)}
             onKeyDown={(e) => handleKeyDown(e, swatch)}
-            role="button"
             tabIndex={0}
             aria-label={ariaLabel}
             className="swatch-picker-saved-swatch aspect-square w-full animate-in cursor-pointer rounded-lg outline-2 -outline-offset-2 outline-transparent transition-[outline-color,box-shadow] zoom-in hover:shadow-[inset_0_0_0_4px_var(--color-neutral-10)] hover:outline-neutral-20 focus:shadow-[inset_0_0_0_4px_var(--color-neutral-10)] focus:outline-neutral-110 active:outline-neutral-110 disabled:cursor-not-allowed disabled:shadow-none disabled:outline-none"

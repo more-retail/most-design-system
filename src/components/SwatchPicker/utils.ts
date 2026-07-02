@@ -40,7 +40,7 @@ export function getRandomInternalSwatch(
     }
     default: {
       const _exhaustiveCheck: never = normalizedMode;
-      throw new Error(`Unhandled swatch mode: ${_exhaustiveCheck}`);
+      throw new Error(`Unhandled swatch mode: ${String(_exhaustiveCheck)}`);
     }
   }
 }

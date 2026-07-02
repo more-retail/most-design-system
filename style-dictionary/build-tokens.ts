@@ -1,15 +1,16 @@
-import StyleDictionary from "style-dictionary";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import StyleDictionary from "style-dictionary";
+
 import { mostFileHeader } from "./fileHeaders/most-file-header";
 import { cssInJs } from "./formats/css-in-js";
-import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
-import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
 import { cssTailwind } from "./formats/css-tailwind";
+import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
+import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
+import { contentString } from "./transforms/content-string";
 import { typographyCss } from "./transforms/typography-css";
 import { typographyReactNative } from "./transforms/typography-react-native";
-import { contentString } from "./transforms/content-string";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -122,7 +123,7 @@ function buildTokens(outDir: string) {
       ]),
     ),
   });
-  sd.buildAllPlatforms();
+  void sd.buildAllPlatforms();
 }
 
 buildTokens(srcOut);
