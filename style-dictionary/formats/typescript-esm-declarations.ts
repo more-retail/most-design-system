@@ -1,10 +1,10 @@
-import { format } from "prettier";
-import { fileHeader } from "style-dictionary/utils";
+import { format } from "oxfmt";
 import {
   FormatFn,
   FormatFnArguments,
   DesignToken,
 } from "style-dictionary/types";
+import { fileHeader } from "style-dictionary/utils";
 
 /**
  * jsonToNestedValue
@@ -40,7 +40,7 @@ const jsonToTypes = (
   json: object,
   indent = "  ",
   rootName = "DesignToken",
-  isRoot = true
+  isRoot = true,
 ) => {
   // is non-object value
   if (!json || typeof json !== "object") return json;
@@ -68,7 +68,6 @@ const jsonToTypes = (
 export const typescriptEsmDeclarations: FormatFn = async ({
   dictionary,
   file,
-  options,
 }: FormatFnArguments) => {
   const tokens = dictionary.tokens;
 
@@ -85,9 +84,5 @@ export const typescriptEsmDeclarations: FormatFn = async ({
     "export default tokens;\n";
 
   // Return prettified
-  return format(output, {
-    parser: "typescript",
-    printWidth: 500,
-    ...options?.prettier,
-  });
+  return (await format("tokens.ts", output, { printWidth: 500 })).code;
 };

@@ -1,6 +1,6 @@
-import { format } from "prettier";
-import { fileHeader } from "style-dictionary/utils";
+import { format } from "oxfmt";
 import { FormatFn, FormatFnArguments } from "style-dictionary/types";
+import { fileHeader } from "style-dictionary/utils";
 
 /**
  * Generates a CSS block that resets custom properties for the specified Tailwind namespaces.
@@ -57,7 +57,7 @@ const disableDefaultNamespaces = (namespaces: string[]): string => {
  * ```
  */
 const tokensToThemeDirective = (
-  tokens: Record<string, number | string>
+  tokens: Record<string, number | string>,
 ): string => {
   const variables = Object.entries(tokens)
     .map(([name, value]) => {
@@ -105,12 +105,12 @@ const tokensToThemeDirective = (
  * ```
  */
 const compositeTokensToUtilityDirectives = (
-  compositeTokens: Record<string, unknown>
+  compositeTokens: Record<string, unknown>,
 ): string => {
   return Object.entries(compositeTokens)
     .map(([name, value]) => {
       const formattedValue = Object.entries(value as Record<string, unknown>)
-        .map(([key, val]) => `  ${key}: ${val};`)
+        .map(([key, val]) => `  ${key}: ${String(val)};`)
         .join("\n");
 
       return `@utility ${name} {\n${formattedValue}\n}`;
@@ -138,7 +138,7 @@ export const cssTailwind: FormatFn = async ({
       }
       return result;
     },
-    {}
+    {},
   );
   values += tokensToThemeDirective(tokens);
 
@@ -149,16 +149,12 @@ export const cssTailwind: FormatFn = async ({
       }
       return result;
     },
-    {}
+    {},
   );
   values += compositeTokensToUtilityDirectives(compositeTokens);
 
   const output = (await fileHeader({ file })) + `${values}\n`;
 
   // Return prettified
-  return format(output, {
-    parser: "css",
-    printWidth: 500,
-    ...options?.prettier,
-  });
+  return (await format("tokens.css", output, { printWidth: 500 })).code;
 };
