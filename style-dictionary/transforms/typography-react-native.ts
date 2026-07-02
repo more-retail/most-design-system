@@ -1,9 +1,10 @@
-import { isTypography } from "../filters/is-typography";
 import type {
   PlatformConfig,
   TransformedToken,
   ValueTransform,
 } from "style-dictionary/types";
+
+import { isTypography } from "../filters/is-typography";
 
 interface TypographyValue {
   fontFamily: string;
@@ -26,7 +27,7 @@ interface TypographyReactNativeValue {
  * Converts a dimension string to a unitless pixel value.
  *
  * @param {string} dimension - The dimension string to convert
- * @param {number} [baseFontSize=16] - The base font size to use for "rem" conversion. Defaults to 16 if not provided.
+ * @param {number} [baseFontSize] - The base font size to use for "rem" conversion. Defaults to 16 if not provided.
  * @returns {number} - The converted unitless pixel value.
  * @throws {Error} - Throws an error if the dimension string is invalid.
  */
@@ -72,15 +73,15 @@ export const typographyReactNative: ValueTransform = {
       fontSize: dimensionToPixelUnitless(value.fontSize, options?.baseFontSize),
       fontWeight: dimensionToPixelUnitless(
         value.fontWeight,
-        options?.baseFontSize
+        options?.baseFontSize,
       ),
       letterSpacing: dimensionToPixelUnitless(
         value.letterSpacing,
-        options?.baseFontSize
+        options?.baseFontSize,
       ),
       lineHeight: dimensionToPixelUnitless(
         value.lineHeight,
-        options?.baseFontSize
+        options?.baseFontSize,
       ),
     };
     return transformed;

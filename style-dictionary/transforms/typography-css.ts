@@ -1,5 +1,6 @@
-import { isTypography } from "../filters/is-typography";
 import type { TransformedToken, ValueTransform } from "style-dictionary/types";
+
+import { isTypography } from "../filters/is-typography";
 
 interface TypographyValue {
   fontFamily?: string;
