@@ -103,6 +103,7 @@ const baseConfig = {
           destination: "tokens.css",
           format: "css/tailwind",
           options: {
+            outputReferences: true,
             disableDefaultNamespaces: ["color", "text", "tracking", "leading"],
           },
         },
