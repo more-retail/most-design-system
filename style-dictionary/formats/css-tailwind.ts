@@ -1,6 +1,10 @@
 import { format } from "oxfmt";
 import { FormatFn, FormatFnArguments } from "style-dictionary/types";
-import { fileHeader } from "style-dictionary/utils";
+import {
+  fileHeader,
+  getReferences,
+  usesReferences,
+} from "style-dictionary/utils";
 
 /**
  * Generates a CSS block that resets custom properties for the specified Tailwind namespaces.
@@ -129,18 +133,31 @@ export const cssTailwind: FormatFn = async ({
   let values = "";
 
   if (options.disableDefaultNamespaces?.length)
-    values += disableDefaultNamespaces(options.disableDefaultNamespaces);
+    values += disableDefaultNamespaces(options.disableDefaultNamespaces) + "\n";
 
   const tokens = dictionary.allTokens.reduce(
     (result: Record<string, string | number>, token) => {
       if (typeof token.$value !== "object") {
-        result[token.name] = token.$value;
+        result[token.name] =
+          options.outputReferences && usesReferences(token.original.$value)
+            ? getReferences(token.original.$value, dictionary.tokens).reduce(
+                (value: string, ref) =>
+                  value.replace(
+                    new RegExp(
+                      `\\{${ref.path.join("\\.")}(\\.\\$value)?\\}`,
+                      "g",
+                    ),
+                    `var(--${ref.name})`,
+                  ),
+                token.original.$value,
+              )
+            : token.$value;
       }
       return result;
     },
     {},
   );
-  values += tokensToThemeDirective(tokens);
+  values += tokensToThemeDirective(tokens) + "\n";
 
   const compositeTokens = dictionary.allTokens.reduce(
     (result: Record<string, unknown>, token) => {
