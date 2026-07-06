@@ -9,6 +9,7 @@ import { cssTailwind } from "./formats/css-tailwind";
 import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
 import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
 import { contentString } from "./transforms/content-string";
+import { sizeScalar } from "./transforms/size-scalar";
 import { typographyCss } from "./transforms/typography-css";
 import { typographyReactNative } from "./transforms/typography-react-native";
 
@@ -28,6 +29,7 @@ const baseConfig = {
       "typography/css": typographyCss,
       "typography/reactNative": typographyReactNative,
       "content/string": contentString,
+      "size/scalar": sizeScalar,
     },
     formats: {
       "css/in-js": cssInJs,
@@ -66,7 +68,7 @@ const baseConfig = {
     reactNative: {
       transforms: [
         "name/camel",
-        "size/object",
+        "size/scalar",
         "color/css",
         "typography/reactNative",
       ],
