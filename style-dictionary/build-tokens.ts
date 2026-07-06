@@ -6,6 +6,7 @@ import StyleDictionary from "style-dictionary";
 import { mostFileHeader } from "./fileHeaders/most-file-header";
 import { cssInJs } from "./formats/css-in-js";
 import { cssTailwind } from "./formats/css-tailwind";
+import { cssVariablesFallback } from "./formats/css-variables-fallback";
 import { typescriptCssInJsEsmDeclarations } from "./formats/typescript-css-in-js-esm-declarations";
 import { typescriptEsmDeclarations } from "./formats/typescript-esm-declarations";
 import { contentString } from "./transforms/content-string";
@@ -32,10 +33,11 @@ const baseConfig = {
       "size/scalar": sizeScalar,
     },
     formats: {
+      "css/variables-fallback": cssVariablesFallback,
       "css/in-js": cssInJs,
+      "css/tailwind": cssTailwind,
       "typescript/esm-declarations": typescriptEsmDeclarations,
       "typescript/css-in-js-esm-declarations": typescriptCssInJsEsmDeclarations,
-      "css/tailwind": cssTailwind,
     },
   },
   platforms: {
@@ -44,8 +46,16 @@ const baseConfig = {
       files: [
         {
           destination: "tokens.css",
-          format: "css/variables",
-          options: { outputReferences: true },
+          format: "css/variables-fallback",
+          options: {
+            outputReferences: true,
+            // Opt-in per-token fallback: tokens carrying a `fallback` under
+            // `fallbackExtensionKey` use it when `toggleVariable` is enabled,
+            // except on displays matching `mediaQuery` (wide-gamut / high-res).
+            fallbackExtensionKey: "in.more.most",
+            toggleVariable: "--most-design-system-responsive-colors",
+            mediaQuery: "@media (color-gamut: p3), (min-resolution: 2x)",
+          },
         },
       ],
       options: { fileHeader: "most-file-header" },
@@ -107,6 +117,12 @@ const baseConfig = {
           options: {
             outputReferences: true,
             disableDefaultNamespaces: ["color", "text", "tracking", "leading"],
+            // Opt-in per-token fallback: tokens carrying a `fallback` under
+            // `fallbackExtensionKey` use it when `toggleVariable` is enabled,
+            // except on displays matching `mediaQuery` (wide-gamut / high-res).
+            fallbackExtensionKey: "in.more.most",
+            toggleVariable: "--most-design-system-responsive-colors",
+            mediaQuery: "@media (color-gamut: p3), (min-resolution: 2x)",
           },
         },
       ],
