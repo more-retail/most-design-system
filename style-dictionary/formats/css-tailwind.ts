@@ -6,6 +6,14 @@ import {
   usesReferences,
 } from "style-dictionary/utils";
 
+import {
+  fallbackMediaBlock,
+  fallbackToggleDeclarations,
+  fallbackTokenValue,
+  formattingWithoutPrefix,
+  getFallbackValue,
+} from "./css-variables-fallback";
+
 /**
  * Generates a CSS block that resets custom properties for the specified Tailwind namespaces.
  *
@@ -132,6 +140,15 @@ export const cssTailwind: FormatFn = async ({
 }: FormatFnArguments) => {
   let values = "";
 
+  const { outputReferences, formatting } = options;
+  const indentation: string = formatting?.indentation || "  ";
+  const extensionKey: string | undefined = options.fallbackExtensionKey;
+  const toggleVariable: string | undefined = options.toggleVariable;
+  const mediaQuery: string | undefined = options.mediaQuery;
+  const hasFallbackConfig = Boolean(
+    extensionKey && toggleVariable && mediaQuery,
+  );
+
   if (options.disableDefaultNamespaces?.length)
     values += disableDefaultNamespaces(options.disableDefaultNamespaces) + "\n";
 
@@ -139,25 +156,40 @@ export const cssTailwind: FormatFn = async ({
     (result: Record<string, string | number>, token) => {
       if (typeof token.$value !== "object") {
         result[token.name] =
-          options.outputReferences && usesReferences(token.original.$value)
-            ? getReferences(token.original.$value, dictionary.tokens).reduce(
-                (value: string, ref) =>
-                  value.replace(
-                    new RegExp(
-                      `\\{${ref.path.join("\\.")}(\\.\\$value)?\\}`,
-                      "g",
+          hasFallbackConfig && getFallbackValue(token, extensionKey ?? "")
+            ? fallbackTokenValue(token, toggleVariable ?? "")
+            : outputReferences && usesReferences(token.original.$value)
+              ? getReferences(token.original.$value, dictionary.tokens).reduce(
+                  (value: string, ref) =>
+                    value.replace(
+                      new RegExp(
+                        `\\{${ref.path.join("\\.")}(\\.\\$value)?\\}`,
+                        "g",
+                      ),
+                      `var(--${ref.name})`,
                     ),
-                    `var(--${ref.name})`,
-                  ),
-                token.original.$value,
-              )
-            : token.$value;
+                  token.original.$value,
+                )
+              : token.$value;
       }
       return result;
     },
     {},
   );
   values += tokensToThemeDirective(tokens) + "\n";
+
+  // Fallback switch + media override for fallback-aware tokens. The switch
+  // lives in a plain :root block (not @theme, so it does not spawn utilities).
+  if (hasFallbackConfig && extensionKey && toggleVariable && mediaQuery) {
+    const fallbackTokens = dictionary.allTokens.filter((token) =>
+      getFallbackValue(token, extensionKey),
+    );
+    if (fallbackTokens.length) {
+      values +=
+        `:root {\n${fallbackToggleDeclarations(fallbackTokens, toggleVariable, extensionKey, indentation)}\n}\n` +
+        `${fallbackMediaBlock(fallbackTokens, mediaQuery, indentation)}\n`;
+    }
+  }
 
   const compositeTokens = dictionary.allTokens.reduce(
     (result: Record<string, unknown>, token) => {
@@ -170,7 +202,12 @@ export const cssTailwind: FormatFn = async ({
   );
   values += compositeTokensToUtilityDirectives(compositeTokens);
 
-  const output = (await fileHeader({ file })) + `${values}\n`;
+  const header = await fileHeader({
+    file,
+    formatting: formattingWithoutPrefix(formatting),
+    options,
+  });
+  const output = header + `${values}\n`;
 
   // Return prettified
   return (await format("tokens.css", output, { printWidth: 500 })).code;

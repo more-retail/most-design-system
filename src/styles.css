@@ -6,3 +6,7 @@
   width: auto;
   height: 100vh;
 }
+
+:root {
+  --most-design-system-responsive-colors: ;
+}
