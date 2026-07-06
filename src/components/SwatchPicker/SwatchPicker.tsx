@@ -293,14 +293,14 @@ function SwatchPickerModeToggle({
   return (
     <div
       className={cn(
-        "swatch-picker-mode-toggle relative flex w-fit items-center gap-1 rounded-xl bg-semantic-surface-secondary p-1 data-[disabled=true]:cursor-not-allowed",
+        "swatch-picker-mode-toggle relative flex w-fit items-center gap-semantic-inline-tight rounded-xl bg-semantic-surface-secondary p-semantic-inset-tightest data-[disabled=true]:cursor-not-allowed",
         className,
       )}
       {...props}
       data-disabled={disabled}
     >
       <div
-        className="swatch-picker-mode-active-indicator absolute top-1 left-1 size-9 rounded-lg bg-semantic-surface-primary shadow-sm shadow-base-neutral-110/10 transition-transform duration-300 ease-in-out"
+        className="swatch-picker-mode-active-indicator absolute top-base-10 left-base-10 size-base-90 rounded-lg bg-semantic-surface-primary shadow-sm shadow-base-neutral-110/10 transition-transform duration-300 ease-in-out"
         style={{
           transform:
             internalSwatch.mode === "gradient"
@@ -310,7 +310,7 @@ function SwatchPickerModeToggle({
       />
       <button
         onClick={() => handleModeToggle("solid")}
-        className="swatch-picker-solid-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
+        className="swatch-picker-solid-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
         aria-label="Switch to solid color mode"
         disabled={disabled}
       >
@@ -318,11 +318,11 @@ function SwatchPickerModeToggle({
       </button>
       <button
         onClick={() => handleModeToggle("gradient")}
-        className="swatch-picker-gradient-mode-button relative flex size-9 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-5 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
+        className="swatch-picker-gradient-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
         aria-label="Switch to gradient color mode"
         disabled={disabled}
       >
-        <GradientIcon className="size-5" />
+        <GradientIcon className="size-base-50" />
       </button>
     </div>
   );
@@ -644,7 +644,7 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
       <div className="absolute top-1/2 left-1/2">
         <div
           ref={primaryKnobRef}
-          className="swatch-picker-primary-knob size-9 origin-right scale-100 rounded-full border-4 border-base-white shadow-xl shadow-base-neutral-110/25 group-data-[disabled=true]:cursor-not-allowed! group-data-[disabled=true]:border-4! group-data-[disabled=true]:border-base-white/50 hover:cursor-grab hover:border-5 active:cursor-grabbing"
+          className="swatch-picker-primary-knob size-base-90 origin-right scale-100 rounded-full border-4 border-base-white shadow-xl shadow-base-neutral-110/25 group-data-[disabled=true]:cursor-not-allowed! group-data-[disabled=true]:border-4! group-data-[disabled=true]:border-base-white/50 hover:cursor-grab hover:border-5 active:cursor-grabbing"
           style={{
             backgroundColor: (internalSwatch.mode === "solid"
               ? internalSwatch.color
@@ -657,11 +657,11 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
       </div>
       {internalSwatch.mode === "gradient" && (
         <div
-          className="pointer-events-none absolute top-0 left-0 h-full w-full transform-[rotate] duration-100 ease-out"
+          className="pointer-events-none absolute top-base-0 left-base-0 h-full w-full transform-[rotate] duration-100 ease-out"
           style={{ transform: `rotate(${secondaryColorVisualHue}deg)` }}
         >
           <div
-            className="swatch-picker-secondary-knob absolute top-1/2 left-1/2 flex size-3 animate-in cursor-default items-center justify-center rounded-full border-2 border-base-white transition-[transform] duration-100 ease-out fade-in group-data-[disabled=true]:border-base-white/50"
+            className="swatch-picker-secondary-knob absolute top-1/2 left-1/2 flex size-base-30 animate-in cursor-default items-center justify-center rounded-full border-2 border-base-white transition-[transform] duration-100 ease-out fade-in group-data-[disabled=true]:border-base-white/50"
             style={{
               backgroundColor: internalSwatch.colors[1].hex(),
               transform: `translate(-50%, -50%) translateX(${
@@ -690,7 +690,7 @@ function SwatchPickerPreview({
   return (
     <div
       className={cn(
-        "swatch-picker-preview size-12 rounded-xl transition-colors duration-200",
+        "swatch-picker-preview size-base-120 rounded-xl transition-colors duration-200",
         className,
       )}
       style={{
@@ -762,7 +762,7 @@ function SwatchPickerSavedSwatches({
     <div
       ref={gridRef}
       className={cn(
-        "swatch-picker-saved-swatches-grid grid w-full animate-in grid-cols-6 gap-1 overflow-hidden rounded-xl bg-semantic-surface-secondary p-1 duration-100 ease-in fade-in",
+        "swatch-picker-saved-swatches-grid grid w-full animate-in grid-cols-6 gap-semantic-inline-tight overflow-hidden rounded-xl bg-semantic-surface-secondary p-semantic-inset-tightest duration-100 ease-in fade-in",
         className,
       )}
       style={{
