@@ -8,7 +8,7 @@ function convertNestedObjectToStrings(obj: unknown): unknown {
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
         result[key] = convertNestedObjectToStrings(
-          (obj as Record<string, unknown>)[key]
+          (obj as Record<string, unknown>)[key],
         );
       }
     }

@@ -1,10 +1,12 @@
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react-swc";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+import tailwindcss from "@tailwindcss/vite";
 import preserveDirectives from "rollup-preserve-directives";
 import dts from "unplugin-dts/vite";
-import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,7 +36,7 @@ export default defineConfig({
       formats: ["es"],
       fileName: "most-design-system",
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ["react", "react-dom", "tailwindcss"],
     },
   },
