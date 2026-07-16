@@ -116,7 +116,16 @@ const baseConfig = {
           format: "css/tailwind",
           options: {
             outputReferences: true,
-            disableDefaultNamespaces: ["color", "text", "tracking", "leading"],
+            disableDefaultNamespaces: [
+              "color",
+              "text",
+              "tracking",
+              "leading",
+              "radius",
+              "border-width",
+              "ring-width",
+              "outline-width",
+            ],
             // Opt-in per-token fallback: tokens carrying a `fallback` under
             // `fallbackExtensionKey` use it when `toggleVariable` is enabled,
             // except on displays matching `mediaQuery` (wide-gamut / high-res).
