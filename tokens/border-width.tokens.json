@@ -1,0 +1,32 @@
+{
+  "border-width": {
+    "base": {
+      "10": {
+        "$value": "1px",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "2px",
+        "$type": "dimension"
+      },
+      "30": {
+        "$value": "4px",
+        "$type": "dimension"
+      }
+    },
+    "semantic": {
+      "default": {
+        "$value": "{border-width.base.10}",
+        "$type": "dimension"
+      },
+      "thick": {
+        "$value": "{border-width.base.20}",
+        "$type": "dimension"
+      },
+      "focus": {
+        "$value": "{border-width.base.30}",
+        "$type": "dimension"
+      }
+    }
+  }
+}
