@@ -463,6 +463,18 @@
           "$value": "{color.base.neutral.40}",
           "$type": "color"
         },
+        "on-secondary": {
+          "$value": "{color.semantic.content.primary}",
+          "$type": "color"
+        },
+        "on-tertiary": {
+          "$value": "{color.semantic.content.primary}",
+          "$type": "color"
+        },
+        "on-inverse": {
+          "$value": "{color.base.white}",
+          "$type": "color"
+        },
         "disabled": {
           "$value": "{color.base.neutral.40}",
           "$type": "color"
@@ -471,20 +483,12 @@
           "$value": "{color.base.neutral.40}",
           "$type": "color"
         },
-        "on-inverse": {
-          "$value": "{color.base.white}",
-          "$type": "color"
-        },
         "on-raised": {
           "$value": "{color.semantic.content.primary}",
           "$type": "color"
         },
         "on-raised-disabled": {
           "$value": "{color.base.neutral.50}",
-          "$type": "color"
-        },
-        "on-tertiary": {
-          "$value": "{color.semantic.content.primary}",
           "$type": "color"
         },
         "brand": {
@@ -606,11 +610,11 @@
           "$type": "color"
         },
         "primary-hover": {
-          "$value": "{color.base.neutral.5}",
+          "$value": "{color.base.neutral.10}",
           "$type": "color"
         },
         "primary-pressed": {
-          "$value": "{color.base.neutral.10}",
+          "$value": "{color.base.neutral.20}",
           "$type": "color"
         },
         "secondary": {
