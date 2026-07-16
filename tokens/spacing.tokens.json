@@ -115,6 +115,10 @@
         "loose": {
           "$value": "{spacing.base.60}",
           "$type": "dimension"
+        },
+        "looser": {
+          "$value": "{spacing.base.70}",
+          "$type": "dimension"
         }
       },
       "stack": {
