@@ -2,9 +2,9 @@ import { defineConfig } from "oxfmt";
 
 export default defineConfig({
   printWidth: 80,
-  tailwind: {
+  experimentalTailwindcss: {
     stylesheet: "./src/styles.css",
-    functions: ["cn", "clsx", "tw"],
+    functions: ["cn", "clsx", "tw", "cva"],
   },
   sortImports: {
     customGroups: [
