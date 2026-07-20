@@ -30,3 +30,6 @@ dist
 
 # These token files are generated at build time
 src/tokens
+
+# Stoybook
+storybook-static
