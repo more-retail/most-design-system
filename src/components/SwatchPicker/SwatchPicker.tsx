@@ -293,14 +293,14 @@ function SwatchPickerModeToggle({
   return (
     <div
       className={cn(
-        "swatch-picker-mode-toggle relative flex w-fit items-center gap-semantic-inline-tight rounded-xl bg-semantic-surface-secondary p-semantic-inset-tightest data-[disabled=true]:cursor-not-allowed",
+        "swatch-picker-mode-toggle relative flex w-fit items-center gap-semantic-inline-tight rounded-base-30 bg-semantic-surface-secondary p-semantic-inset-tightest data-[disabled=true]:cursor-not-allowed",
         className,
       )}
       {...props}
       data-disabled={disabled}
     >
       <div
-        className="swatch-picker-mode-active-indicator absolute top-base-10 left-base-10 size-base-90 rounded-lg bg-semantic-surface-primary shadow-sm shadow-base-neutral-110/10 transition-transform duration-300 ease-in-out"
+        className="swatch-picker-mode-active-indicator absolute top-base-10 left-base-10 size-base-90 rounded-base-20 bg-semantic-surface-primary shadow-sm shadow-base-neutral-110/10 transition-transform duration-300 ease-in-out"
         style={{
           transform:
             internalSwatch.mode === "gradient"
@@ -310,7 +310,7 @@ function SwatchPickerModeToggle({
       />
       <button
         onClick={() => handleModeToggle("solid")}
-        className="swatch-picker-solid-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
+        className="swatch-picker-solid-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-base-20 disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
         aria-label="Switch to solid color mode"
         disabled={disabled}
       >
@@ -318,7 +318,7 @@ function SwatchPickerModeToggle({
       </button>
       <button
         onClick={() => handleModeToggle("gradient")}
-        className="swatch-picker-gradient-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-lg disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
+        className="swatch-picker-gradient-mode-button relative flex size-base-90 cursor-pointer items-center justify-center rounded-base-20 disabled:cursor-not-allowed [&_svg]:size-base-50 [&_svg]:fill-semantic-content-primary disabled:[&_svg]:fill-semantic-content-disabled"
         aria-label="Switch to gradient color mode"
         disabled={disabled}
       >
@@ -615,7 +615,7 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
     <div
       ref={swatchPickerWheelRef}
       className={cn(
-        "swatch-picker-wheel group group relative size-60 rounded-full shadow-inner shadow-base-neutral-110/25 hover:cursor-pointer data-[disabled=true]:cursor-not-allowed",
+        "swatch-picker-wheel group group relative size-60 rounded-base-full shadow-inner shadow-base-neutral-110/25 hover:cursor-pointer data-[disabled=true]:cursor-not-allowed",
         className,
       )}
       style={{
@@ -644,7 +644,7 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
       <div className="absolute top-1/2 left-1/2">
         <div
           ref={primaryKnobRef}
-          className="swatch-picker-primary-knob size-base-90 origin-right scale-100 rounded-full border-4 border-base-white shadow-xl shadow-base-neutral-110/25 group-data-[disabled=true]:cursor-not-allowed! group-data-[disabled=true]:border-4! group-data-[disabled=true]:border-base-white/50 hover:cursor-grab hover:border-5 active:cursor-grabbing"
+          className="swatch-picker-primary-knob size-base-90 origin-right scale-100 rounded-base-full border-semantic-focus border-base-white shadow-xl shadow-base-neutral-110/25 group-data-[disabled=true]:cursor-not-allowed! group-data-[disabled=true]:border-semantic-focus! group-data-[disabled=true]:border-base-white/50 hover:cursor-grab active:cursor-grabbing"
           style={{
             backgroundColor: (internalSwatch.mode === "solid"
               ? internalSwatch.color
@@ -661,7 +661,7 @@ function SwatchPickerWheel({ className, ...props }: SwatchPickerWheelProps) {
           style={{ transform: `rotate(${secondaryColorVisualHue}deg)` }}
         >
           <div
-            className="swatch-picker-secondary-knob absolute top-1/2 left-1/2 flex size-base-30 animate-in cursor-default items-center justify-center rounded-full border-2 border-base-white transition-[transform] duration-100 ease-out fade-in group-data-[disabled=true]:border-base-white/50"
+            className="swatch-picker-secondary-knob absolute top-1/2 left-1/2 flex size-base-30 animate-in cursor-default items-center justify-center rounded-base-full border-semantic-thick border-base-white transition-[transform] duration-100 ease-out fade-in group-data-[disabled=true]:border-base-white/50"
             style={{
               backgroundColor: internalSwatch.colors[1].hex(),
               transform: `translate(-50%, -50%) translateX(${
@@ -690,7 +690,7 @@ function SwatchPickerPreview({
   return (
     <div
       className={cn(
-        "swatch-picker-preview size-base-120 rounded-xl transition-colors duration-200",
+        "swatch-picker-preview size-base-120 rounded-base-30 transition-colors duration-200",
         className,
       )}
       style={{
@@ -762,7 +762,7 @@ function SwatchPickerSavedSwatches({
     <div
       ref={gridRef}
       className={cn(
-        "swatch-picker-saved-swatches-grid grid w-full animate-in grid-cols-6 gap-semantic-inline-tight overflow-hidden rounded-xl bg-semantic-surface-secondary p-semantic-inset-tightest duration-100 ease-in fade-in",
+        "swatch-picker-saved-swatches-grid grid w-full animate-in grid-cols-6 gap-semantic-inline-tight overflow-hidden rounded-base-30 bg-semantic-surface-secondary p-semantic-inset-tightest duration-100 ease-in fade-in",
         className,
       )}
       style={{
@@ -794,7 +794,7 @@ function SwatchPickerSavedSwatches({
             onKeyDown={(e) => handleKeyDown(e, swatch)}
             tabIndex={0}
             aria-label={ariaLabel}
-            className="swatch-picker-saved-swatch aspect-square w-full animate-in cursor-pointer rounded-lg outline-2 -outline-offset-2 outline-transparent transition-[outline-color,box-shadow] zoom-in hover:shadow-[inset_0_0_0_4px_var(--color-semantic-surface-secondary)] hover:outline-semantic-border-primary focus:shadow-[inset_0_0_0_4px_var(--color-semantic-surface-secondary)] focus:outline-semantic-border-focus active:outline-semantic-border-focus disabled:cursor-not-allowed disabled:shadow-none disabled:outline-none"
+            className="swatch-picker-saved-swatch aspect-square w-full animate-in cursor-pointer rounded-base-20 outline-2 -outline-offset-2 outline-transparent transition-[outline-color,box-shadow] zoom-in hover:shadow-[inset_0_0_0_4px_var(--color-semantic-surface-secondary)] hover:outline-semantic-border-primary focus:shadow-[inset_0_0_0_4px_var(--color-semantic-surface-secondary)] focus:outline-semantic-border-focus active:outline-semantic-border-focus disabled:cursor-not-allowed disabled:shadow-none disabled:outline-none"
             style={{ background }}
             disabled={disabled}
           />
