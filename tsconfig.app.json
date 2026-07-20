@@ -6,8 +6,9 @@
     "types": ["node"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "allowJs": true,
     /* Don't emit */
-    "declaration": false,
+    "noEmit": true,
     "rootDir": "./",
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -17,8 +18,10 @@
     /* Linting */
     "strict": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/storybook/*": ["./.storybook/*"]
     }
   },
-  "include": ["src", "style-dictionary"]
+  "include": ["src/**/*", "style-dictionary/**/*", ".storybook/**/*"]
 }

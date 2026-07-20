@@ -26,6 +26,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "@/utils": resolve(__dirname, "./src/utils"),
+      "@/storybook": resolve(__dirname, "./.storybook"),
       "@": resolve(__dirname, "./src"),
     },
   },
