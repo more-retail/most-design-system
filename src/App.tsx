@@ -35,7 +35,7 @@ function App() {
       </SwatchPicker>
 
       <button
-        className="h-12 cursor-pointer rounded-full bg-orange-60 px-4 typography-label-30 text-white"
+        className="bg-orange-60 text-white h-12 cursor-pointer rounded-full px-4 typography-label-30"
         onClick={() => {
           console.log("Last saved mode was: ", getLastSavedMode());
           setSwatch({ mode: "gradient", colors: ["#bdc3c7", "#bdc3c7"] });

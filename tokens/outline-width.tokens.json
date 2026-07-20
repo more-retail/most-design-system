@@ -1,0 +1,32 @@
+{
+  "outline-width": {
+    "base": {
+      "10": {
+        "$value": "{border-width.base.10}",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "{border-width.base.20}",
+        "$type": "dimension"
+      },
+      "30": {
+        "$value": "{border-width.base.30}",
+        "$type": "dimension"
+      }
+    },
+    "semantic": {
+      "default": {
+        "$value": "{border-width.semantic.default}",
+        "$type": "dimension"
+      },
+      "thick": {
+        "$value": "{border-width.semantic.thick}",
+        "$type": "dimension"
+      },
+      "focus": {
+        "$value": "{border-width.semantic.focus}",
+        "$type": "dimension"
+      }
+    }
+  }
+}

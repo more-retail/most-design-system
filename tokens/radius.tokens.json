@@ -1,0 +1,54 @@
+{
+  "radius": {
+    "base": {
+      "0": {
+        "$value": "0px",
+        "$type": "dimension"
+      },
+      "10": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "30": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "40": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "50": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "60": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "70": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "80": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "90": {
+        "$value": "36px",
+        "$type": "dimension"
+      },
+      "100": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "full": {
+        "$value": "9999px",
+        "$type": "dimension"
+      }
+    }
+  }
+}

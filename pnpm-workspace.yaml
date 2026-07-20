@@ -1,3 +1,5 @@
 allowBuilds:
   "@swc/core": true
   esbuild: true
+minimumReleaseAgeExclude:
+  - "@more-retail/fonts@1.0.0 || 1.1.0"
